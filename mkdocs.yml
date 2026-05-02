@@ -8,9 +8,6 @@ edit_uri: ""
 
 theme:
   name: material
-  custom_dir: docs/overrides
-  logo: assets/logo.svg
-  favicon: assets/favicon.png
   palette:
     - media: "(prefers-color-scheme)"
       toggle:
