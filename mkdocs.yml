@@ -1,0 +1,119 @@
+site_name: Open Zero Trust Project
+site_url: https://oztp.org
+site_description: Free, open source Zero Trust security tools and resources for organizations of every size.
+site_author: OZTP Contributors
+repo_url: https://github.com/oztp-org/oztp-control-platform
+repo_name: oztp-org/oztp-control-platform
+edit_uri: ""
+
+theme:
+  name: material
+  custom_dir: docs/overrides
+  logo: assets/logo.svg
+  favicon: assets/favicon.png
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Follow system preference
+
+  features:
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+    - announce.dismiss
+
+  font:
+    text: Inter
+    code: JetBrains Mono
+
+  icon:
+    repo: fontawesome/brands/github
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/extra.js
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - attr_list
+  - md_in_html
+  - tables
+  - footnotes
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+  - blog:
+      blog_dir: blog
+      post_date_format: long
+      post_url_format: "{date}/{slug}"
+      authors: true
+
+nav:
+  - Home: index.md
+  - About: about.md
+  - Products:
+    - Overview: products/index.md
+    - Control Platform: products/control-platform.md
+    - Device Agent: products/device-agent.md
+    - ZT Maturity Assessment: products/zt-assessment.md
+    - Agent Zeta: products/agent-zeta.md
+  - Blog:
+    - blog/index.md
+  - Community: community.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/oztp-org
+      name: OZTP on GitHub
+  generator: false
+  analytics:
+    feedback:
+      title: Was this helpful?
+      ratings:
+        - icon: material/thumb-up-outline
+          name: Yes
+          data: 1
+          note: Thanks for the feedback!
+        - icon: material/thumb-down-outline
+          name: No
+          data: 0
+          note: Thanks — we'll keep improving.
