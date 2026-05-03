@@ -36,8 +36,8 @@ hide:
   </div>
   <div class="principle-card">
     <div class="icon">🔓</div>
-    <h3>Free and Open</h3>
-    <p>All products are free to download and open source. Where cloud infrastructure is required, costs are passed through at cost — never marked up.</p>
+    <h3>Open Source</h3>
+    <p>All apps are free to download and open source. Run them on your own infrastructure, or use OZTP-hosted services.</p>
   </div>
   <div class="principle-card">
     <div class="icon">🔗</div>
@@ -72,7 +72,7 @@ hide:
     <p>Structured assessments mapped to the CISA Zero Trust Maturity Model — know where you stand across all five pillars.</p>
   </a>
   <a href="products/agent-zeta/" class="product-card">
-    <span class="status-badge status-planned">Coming Soon</span>
+    <span class="status-badge status-active">Active</span>
     <h3>Agent Zeta</h3>
     <p>AI-powered Zero Trust advisor. Ask questions, get prioritized recommendations, and chart a path to higher maturity — using your choice of LLM.</p>
   </a>
@@ -86,4 +86,4 @@ Zero Trust is not a product you buy — it's a security posture you build over t
 
 Start with visibility. Add controls when you're ready. Let the frameworks guide you.
 
-[Get started with the Device Agent →](products/device-agent.md){ .md-button }
+[Get started with the Device Agent →](products/device-agent/){ .md-button }
