@@ -39,8 +39,6 @@ Monitoring first also means organizations can start gaining value immediately, w
 
 Most security tools can be used defensively or offensively — that's the nature of the field. OZTP's dedication is to the defensive side. We build blue team solutions: tools that help organizations see clearly, verify continuously, and respond confidently.
 
-This is a constraint we're happy to live with.
-
 ## Get Involved
 
 The project is on GitHub at [github.com/oztp-org](https://github.com/oztp-org). The code is open, the roadmap is public, and contributions are welcome.
