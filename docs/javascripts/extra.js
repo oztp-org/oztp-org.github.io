@@ -3,7 +3,7 @@
 (function () {
   "use strict";
 
-  const API_URL = "https://oztp-agent-zeta-651946913194.us-east1.run.app/v1/chat";
+  const API_URL = "https://oztp-zeta-651946913194.us-east1.run.app/v1/chat";
   const MAX_HISTORY = 10;
 
   let sessionId = null;
