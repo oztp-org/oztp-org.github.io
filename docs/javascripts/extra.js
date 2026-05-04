@@ -13,6 +13,7 @@
   // ── DOM ──────────────────────────────────────────────────────────────────
 
   function buildWidget() {
+    if (document.getElementById("az-fullpage")) return;
     const style = document.createElement("style");
     style.textContent = `
       #az-fab {
@@ -48,11 +49,12 @@
       }
       #az-header h3 { margin: 0; font-size: 0.95rem; font-weight: 700; }
       #az-header p { margin: 0; font-size: 0.72rem; opacity: 0.8; }
-      #az-close {
-        margin-left: auto; background: none; border: none; color: white;
-        cursor: pointer; font-size: 1.1rem; padding: 4px; opacity: 0.8;
+      #az-close, #az-popout {
+        background: none; border: none; color: white;
+        cursor: pointer; font-size: 1rem; padding: 4px; opacity: 0.8;
       }
-      #az-close:hover { opacity: 1; }
+      #az-close { margin-left: auto; font-size: 1.1rem; }
+      #az-close:hover, #az-popout:hover { opacity: 1; }
 
       #az-messages {
         flex: 1; overflow-y: auto; padding: 12px; display: flex;
@@ -122,6 +124,7 @@
           <h3>Agent Zeta</h3>
           <p>AI Zero Trust Advisor · OZTP</p>
         </div>
+        <button id="az-popout" title="Open in new window">↗</button>
         <button id="az-close" title="Close">✕</button>
       </div>
       <div id="az-messages">
@@ -139,6 +142,9 @@
     document.body.appendChild(panel);
 
     document.getElementById("az-close").addEventListener("click", togglePanel);
+    document.getElementById("az-popout").addEventListener("click", function () {
+      window.open("/chat/", "_blank");
+    });
     document.getElementById("az-send").addEventListener("click", sendMessage);
     document.getElementById("az-input").addEventListener("keydown", function (e) {
       if (e.key === "Enter" && !e.shiftKey) {
