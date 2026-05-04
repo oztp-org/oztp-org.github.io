@@ -94,7 +94,7 @@ hide:
     <textarea id="az-fp-input" placeholder="Ask a Zero Trust question…" rows="1"></textarea>
     <button id="az-fp-send">Send</button>
   </div>
-  <p id="az-fp-disclaimer">Powered by OZTP · For informational use · Not a substitute for a security audit</p>
+  <p id="az-fp-disclaimer">Powered by OZTP · For informational use · Not a substitute for a security audit · Conversations are stored to support session continuity — do not share sensitive organizational data</p>
 </div>
 
 <script>
