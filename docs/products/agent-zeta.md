@@ -1,6 +1,6 @@
 # Agent Zeta
 
-**Status:** Coming Soon — Phase 4
+**Status:** Active
 
 Agent Zeta is an AI-powered Zero Trust Architecture advisor. It helps security teams, IT administrators, and organizational leaders understand their current Zero Trust posture and chart a clear path toward higher maturity.
 

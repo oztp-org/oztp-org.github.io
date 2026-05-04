@@ -31,8 +31,8 @@ hide:
 <div class="principle-grid">
   <div class="principle-card">
     <div class="icon">🛡️</div>
-    <h3>Defensive Only</h3>
-    <p>OZTP tools observe, report, and advise. They never probe, exploit, or make unauthorized changes. Human approval comes before any configuration change.</p>
+    <h3>Positive Focus</h3>
+    <p>Zero Trust is a journey, not a destination. Every improvement — a new control deployed, a gap identified, a team better informed — is a step in the right direction. OZTP builds tools to support that pursuit at every stage.</p>
   </div>
   <div class="principle-card">
     <div class="icon">🔓</div>
