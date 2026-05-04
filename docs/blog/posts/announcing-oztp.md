@@ -39,7 +39,7 @@ Monitoring first also means organizations can start gaining value immediately, w
 
 Every line of code in OZTP is reviewed against one standard: does this help an organization defend itself, or could it be repurposed for something else?
 
-We're not building red team tools. We're not building vulnerability scanners. We're not building anything that probes, exploits, or exfiltrates. If a contribution doesn't pass that test, it doesn't ship.
+Most security tools can be used defensively or offensively — that's the nature of the field. OZTP's dedication is to the defensive side. We build blue team solutions: tools that help organizations see clearly, verify continuously, and respond confidently.
 
 This is a constraint we're happy to live with.
 
