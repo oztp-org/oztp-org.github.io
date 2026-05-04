@@ -19,7 +19,7 @@ OZTP builds free, open source security tools aligned with Zero Trust frameworks.
     <p>CISA ZTMM-based assessment across all five Zero Trust pillars. Know your current maturity level and what to prioritize next.</p>
   </a>
   <a href="agent-zeta/" class="product-card">
-    <span class="status-badge status-planned">Coming Soon</span>
+    <span class="status-badge status-active">Active</span>
     <h3>Agent Zeta</h3>
     <p>AI Zero Trust advisor. Ask questions in plain language, get framework-aligned recommendations, use your own LLM provider.</p>
   </a>
