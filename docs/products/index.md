@@ -25,12 +25,3 @@ OZTP builds free, open source security tools aligned with Zero Trust frameworks.
   </a>
 </div>
 
----
-
-## What OZTP Does Not Do
-
-To be clear about scope:
-
-- **No offensive capabilities.** OZTP tools do not probe, scan for vulnerabilities, or exploit anything.
-- **No automatic configuration changes.** Advisory tools recommend; humans decide and approve.
-- **No telemetry sent to OZTP.** Device data stays between your devices and your control platform instance.
