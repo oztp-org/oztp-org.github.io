@@ -1,41 +1,50 @@
 # ZT Maturity Assessment
 
-**Status:** Planned — Phase 4
+**Status:** Live
 
-The ZT Maturity Assessment helps organizations understand where they stand across the five pillars of Zero Trust, using the CISA Zero Trust Maturity Model (ZTMM) v2.0 as the scoring framework.
+The ZT Maturity Assessment helps organizations understand where they stand across Zero Trust pillars using four major frameworks. Complete an assessment in minutes — no account required.
+
+[Launch ZT Assessment →](https://oztp-control-platform-651946913194.us-east1.run.app/assessments){ .md-button .md-button--primary target=_blank }
 
 ---
 
-## What It Will Do
+## Four Frameworks, One Score
 
-- Guide organizations through a structured questionnaire covering all five CISA ZTMM pillars
-- Score current maturity level (Traditional → Initial → Advanced → Optimal) per pillar
-- Identify the most impactful gaps relative to the next maturity level
-- Produce a written report with prioritized recommendations
-- Map all recommendations to specific NIST, CISA, and CIS controls
+Choose one or more frameworks to assess your posture. Scores are saved in your browser — complete them at your own pace.
 
-## The Five Pillars
+| Framework | Controls | Best For |
+|---|---|---|
+| **CIS Controls v8 IG1** | 45 | Starting point for any organization; basic cyber hygiene |
+| **CISA ZTMM v2** | 98 | Federal guidance; 3-stage maturity progression per pillar |
+| **NIST SP 800-207** | 47 | Architecture and policy planning; the Seven Tenets |
+| **ISO/IEC 27001:2022** | 53 | International standard; compliance and audit workflows |
 
-| Pillar | Description |
-|---|---|
-| **Identity** | Continuous verification of all identities — human, machine, and service accounts |
-| **Devices** | Device health and compliance checked before and during access |
-| **Networks** | Micro-segmented, encrypted, monitored — no implicit trust from network location |
-| **Applications & Workloads** | Applications secured across their full lifecycle; APIs protected |
-| **Data** | Data classified, encrypted, and access-controlled based on sensitivity |
+## Absolute Zero (AZ) Score
+
+Once you've scored any combination of the four frameworks, the **Absolute Zero** composite aggregates them into a single percentage across all canonical ZT pillars:
+
+Identity · Devices · Networks · Applications · Data · Visibility · Automation · Governance
+
+The AZ score tells you where you stand overall — and which pillars need the most attention.
 
 ## Maturity Levels
 
-| Level | Name | Description |
+| Score | Level | Description |
 |---|---|---|
-| 1 | Traditional | Siloed, manual, reactive. Perimeter-based trust. |
-| 2 | Initial | Beginning cross-pillar integration. Moving from reactive to proactive. |
-| 3 | Advanced | Integrated across pillars. Increasing automation. Proactive posture. |
-| 4 | Optimal | Fully dynamic, automated, continuously optimized. |
+| 75–100% | **Optimal** | Fully dynamic, automated, continuously optimized |
+| 50–74% | **Advanced** | Integrated across pillars; increasing automation |
+| 25–49% | **Initial** | Cross-pillar integration beginning; moving from reactive to proactive |
+| 0–24% | **Traditional** | Siloed, manual, perimeter-based |
 
----
+## How It Works
 
-!!! info "In Development"
-    The command-line version of the ZT Maturity Assessment is currently in development as part of **Agent Zeta**. A web-based version will follow.
+1. Select a framework
+2. Answer each control: **Yes / Partial / No / N/A**
+3. Add assessor notes and evidence references (optional)
+4. Click **Score** — results appear instantly
+5. Export the scored template or results JSON for your records
+6. Repeat for other frameworks, then compute your **AZ** composite
 
-[Learn about Agent Zeta →](agent-zeta.md){ .md-button }
+Progress auto-saves to your browser. You can close the tab and resume any time.
+
+[Start your assessment →](https://oztp-control-platform-651946913194.us-east1.run.app/assessments){ .md-button target=_blank }
