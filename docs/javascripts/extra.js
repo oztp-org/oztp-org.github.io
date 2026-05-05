@@ -13,7 +13,7 @@
   // ── DOM ──────────────────────────────────────────────────────────────────
 
   function buildWidget() {
-    if (document.getElementById("az-fullpage")) return;
+    if (document.getElementById("az-fab")) return;
     const style = document.createElement("style");
     style.textContent = `
       #az-fab {
@@ -229,7 +229,11 @@
   }
 
   // ── Init ─────────────────────────────────────────────────────────────────
-  if (document.readyState === "loading") {
+  // document$ is MkDocs Material's observable that fires on every instant navigation.
+  // Without this, navigation.instant replaces the body and destroys the widget.
+  if (typeof document$ !== "undefined") {
+    document$.subscribe(buildWidget);
+  } else if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", buildWidget);
   } else {
     buildWidget();
