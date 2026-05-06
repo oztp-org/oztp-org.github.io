@@ -87,6 +87,7 @@ plugins:
 nav:
   - Home: index.md
   - About: about.md
+  - Frameworks: frameworks.md
   - Top 10 ZT Controls: top10.md
   - Absolute Zero: absolute-zero.md
   - Products:

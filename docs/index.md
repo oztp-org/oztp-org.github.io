@@ -12,10 +12,10 @@ hide:
   </p>
 
   <div class="framework-strip" style="justify-content:center;">
-    <span class="framework-badge">NIST SP 800-207</span>
-    <span class="framework-badge">CISA ZTMM v2</span>
-    <span class="framework-badge">CIS Controls v8</span>
-    <span class="framework-badge">ISO/IEC 27001</span>
+    <a class="framework-badge" href="frameworks/#nist-sp-800-207">NIST SP 800-207</a>
+    <a class="framework-badge" href="frameworks/#cisa-ztmm-v2">CISA ZTMM v2</a>
+    <a class="framework-badge" href="frameworks/#cis-controls-v8">CIS Controls v8</a>
+    <a class="framework-badge" href="frameworks/#iso-27001">ISO/IEC 27001</a>
   </div>
 
   <div class="cta-row">
