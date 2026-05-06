@@ -67,7 +67,7 @@ hide:
     <p>Lightweight Windows 11 Pro agent that reports application control posture and security events to the control platform.</p>
   </a>
   <a href="products/zt-assessment/" class="product-card">
-    <span class="status-badge status-planned">Planned</span>
+    <span class="status-badge status-active">Active</span>
     <h3>ZT Maturity Assessment</h3>
     <p>Structured assessments mapped to the CISA Zero Trust Maturity Model — know where you stand across all five pillars.</p>
   </a>
@@ -82,7 +82,7 @@ hide:
 
 <p class="section-label">Built for the Long Haul</p>
 
-Zero Trust is not a product you buy — it's a security posture you build over time. OZTP exists to make that journey achievable for organizations that don't have a dedicated security team, a large budget, or years to spare.
+Zero Trust is not a product you buy — it's a security posture you build over time. OZTP exists to support that journey for all organizations, no matter the size of their cybersecurity budget or number of devices.
 
 Start with visibility. Add controls when you're ready. Let the frameworks guide you.
 
