@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Canvas Breach — Incident Response Checklist | OZTP</title>
+  <style>
+    :root {
+      --primary: #3f51b5;
+      --primary-dark: #303f9f;
+      --accent: #7986cb;
+      --green: #4caf50;
+      --orange: #ff9800;
+      --red: #f44336;
+      --bg: #ffffff;
+      --bg-alt: #f5f7ff;
+      --border: #e0e3f0;
+      --text: #1a1a2e;
+      --text-muted: #5c6080;
+      --done-bg: #f0faf0;
+      --done-border: #c8e6c9;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1a2e;
+        --bg-alt: #16213e;
+        --border: #2d3561;
+        --text: #e8eaf6;
+        --text-muted: #9fa8da;
+        --done-bg: #1b2e1b;
+        --done-border: #2e4d2e;
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      background: var(--bg);
+      color: var(--text);
+      padding: 0 0 4rem;
+    }
+
+    /* ── Header ── */
+    .page-header {
+      background: var(--primary);
+      color: white;
+      padding: 2rem 1.5rem 1.5rem;
+    }
+    .page-header .back-link {
+      display: inline-block;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 0.8rem;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.03em;
+    }
+    .page-header .back-link:hover { color: white; }
+    .page-header h1 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 0.25rem;
+    }
+    .page-header .subtitle {
+      font-size: 0.875rem;
+      opacity: 0.85;
+      margin-bottom: 0.75rem;
+    }
+    .badge-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .badge-active { background: rgba(244,67,54,0.25); color: #ffcdd2; border: 1px solid rgba(244,67,54,0.4); }
+    .badge-sector { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.9); border: 1px solid rgba(255,255,255,0.25); }
+
+    /* ── Overall Progress ── */
+    .overall-progress {
+      background: var(--bg-alt);
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .progress-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.6rem;
+      gap: 1rem;
+    }
+    .progress-label { font-size: 0.8rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .progress-count { font-size: 0.875rem; font-weight: 700; color: var(--primary); }
+    .progress-bar-outer {
+      height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .progress-bar-inner {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 4px;
+      transition: width 0.3s ease;
+      width: 0%;
+    }
+    .toolbar {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 0.75rem;
+    }
+    .btn {
+      padding: 6px 14px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn:hover { background: var(--border); }
+    .btn-primary { background: var(--primary); color: white; border-color: var(--primary); }
+    .btn-primary:hover { background: var(--primary-dark); }
+
+    /* ── Main content ── */
+    .content { max-width: 860px; margin: 0 auto; padding: 0 1.5rem; }
+
+    .instructions {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary);
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+    .instructions strong { color: var(--text); }
+
+    /* ── Sections ── */
+    .section { margin: 2rem 0; }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--border);
+    }
+    .section-title-group {}
+    .section-urgency {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 2px 8px;
+      border-radius: 10px;
+      display: inline-block;
+      margin-bottom: 0.3rem;
+    }
+    .urgency-immediate { background: rgba(244,67,54,0.12); color: #f44336; }
+    .urgency-48h { background: rgba(255,152,0,0.12); color: #ff9800; }
+    .urgency-ongoing { background: rgba(63,81,181,0.12); color: var(--primary); }
+
+    .section-header h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 0;
+    }
+    .section-progress-pill {
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 3px 10px;
+      white-space: nowrap;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+    .section-progress-pill.done { background: var(--done-bg); border-color: var(--done-border); color: var(--green); }
+
+    /* ── Subsection ── */
+    .subsection { margin: 1.25rem 0; }
+    .subsection h3 {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+    }
+
+    /* ── Check items ── */
+    .check-item {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      padding: 0.875rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      background: var(--bg);
+      transition: background 0.15s, border-color 0.15s;
+      cursor: pointer;
+    }
+    .check-item:hover { border-color: var(--accent); }
+    .check-item.checked {
+      background: var(--done-bg);
+      border-color: var(--done-border);
+    }
+    .check-item.checked .item-title { text-decoration: line-through; color: var(--text-muted); }
+
+    .check-item input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      flex-shrink: 0;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+    .item-body { flex: 1; }
+    .item-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.2rem; }
+    .item-detail {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .item-detail ul { padding-left: 1.2rem; margin-top: 0.3rem; }
+    .item-detail li { margin-bottom: 0.15rem; }
+    .item-evidence {
+      font-size: 0.75rem;
+      color: var(--accent);
+      margin-top: 0.35rem;
+      font-style: italic;
+    }
+    .item-ref {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 6px;
+      margin-top: 0.35rem;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Print ── */
+    @media print {
+      .overall-progress, .toolbar, .btn { display: none !important; }
+      .page-header { background: #3f51b5 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .check-item { break-inside: avoid; }
+      .section { break-inside: avoid; }
+      body { padding: 0; }
+    }
+
+    /* ── Footer ── */
+    .page-footer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      padding: 2rem 1.5rem;
+      border-top: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+    .page-footer a { color: var(--primary); }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="page-header">
+  <a class="back-link" href="../canvas-2026-05.html">← Back to Canvas Advisory</a>
+  <h1>Canvas Breach — Incident Response Checklist</h1>
+  <p class="subtitle">For: K-12 Schools, Colleges, and Universities Using Canvas LMS · Active Incident — May 2026</p>
+  <div class="badge-row">
+    <span class="badge badge-active">ACTIVE INCIDENT</span>
+    <span class="badge badge-sector">K-12 &amp; Higher Education</span>
+    <span class="badge badge-sector">Ransom Deadline: May 12, 2026</span>
+  </div>
+</div>
+
+<!-- Sticky Progress -->
+<div class="overall-progress">
+  <div class="progress-row">
+    <span class="progress-label">Overall Progress</span>
+    <span class="progress-count" id="overall-count">0 / 0 complete</span>
+  </div>
+  <div class="progress-bar-outer">
+    <div class="progress-bar-inner" id="overall-bar"></div>
+  </div>
+  <div class="toolbar">
+    <button class="btn btn-primary" onclick="window.print()">Print / Save PDF</button>
+    <button class="btn" onclick="expandAll()">Expand All</button>
+    <button class="btn" onclick="resetAll()">Reset Checklist</button>
+    <button class="btn" onclick="window.location.href='../canvas-2026-05.html'">← Advisory</button>
+  </div>
+</div>
+
+<!-- Content -->
+<div class="content">
+
+  <div class="instructions">
+    <strong>How to use this checklist:</strong> Work through sections in priority order — <strong>Section 1 first</strong>. Check each item as complete. Progress is saved in your browser automatically. Assign ownership and document evidence in your own incident tracking system. Share this checklist with your security team and IT leadership.
+    <br><br>
+    <strong>Framework references:</strong> Items reference NIST SP 800-207, CISA ZTMM v2, and CIS Controls v8 where applicable. Items marked <em>Advanced</em> require additional tooling or configuration and may not apply to all institutions.
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 1 -->
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <div class="section" id="sec1">
+    <div class="section-header">
+      <div class="section-title-group">
+        <div class="section-urgency urgency-immediate">Immediate — Complete within 24 hours</div>
+        <h2>Section 1: Immediate Response Actions</h2>
+      </div>
+      <span class="section-progress-pill" id="sec1-pill">0 / 0</span>
+    </div>
+
+    <div class="subsection">
+      <h3>1.1 Activate Incident Response</h3>
+
+      <div class="check-item" data-section="sec1">
+        <input type="checkbox" />
+        <div class="item-body">
+          <div class="item-title">Activate your incident response team</div>
+          <div class="item-detail">Assign roles: incident commander, communications lead, technical lead. If you don't have a formal IR plan, designate these roles now from available IT and security staff.</div>
+          <div class="item-evidence">Evidence: Named roster with contact info documented</div>
+        </div>
+      </div>
+
+      <div class="check-item" data-section="sec1">
+        <input type="checkbox" />
+        <div class="item-body">
+          <div class="item-title">Notify key stakeholders</div>
+          <div class="item-detail">Inform: superintendent / provost, legal counsel, communications/PR, IT leadership, and department heads whose data is in Canvas.</div>
+          <div class="item-evidence">Evidence: Notification log with timestamps</div>
+        </div>
+      </div>
+
+      <div class="check-item" data-section="sec1">
+        <input type="checkbox" />
+        <div class="item-body">
+          <div class="item-title">Enable Canvas audit logging</div>
+          <div class="item-detail">If not already enabled: Canvas Admin → Settings → Audit Log. Verify logs are being collected and retained. You need this data for forensic analysis.</div>
+          <div class="item-evidence">Evidence: Screenshot of enabled audit logging with timestamp</div>
+        </div>
+      </div>
+
+      <div class="check-item" data-section="sec1">
+        <input type="checkbox" />
+        <div class="item-body">
+          <div class="item-title">Export Canvas audit logs (April 30 to present)</div>
+          <div class="item-detail">Export all audit logs from April 30, 2026 forward. Look for: unusual API access, bulk data downloads, account permission changes, access from unexpected locations.
+            <ul>
+              <li>Canvas Admin → Audit Log → filter by date range</li>
+              <li>Document the export date and log range</li>
+            </ul>
+          </div>
+          <div class="item-evidence">Evidence: Log export file with documented date range</div>
+        </div>
+      </div>
+
+      <div class="check-item" data-section="sec1">
+        <input type="checkbox" />
+        <div class="item-body">
+          <div class="item-title">Open urgent support ticket with Canvas / Instructure</div>
+          <div class="item-detail">Contact Instructure support immediately. Request: forensic analysis of your institution's instance, confirmation of what data was accessed, and their incident response timeline.</div>
+          <div class="item-evidence">Evidence: Support ticket number and correspondence log</div>
+        </div>
+      </div>
+
+      <div class="check-item" data-section="sec1">
+        <input type="checkbox" />
+        <div class="item-body">
+          <div class="item-title">Review Canvas's official security notice</div>
+          <div class="item-detail">Check Canvas status page and security documentation for guidance specific to this incident. Document any vendor-provided remediation steps and whether you have completed them.</div>
+          <div class="item-evidence">Evidence: Documented vendor guidance with completion status</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>1.2 Credential and Session Management</h3>
+
+      <div class="check-item" data-section="sec1">
+        <input type="checkbox" />
+        <div class="item-body">
+          <div class="item-title">Force re-authentication for all active Canvas sessions</div>
+          <div class="item-detail">Canvas Admin → Settings → Sessions → Invalidate all sessions. All users will be required to log back in. Do this before or immediately after resetting admin passwords.</div>
+          <div class="item-evidence">Evidence: Timestamp of session invalidation</div>
+          <span class="item-ref">CISA ZTMM — Identity Pillar</span>
+        </div>
+      </div>
+
+      <div class="check-item" data-section="sec1">
+        <input type="checkbox" />
+        <div class="item-body">
+          <div class="item-title">Reset all Canvas admin and teacher account passwords</div>
+          <div class="item-detail">Force password reset for all admin and teacher roles. Minimum 16 characters, unique (not reused from other systems). Coordinate with your identity provider (Azure AD, Okta, Google Workspace) if Canvas uses SSO.</div>
+          <div class="item-evidence">Evidence: Password reset log from identity provider</div>
+          <span class="item-ref">CIS Controls v8 #5 — Account Management</span>
+        </div>
+      </div>
+
+      <div class="check-item" data-section="sec1">
+        <input type="checkbox" />
+        <div class="item-body">
+          <div class="item-title">Audit all Canvas admin accounts — remove unused accounts</div>
+          <div class="item-detail">Review who has admin, sub-account admin, and teacher roles. Remove or disable any account that is no longer actively used. Former staff accounts are a common attack vector.</div>
+          <div class="item-evidence">Evidence: Exported list of active Canvas admin accounts with justification for each</div>
+          <span class="item-ref">CIS Controls v8 #6 — Access Control Management</span>
+        </div>
+      </div>
+
+      <div class="check-item" data-section="sec1">
+        <input type="checkbox" />
+        <div class="item-body">
+          <div class="item-title">Rotate all Canvas API tokens and developer keys</div>
+          <div class="item-detail">Identify every Canvas API key in use. Canvas Admin → Developer Keys. Rotate all existing keys immediately. Document: which system uses each key, what scope it has, who owns it.</div>
+          <div class="item-evidence">Evidence: Key inventory with rotation timestamps</div>
+          <span class="item-ref">NIST SP 800-207 §3.3 — Least Privilege</span>
+        </div>
+      </div>
+
+      <div class="check-item" data-section="sec1">
+        <input type="checkbox" />
+        <div class="item-body">
+          <div class="item-title">Enable MFA for all Canvas admin accounts</div>
+          <div class="item-detail">Canvas Admin → Settings → MFA Configuration (if supported in your deployment). If Canvas uses SSO, enforce MFA through your identity provider for all Canvas-entitled accounts.</div>
+          <div class="item-evidence">Evidence: Screenshot showing MFA policy applied to admin role</div>
+          <span class="item-ref">CISA ZTMM Identity Pillar · CIS Controls v8 #6</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 2 -->
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <div class="section" id="sec2">
+    <div class="section-header">
+      <div class="section-title-group">
+        <div class="section-urgency urgency-48h">48 Hours — Complete before ransom deadline</div>
+        <h2>Section 2: Data Exposure Assessment</h2>
+      </div>
+      <span class="section-progress-pill" id="sec2-pill">0 / 0</span>
+    </div>
+
+    <div class="subsection">
+      <h3>2.1 Identify What Data Is at Risk</h3>
+
+      <div class="check-item" data-section="sec2">
+        <input type="checkbox" />
+        <div class="item-body">
+          <div class="item-title">Document all sensitive data stored in Canvas</div>
+          <div class="item-detail">Inventory what your institution has in Canvas:
+            <ul>
+              <li>Student names, IDs, dates of birth</li>
+              <li>Grades and academic records</li>
+              <li>Student and staff contact information</li>
+              <li>Course content and materials</li>
+              <li>Canvas Inbox messages and discussions</li>
+              <li>Any health, counseling, or financial aid content</li>
+            </ul>
+          </div>
+          <div class="item-evidence">Evidence: Data classification document for Canvas</div>
+          <span class="item-ref">CISA ZTMM Data Pillar · CIS Controls v8 #3</span>
+        </div>
+      </div>
+
+      <div class="check-item" data-section="sec2">
+        <input type="checkbox" />
+        <div class="item-body">
+          <div class="item-title">Determine applicable regulatory requirements</div>
+          <div class="item-detail">Assess which regulations govern your breach notification obligations:
+            <ul>
+              <li><strong>FERPA</strong> — applies to all institutions receiving federal funding; governs student education records</li>
+              <li><strong>HIPAA</strong> — if health or counseling data was in Canvas</li>
+              <li><strong>State privacy laws</strong> — most states have breach notification laws with specific timelines (often 30–72 hours)</li>
+              <li><strong>GDPR</strong> — if your institution has EU students or staff</li>
+            </ul>
+          </div>
+          <div class="item-evidence">Evidence: Legal review memo documenting applicable regulations and notification deadlines</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="subsection">
+      <h3>2.2 Forensic Review of Canvas Activity</h3>
+
+      <div class="check-item" data-section="sec2">
+        <input type="checkbox" />
+        <div class="item-body">
+          <div class="item-title">Analyze Canvas audit logs for suspicious access (April 30 – present)</div>
+          <div class="item-detail">Look for these indicators of compromise in your exported logs:
+            <ul>
+              <li>Bulk data exports or mass record downloads</li>
+              <li>API access from unexpected IP addresses or geolocations</li>
+              <li>Access outside normal business hours, especially late night / early morning</li>
+              <li>Admin account permission changes</li>
+              <li>New developer keys or OAuth applications added</li>
+              <li>User enumeration queries</li>
+            </ul>
+          </div>
+          <div class="item-evidence">Evidence: Documented findings from log review; flag anomalies for legal and IR team</div>
+        </div>
+      </div>
+
+      <div class="check-item" data-section="sec2">
+        <input type="checkbox" />
+        <div class="item-body">
+          <div class="item-title">Review SIS-to-Canvas integration data flows</div>
+          <div class="item-detail">If your Student Information System (PowerSchool, Infinite Campus, Ellucian, Banner, etc.) syncs data to Canvas, determine exactly what fields were in scope. Check whether the sync was one-way or bidirectional — a bidirectional integration means Canvas could have been used as a pivot point.</div>
+          <div class="item-evidence">Evidence: Integration data flow diagram with field-level scope</div>
+          <span class="item-ref">NIST SP 800-207 Tenet 7 — Monitor all assets</span>
+        </div>
+      </div>
+
+      <div class="check-item" data-section="sec2">
+        <input type="checkbox" />
+        <div class="item-body">
+          <div class="item-title">Identify and review all third-party Canvas integrations (LTI tools, APIs)</div>
+          <div class="item-detail">Canvas Admin → Developer Keys / LTI Integrations. List every integration: Zoom, Turnitin, VoiceThread, Google Classroom, etc. For each: what data can it access? When did it last authenticate? Is it still needed?</div>
+          <div class="item-evidence">Evidence: Integration inventory with access scope and review status</div>
+          <span class="item-ref">CISA ZTMM Applications &amp; Workloads Pillar</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 3 -->
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <div class="section" id="sec3">
+    <div class="section-header">
+      <div class="section-title-group">
+        <div class="section-urgency urgency-48h">48–72 Hours — Before public notification</div>
+        <h2>Section 3: Notification and Compliance</h2>
+      </div>
+      <span class="section-progress-pill" id="sec3-pill">0 / 0</span>
+    </div>
+
+    <div class="check-item" data-section="sec3">
+      <input type="checkbox" />
+      <div class="item-body">
+        <div class="item-title">Notify affected students and staff</div>
+        <div class="item-detail">Draft clear, plain-language notification: what happened, what was taken, what they should do (change passwords, watch for phishing). Avoid legal jargon. Publish through official channels — school website, official email, and any parent notification system.</div>
+        <div class="item-evidence">Evidence: Notification copy with distribution record</div>
+      </div>
+    </div>
+
+    <div class="check-item" data-section="sec3">
+      <input type="checkbox" />
+      <div class="item-body">
+        <div class="item-title">File required regulatory notifications</div>
+        <div class="item-detail">Based on your regulatory review (Section 2.1): notify the relevant state attorney general, education department, and/or data protection authority within required timelines. Engage legal counsel to draft notifications.</div>
+        <div class="item-evidence">Evidence: Filed notifications with submission confirmations</div>
+      </div>
+    </div>
+
+    <div class="check-item" data-section="sec3">
+      <input type="checkbox" />
+      <div class="item-body">
+        <div class="item-title">Notify law enforcement if appropriate</div>
+        <div class="item-detail">Report to: FBI IC3 (ic3.gov) and/or CISA (cisa.gov/report). For K-12 institutions, contact your state's Department of Education cybersecurity team. Do NOT pay the ransom — report the extortion demand as part of your notification.</div>
+        <div class="item-evidence">Evidence: Report reference numbers</div>
+      </div>
+    </div>
+
+    <div class="check-item" data-section="sec3">
+      <input type="checkbox" />
+      <div class="item-body">
+        <div class="item-title">Communicate with parents (K-12)</div>
+        <div class="item-detail">For K-12 institutions: parents have rights under FERPA. Prepare a parent-facing communication explaining what student data may have been exposed, what the school is doing, and what parents can do to protect their children.</div>
+        <div class="item-evidence">Evidence: Parent communication sent via official channels</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 4 -->
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <div class="section" id="sec4">
+    <div class="section-header">
+      <div class="section-title-group">
+        <div class="section-urgency urgency-ongoing">30 Days — Hardening and prevention</div>
+        <h2>Section 4: Zero Trust Hardening</h2>
+      </div>
+      <span class="section-progress-pill" id="sec4-pill">0 / 0</span>
+    </div>
+
+    <div class="subsection">
+      <h3>4.1 Identity Controls</h3>
+
+      <div class="check-item" data-section="sec4">
+        <input type="checkbox" />
+        <div class="item-body">
+          <div class="item-title">Enforce MFA for all Canvas users (students, staff, faculty)</div>
+          <div class="item-detail">Not just admins — all users. Enforce through your identity provider if Canvas uses SSO. This is the single most impactful control to prevent credential-based access after a breach.</div>
+          <div class="item-evidence">Evidence: MFA policy enforced and verified in IdP</div>
+          <span class="item-ref">CISA ZTMM Identity Pillar · CIS Controls v8 #6</span>
+        </div>
+      </div>
+
+      <div class="check-item" data-section="sec4">
+        <input type="checkbox" />
+        <div class="item-body">
+          <div class="item-title">Move Canvas integrations from static API keys to scoped, time-limited credentials</div>
+          <div class="item-detail">Static API keys that never expire are a critical vulnerability. Work with your identity provider to issue short-lived OAuth tokens for Canvas integrations. Each token should have the minimum scope required — not "read all student data" but "read enrollment data for this course."</div>
+          <div class="item-evidence">Evidence: Integration inventory updated; static keys replaced</div>
+          <span class="item-ref">NIST SP 800-207 Tenet 3 — Per-session access</span>
+        </div>
+      </div>
+
+      <div class="check-item" data-section="sec4">
+        <input type="checkbox" />
+        <div class="item-body">
+          <div class="item-title">Implement privileged access review cycle (quarterly)</div>
+          <div class="item-detail">Schedule a recurring quarterly review of Canvas admin accounts, API keys, and integration permissions. Stale accounts and overly broad permissions are how attackers maintain persistence after an initial breach.</div>
+          <div class="item-evidence">Evidence: Scheduled review documented in IT calendar</div>
+          <span class="item-ref">CIS Controls v8 #5 — Account Management</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>4.2 Data Controls</h3>
+
+      <div class="check-item" data-section="sec4">
+        <input type="checkbox" />
+        <div class="item-body">
+          <div class="item-title">Classify and inventory data stored in Canvas</div>
+          <div class="item-detail">Formally document what data your institution has in Canvas and how sensitive each type is. Apply your data classification policy. Remove data from Canvas that doesn't need to be there — especially health records, financial aid documents, or SSNs.</div>
+          <div class="item-evidence">Evidence: Data classification inventory for Canvas with sensitivity ratings</div>
+          <span class="item-ref">CISA ZTMM Data Pillar · CIS Controls v8 #3</span>
+        </div>
+      </div>
+
+      <div class="check-item" data-section="sec4">
+        <input type="checkbox" />
+        <div class="item-body">
+          <div class="item-title">Review SIS sync scope — minimize data in Canvas</div>
+          <div class="item-detail">Audit what your SIS pushes to Canvas. Canvas needs: enrollment data, course assignments, basic student identifiers. It does not need: health records, counseling notes, detailed financial data, or Social Security numbers. Remove these fields from any sync jobs.</div>
+          <div class="item-evidence">Evidence: SIS sync configuration reviewed and fields minimized</div>
+          <span class="item-ref">NIST SP 800-207 Tenet 6 — Data minimization</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>4.3 Visibility and Monitoring</h3>
+
+      <div class="check-item" data-section="sec4">
+        <input type="checkbox" />
+        <div class="item-body">
+          <div class="item-title">Set up ongoing Canvas API activity monitoring</div>
+          <div class="item-detail">Establish a baseline of normal Canvas API usage for your institution (normal query volume, access times, account types). Configure alerts for: bulk data requests, access outside normal hours, access from unexpected locations, unusual account permission changes.</div>
+          <div class="item-evidence">Evidence: Monitoring policy documented with alert thresholds</div>
+          <span class="item-ref">NIST SP 800-207 Tenet 7 · CISA ZTMM Visibility &amp; Analytics</span>
+        </div>
+      </div>
+
+      <div class="check-item" data-section="sec4">
+        <input type="checkbox" />
+        <div class="item-body">
+          <div class="item-title">Integrate Canvas audit logs into your SIEM or central log management</div>
+          <div class="item-detail">Canvas logs should not live only in Canvas. Forward them to your SIEM, Splunk, ELK, or at minimum a centralized log storage system outside of Canvas. This ensures you have logs even if the Canvas platform is compromised or goes offline. <em>(Advanced — requires tooling)</em></div>
+          <div class="item-evidence">Evidence: Log forwarding configured; retention policy set</div>
+          <span class="item-ref">CISA ZTMM Visibility &amp; Analytics Pillar</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 5 -->
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <div class="section" id="sec5">
+    <div class="section-header">
+      <div class="section-title-group">
+        <div class="section-urgency urgency-ongoing">60–90 Days — Improve posture</div>
+        <h2>Section 5: Recovery and Continuous Improvement</h2>
+      </div>
+      <span class="section-progress-pill" id="sec5-pill">0 / 0</span>
+    </div>
+
+    <div class="check-item" data-section="sec5">
+      <input type="checkbox" />
+      <div class="item-body">
+        <div class="item-title">Conduct a post-incident review</div>
+        <div class="item-detail">Hold a structured review within 2 weeks of incident closure: what happened, how it was detected, what the response timeline was, what worked, what failed. Document lessons learned and assign follow-up actions with owners and deadlines.</div>
+        <div class="item-evidence">Evidence: Post-incident report with action items</div>
+      </div>
+    </div>
+
+    <div class="check-item" data-section="sec5">
+      <input type="checkbox" />
+      <div class="item-body">
+        <div class="item-title">Update your incident response plan to include SaaS platform breaches</div>
+        <div class="item-detail">Most IR plans cover internal breaches but not vendor/SaaS incidents where you are a downstream victim. Add procedures specifically for: receiving vendor breach notification, assessing exposure, third-party coordination, and regulatory notification timelines.</div>
+        <div class="item-evidence">Evidence: Updated IR plan with SaaS breach scenarios</div>
+      </div>
+    </div>
+
+    <div class="check-item" data-section="sec5">
+      <input type="checkbox" />
+      <div class="item-body">
+        <div class="item-title">Conduct a Zero Trust Maturity Assessment</div>
+        <div class="item-detail">This breach exposed gaps in Identity, Data, and Applications &amp; Workloads pillars. Use a structured ZT maturity assessment to understand your current posture across all five pillars and build a roadmap for improvement.</div>
+        <div class="item-evidence">Evidence: ZT assessment results with 90-day roadmap</div>
+        <span class="item-ref">CISA ZTMM v2 · NIST SP 800-207</span>
+      </div>
+    </div>
+
+    <div class="check-item" data-section="sec5">
+      <input type="checkbox" />
+      <div class="item-body">
+        <div class="item-title">Run phishing awareness training for staff and students</div>
+        <div class="item-detail">Attackers now have institutional email addresses and will use them. Run targeted training on: recognizing phishing using Canvas / school branding, reporting suspicious emails, and not clicking unsolicited password reset links. Focus especially on staff accounts, which have elevated Canvas privileges.</div>
+        <div class="item-evidence">Evidence: Training completion records</div>
+        <span class="item-ref">CIS Controls v8 #14 — Security Awareness</span>
+      </div>
+    </div>
+
+    <div class="check-item" data-section="sec5">
+      <input type="checkbox" />
+      <div class="item-body">
+        <div class="item-title">Review all SaaS vendor contracts for security requirements and breach notification SLAs</div>
+        <div class="item-detail">This incident revealed how long it took Instructure to notify affected institutions. Review your Canvas contract (and all major SaaS contracts) for: breach notification timelines, security audit rights, data deletion requirements, and liability clauses. Update contracts at renewal if these are missing.</div>
+        <div class="item-evidence">Evidence: Contract review findings with renewal action items</div>
+      </div>
+    </div>
+
+  </div>
+
+</div><!-- /content -->
+
+<div class="page-footer">
+  Produced by the <a href="https://oztp.org">Open Zero Trust Project</a> · Framework references: NIST SP 800-207, CISA ZTMM v2, CIS Controls v8 ·
+  <a href="../canvas-2026-05.html">← Back to Advisory</a> ·
+  <a href="https://oztp.org/advisories/">All Advisories</a>
+</div>
+
+<script>
+  const STORAGE_KEY = "oztp-canvas-ir-checklist";
+
+  function getState() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch { return {}; }
+  }
+  function saveState(state) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  function getAllItems() {
+    return document.querySelectorAll(".check-item");
+  }
+
+  function getSectionItems(sectionId) {
+    return document.querySelectorAll(`.check-item[data-section="${sectionId}"]`);
+  }
+
+  function updateSectionPill(sectionId) {
+    const items = getSectionItems(sectionId);
+    const done = Array.from(items).filter(i => i.querySelector("input").checked).length;
+    const pill = document.getElementById(sectionId + "-pill");
+    if (!pill) return;
+    pill.textContent = done + " / " + items.length;
+    pill.classList.toggle("done", done === items.length && items.length > 0);
+  }
+
+  function updateOverall() {
+    const all = getAllItems();
+    const done = Array.from(all).filter(i => i.querySelector("input").checked).length;
+    document.getElementById("overall-count").textContent = done + " / " + all.length + " complete";
+    const pct = all.length > 0 ? Math.round((done / all.length) * 100) : 0;
+    document.getElementById("overall-bar").style.width = pct + "%";
+  }
+
+  function loadState() {
+    const state = getState();
+    const items = getAllItems();
+    items.forEach((item, idx) => {
+      const cb = item.querySelector("input");
+      if (state[idx]) {
+        cb.checked = true;
+        item.classList.add("checked");
+      }
+    });
+    ["sec1","sec2","sec3","sec4","sec5"].forEach(updateSectionPill);
+    updateOverall();
+  }
+
+  function bindEvents() {
+    const items = getAllItems();
+    items.forEach((item, idx) => {
+      const cb = item.querySelector("input");
+      item.addEventListener("click", function(e) {
+        if (e.target !== cb) cb.checked = !cb.checked;
+        item.classList.toggle("checked", cb.checked);
+        const state = getState();
+        state[idx] = cb.checked;
+        saveState(state);
+        const sectionId = item.getAttribute("data-section");
+        updateSectionPill(sectionId);
+        updateOverall();
+      });
+    });
+  }
+
+  function expandAll() { /* sections are always visible */ }
+
+  function resetAll() {
+    if (!confirm("Reset all checkboxes? This cannot be undone.")) return;
+    localStorage.removeItem(STORAGE_KEY);
+    getAllItems().forEach(item => {
+      item.querySelector("input").checked = false;
+      item.classList.remove("checked");
+    });
+    ["sec1","sec2","sec3","sec4","sec5"].forEach(updateSectionPill);
+    updateOverall();
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    loadState();
+    bindEvents();
+  });
+</script>
+</body>
+</html>
