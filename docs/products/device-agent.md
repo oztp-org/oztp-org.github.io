@@ -1,8 +1,8 @@
 # Device Agent
 
-**Status:** Active — Windows 11 Pro (additional platforms on the roadmap)
+**Status:** Active — Windows 11 Pro and Windows 11 Home (additional platforms on the roadmap)
 
-The OZTP Device Agent is a lightweight background process that reports security posture data to the Control Platform. The initial release targets Windows 11 Pro; additional operating systems are on the roadmap below.
+The OZTP Device Agent is a lightweight background process that reports security posture data to the Control Platform. The current release supports Windows 11 Pro and Home; additional operating systems are on the roadmap below.
 
 ---
 
@@ -36,12 +36,32 @@ The Device Agent leans on OS-native security controls — OZTP enhances them, it
 | Platform | Focus | Status |
 |---|---|---|
 | Windows 11 Pro | WDAC monitoring | **Active** |
-| Windows 11 Home | Defender, Device Encryption, Firewall, Secure Boot, UAC, Windows Hello | Planned |
+| Windows 11 Home | Defender, Device Encryption, Firewall, Secure Boot, UAC, Windows Hello | **Active** |
 | Windows Server | WDAC + SMB signing, RDP hardening, audit policy, BitLocker | Planned |
 | Linux (desktop + server) | AppArmor / SELinux, UFW, LUKS, SSH hardening, auditd | Planned |
 | macOS | Gatekeeper / SIP, FileVault, pf | Parked |
 
 Working on a deployment that needs one of the planned platforms sooner? [Open an issue](https://github.com/oztp-org/oztp-control-platform/issues) and we'll factor it into prioritization.
+
+---
+
+## On-Device Credential Security
+
+The agent stores two files locally that contain sensitive credentials:
+
+| File | Contains | Sensitivity |
+|---|---|---|
+| `oztp-agent.json` | `org_api_key` — can register new devices | Higher |
+| `oztp-agent-state.json` | Per-device API key — used for check-ins only | Lower |
+
+**After first registration, remove or blank the `org_api_key` from your config file.** The agent only needs it once to register the device. After that, it uses the per-device key stored in the state file. Leaving the org key in the config unnecessarily expands the blast radius if the file is ever read by an unauthorized party.
+
+**Restrict folder permissions** on the agent directory (e.g. `C:\OZTP\`) to administrator-only access. Standard users should not be able to read the config or state files.
+
+All data in transit is encrypted via HTTPS. OZTP does not have access to your device's file system — credential protection at rest is the responsibility of the device owner and the organization deploying the agent.
+
+!!! info "Planned: Secure Credential Storage"
+    A future release will support Windows Credential Manager and platform keychain storage so credentials are never stored in plaintext on disk.
 
 ---
 
