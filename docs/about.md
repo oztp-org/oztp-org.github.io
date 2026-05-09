@@ -25,7 +25,7 @@ These are not abstract ideals. They are implementable controls with well-defined
 ## Our Principles
 
 **Defensive only.**
-OZTP tools observe, report, and advise. They do not probe vulnerabilities, exploit weaknesses, or make unauthorized configuration changes. Every capability is reviewed against this standard before release.
+OZTP tools observe, report, and advise. They do not exploit vulnerabilities or make unauthorized configuration changes. Every capability is reviewed against this standard before release.
 
 **Free and open source.**
 Software is free to download, use, and modify. Where products require cloud infrastructure or AI processing, those costs are passed through to the organization at cost — OZTP does not mark them up or build a profit margin on top of what you consume.
