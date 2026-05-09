@@ -99,6 +99,7 @@ nav:
   - ZT Advisories:
     - Overview: advisories/index.md
     - Canvas Breach (May 2026): advisories/canvas-2026-05.md
+    - LastPass Breach (2022): advisories/lastpass-2022.md
   - Blog:
     - blog/index.md
   - Community: community.md

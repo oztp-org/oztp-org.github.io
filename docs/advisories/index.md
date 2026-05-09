@@ -37,6 +37,12 @@ Each advisory covers an active or recent cyber incident affecting real organizat
 |----------|------|--------|---------|
 | [Canvas LMS Breach — ShinyHunters](canvas-2026-05.md) | May 2026 | **ACTIVE** | K-12, Higher Ed worldwide |
 
+## Lessons Learned
+
+| Advisory | Date | Status | Affected |
+|----------|------|--------|---------|
+| [LastPass Supply Chain Breach — Password Manager Risk](lastpass-2022.md) | May 2026 | **LESSONS LEARNED** | All Organizations |
+
 ---
 
 ## About This Resource
