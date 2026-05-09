@@ -90,6 +90,7 @@ nav:
   - Frameworks: frameworks.md
   - Top 10 ZT Controls: top10.md
   - Absolute Zero: absolute-zero.md
+  - Turn Off The SPOF: turn-off-the-spof.md
   - Products:
     - Overview: products/index.md
     - Control Platform: products/control-platform.md

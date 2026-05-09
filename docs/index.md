@@ -80,6 +80,21 @@ hide:
 
 ---
 
+<p class="section-label">Concepts</p>
+
+<div class="product-grid">
+  <a href="turn-off-the-spof/" class="product-card">
+    <h3>Turn Off The SPOF</h3>
+    <p>Every major breach had a single point of failure. See how real incidents unfolded, identify the patterns in your own environment, and learn how Zero Trust eliminates them.</p>
+  </a>
+  <a href="absolute-zero/" class="product-card">
+    <h3>Absolute Zero</h3>
+    <p>A composite maturity score across all canonical Zero Trust pillars — a single number that tells you how close you are and where the gaps are.</p>
+  </a>
+</div>
+
+---
+
 <p class="section-label">Built for the Long Haul</p>
 
 Zero Trust is not a product you buy — it's a security posture you build over time. OZTP exists to support that journey for all organizations, no matter the size of their cybersecurity budget or number of devices.
