@@ -1,4 +1,4 @@
-# Turn Off The SPOF
+# Stop the SPOF
 
 A Single Point of Failure (SPOF) is any person, credential, system, or pathway where a single compromise leads to total loss. Zero Trust exists, in large part, to eliminate them.
 

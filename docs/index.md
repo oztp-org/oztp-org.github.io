@@ -83,8 +83,8 @@ hide:
 <p class="section-label">Concepts</p>
 
 <div class="product-grid">
-  <a href="turn-off-the-spof/" class="product-card">
-    <h3>Turn Off The SPOF</h3>
+  <a href="stop-the-spof/" class="product-card">
+    <h3>Stop the SPOF</h3>
     <p>Every major breach had a single point of failure. See how real incidents unfolded, identify the patterns in your own environment, and learn how Zero Trust eliminates them.</p>
   </a>
   <a href="absolute-zero/" class="product-card">
