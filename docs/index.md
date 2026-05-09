@@ -64,7 +64,7 @@ hide:
   <a href="products/device-agent/" class="product-card">
     <span class="status-badge status-active">Active</span>
     <h3>Device Agent</h3>
-    <p>Lightweight Windows 11 Pro agent that reports application control posture and security events to the control platform.</p>
+    <p>Lightweight Windows 11 Pro and Home agent that reports security posture and application control events to the control platform.</p>
   </a>
   <a href="products/zt-assessment/" class="product-card">
     <span class="status-badge status-active">Active</span>

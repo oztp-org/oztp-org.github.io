@@ -55,11 +55,11 @@ Every recommendation, checklist item, and maturity score maps to a recognized ex
 
 ## Status
 
-OZTP is an early-stage open source project. The first release targets Windows 11 Pro environments with a focus on WDAC (Windows Defender Application Control) monitoring.
+OZTP is an early-stage open source project. The initial release supports Windows 11 Pro and Home with a focus on device security posture and application control monitoring.
 
-This is intentional. We are starting narrow and verifiable before expanding scope.
+This is intentional. We are starting narrow and verifiable before expanding scope. Additional platforms — Windows Server, Linux desktop, and Linux server — are on the roadmap.
 
-See the [roadmap in our GitHub repository](https://github.com/oztp-org/oztp-control-platform/blob/main/docs/oztp-mvp-plan.md) for current phase and priorities.
+See the [GitHub repository](https://github.com/oztp-org/oztp-control-platform) for current development priorities.
 
 ---
 

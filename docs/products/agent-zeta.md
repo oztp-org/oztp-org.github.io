@@ -53,7 +53,7 @@ python run.py
 
 ### Web Interface
 
-A browser-based version of Agent Zeta is in development and will be available on this site. It will allow anyone to start a Zero Trust advisory session directly — no installation required.
+A browser-based version of Agent Zeta is live on this site. Click the **⚡ button** in the bottom-right corner of any page to start a Zero Trust advisory session directly — no installation required.
 
 !!! note "Prompt Safety"
     The web interface includes input validation and rate limiting to prevent misuse. Agent Zeta is scoped to Zero Trust advisory topics only.
