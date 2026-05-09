@@ -28,7 +28,7 @@ These are not abstract ideals. They are implementable controls with well-defined
 OZTP tools observe, report, and advise. They do not exploit vulnerabilities or make unauthorized configuration changes. Every capability is reviewed against this standard before release.
 
 **Free and open source.**
-Software is free to download, use, and modify. Where products require cloud infrastructure or AI processing, those costs are passed through to the organization at cost — OZTP does not mark them up or build a profit margin on top of what you consume.
+Software is free to download, use, and modify.
 
 **No vendor lock-in.**
 Products are designed to be infrastructure-agnostic. We support multiple cloud providers, multiple AI providers, and multiple operating systems. Organizations should own their security posture, not rent it from a single vendor.
