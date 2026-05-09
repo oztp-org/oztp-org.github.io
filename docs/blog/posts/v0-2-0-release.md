@@ -76,8 +76,8 @@ We launched a new section — **ZT Advisories** — covering real incidents with
 
 Two advisories are live:
 
-- **[Canvas LMS Breach — ShinyHunters](../advisories/canvas-2026-05.md)** — Active incident affecting millions of students and thousands of institutions. Includes an interactive incident response checklist.
-- **[LastPass Supply Chain Breach](../advisories/lastpass-2022.md)** — Lessons from the 2022 breach: how a developer's personal device exposed millions of encrypted vaults, what unencrypted metadata means for your organization, and how to evaluate any password manager going forward.
+- **[Canvas LMS Breach — ShinyHunters](../../advisories/canvas-2026-05.md)** — Active incident affecting millions of students and thousands of institutions. Includes an interactive incident response checklist.
+- **[LastPass Supply Chain Breach](../../advisories/lastpass-2022.md)** — Lessons from the 2022 breach: how a developer's personal device exposed millions of encrypted vaults, what unencrypted metadata means for your organization, and how to evaluate any password manager going forward.
 
 New advisories will be added as significant incidents arise.
 
