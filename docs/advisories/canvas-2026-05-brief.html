@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OZTP Brief — Canvas LMS Breach — May 2026</title>
+  <style>
+    /* ── Reset & Base ─────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 10.5pt;
+      color: #212121;
+      background: #f5f5f5;
+      line-height: 1.5;
+    }
+
+    /* ── Page wrapper ─────────────────────────────────────────────────────── */
+    .page {
+      width: 8.5in;
+      min-height: 11in;
+      margin: 0.4in auto;
+      background: #fff;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+      page-break-after: always;
+      overflow: hidden;
+    }
+
+    /* ── Header bar ───────────────────────────────────────────────────────── */
+    .page-header {
+      background: #3f51b5;
+      color: #fff;
+      padding: 18px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .page-header .brand {
+      font-size: 11pt;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      opacity: 0.92;
+    }
+
+    .page-header .doc-label {
+      font-size: 8pt;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
+
+    /* ── Page body ────────────────────────────────────────────────────────── */
+    .page-body {
+      flex: 1;
+      padding: 32px 40px 28px;
+    }
+
+    /* ── Title block ──────────────────────────────────────────────────────── */
+    .title-block {
+      border-bottom: 3px solid #3f51b5;
+      padding-bottom: 18px;
+      margin-bottom: 22px;
+    }
+
+    .badges {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    .badge-red {
+      background: rgba(211, 47, 47, 0.1);
+      color: #c62828;
+      border: 1px solid rgba(211, 47, 47, 0.35);
+    }
+
+    .badge-indigo {
+      background: rgba(63, 81, 181, 0.1);
+      color: #3f51b5;
+      border: 1px solid rgba(63, 81, 181, 0.3);
+    }
+
+    .doc-title {
+      font-size: 24pt;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #1a1a2e;
+      line-height: 1.15;
+      margin-bottom: 6px;
+    }
+
+    .doc-subtitle {
+      font-size: 11pt;
+      color: #555;
+      line-height: 1.4;
+    }
+
+    /* ── Two-column layout ────────────────────────────────────────────────── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-bottom: 22px;
+    }
+
+    /* ── Section headings ─────────────────────────────────────────────────── */
+    .section-heading {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #3f51b5;
+      margin-bottom: 10px;
+      padding-bottom: 4px;
+      border-bottom: 1.5px solid #e8eaf6;
+    }
+
+    /* ── At a Glance grid ─────────────────────────────────────────────────── */
+    .glance-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    .glance-item {
+      padding: 7px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .glance-item:nth-last-child(-n+2) {
+      border-bottom: none;
+    }
+
+    .glance-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #777;
+      margin-bottom: 2px;
+    }
+
+    .glance-value {
+      font-size: 9.5pt;
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+
+    .glance-value.red { color: #c62828; }
+    .glance-value.green { color: #2e7d32; }
+
+    /* ── Actions list ─────────────────────────────────────────────────────── */
+    .actions-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .action-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 9px 12px;
+      background: #f8f9ff;
+      border-left: 3px solid #3f51b5;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .action-num {
+      font-size: 12pt;
+      font-weight: 800;
+      color: #3f51b5;
+      line-height: 1;
+      min-width: 18px;
+      margin-top: 1px;
+    }
+
+    .action-text strong {
+      display: block;
+      font-size: 9pt;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 1px;
+    }
+
+    .action-text span {
+      font-size: 8.5pt;
+      color: #555;
+      line-height: 1.4;
+    }
+
+    /* ── Warning box ──────────────────────────────────────────────────────── */
+    .warn-box {
+      background: rgba(211, 47, 47, 0.06);
+      border: 1px solid rgba(211, 47, 47, 0.25);
+      border-left: 4px solid #c62828;
+      border-radius: 0 4px 4px 0;
+      padding: 10px 14px;
+      margin-top: 14px;
+      font-size: 8.5pt;
+      color: #b71c1c;
+      line-height: 1.5;
+    }
+
+    .warn-box strong { display: block; margin-bottom: 3px; font-size: 8pt; text-transform: uppercase; letter-spacing: 0.06em; }
+
+    /* ── Page footer ──────────────────────────────────────────────────────── */
+    .page-footer {
+      background: #f5f5f5;
+      border-top: 1px solid #e0e0e0;
+      padding: 10px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 7.5pt;
+      color: #888;
+    }
+
+    /* ════════════════════════════════════════════════════════════════════════
+       PAGE 2
+    ════════════════════════════════════════════════════════════════════════ */
+
+    /* ── ZT controls table ────────────────────────────────────────────────── */
+    .zt-controls {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      font-size: 8.5pt;
+    }
+
+    .zt-controls thead tr {
+      background: #3f51b5;
+      color: #fff;
+    }
+
+    .zt-controls thead th {
+      padding: 7px 12px;
+      text-align: left;
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .zt-controls tbody tr:nth-child(even) { background: #f8f9ff; }
+
+    .zt-controls tbody td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #e8eaf6;
+      vertical-align: top;
+      line-height: 1.45;
+    }
+
+    .zt-controls tbody td:first-child {
+      font-weight: 700;
+      color: #3f51b5;
+      white-space: nowrap;
+    }
+
+    /* ── 90-day path ──────────────────────────────────────────────────────── */
+    .path-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8.5pt;
+      margin-bottom: 24px;
+    }
+
+    .path-table thead tr {
+      background: #e8eaf6;
+    }
+
+    .path-table thead th {
+      padding: 7px 14px;
+      text-align: left;
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #3f51b5;
+    }
+
+    .path-table tbody td {
+      padding: 8px 14px;
+      border-bottom: 1px solid #eeeeee;
+      vertical-align: top;
+      line-height: 1.45;
+    }
+
+    .path-table tbody td:first-child {
+      font-weight: 700;
+      white-space: nowrap;
+      color: #444;
+      width: 90px;
+    }
+
+    /* ── CTA box ──────────────────────────────────────────────────────────── */
+    .cta-box {
+      background: #3f51b5;
+      color: #fff;
+      border-radius: 8px;
+      padding: 28px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      margin-top: auto;
+    }
+
+    .cta-box .cta-text h3 {
+      font-size: 14pt;
+      font-weight: 800;
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+
+    .cta-box .cta-text p {
+      font-size: 9pt;
+      opacity: 0.85;
+      line-height: 1.5;
+      max-width: 420px;
+    }
+
+    .cta-box .cta-url {
+      background: #fff;
+      color: #3f51b5;
+      border-radius: 6px;
+      padding: 12px 22px;
+      font-size: 10pt;
+      font-weight: 800;
+      text-decoration: none;
+      white-space: nowrap;
+      letter-spacing: 0.01em;
+      flex-shrink: 0;
+      text-align: center;
+    }
+
+    .cta-box .cta-url small {
+      display: block;
+      font-size: 7.5pt;
+      font-weight: 500;
+      color: #7986cb;
+      margin-top: 2px;
+    }
+
+    /* ── Print styles ─────────────────────────────────────────────────────── */
+    @media print {
+      body { background: #fff; font-size: 10pt; }
+      .page { width: 100%; margin: 0; box-shadow: none; min-height: 0; }
+      .cta-box .cta-url { border: 2px solid #3f51b5; }
+    }
+
+    @page {
+      size: letter portrait;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     PAGE 1
+════════════════════════════════════════════════════════════════════════════ -->
+<div class="page">
+
+  <div class="page-header">
+    <div class="brand">Open Zero Trust Project &nbsp;·&nbsp; OZTP Brief</div>
+    <div class="doc-label">May 2026 &nbsp;·&nbsp; oztp.org</div>
+  </div>
+
+  <div class="page-body">
+
+    <!-- Title -->
+    <div class="title-block">
+      <div class="badges">
+        <span class="badge badge-red">Active Incident</span>
+        <span class="badge badge-indigo">K-12 &amp; Higher Education</span>
+        <span class="badge badge-indigo">SaaS Data Breach</span>
+      </div>
+      <div class="doc-title">Canvas LMS Breach</div>
+      <div class="doc-subtitle">ShinyHunters claims 275 million users compromised across 8,800 institutions — what happened, what to do, and how Zero Trust limits the damage.</div>
+    </div>
+
+    <!-- Two column: At a Glance + Actions -->
+    <div class="two-col">
+
+      <!-- Left: At a Glance -->
+      <div>
+        <div class="section-heading">At a Glance</div>
+        <div class="glance-grid">
+          <div class="glance-item">
+            <div class="glance-label">Threat Actor</div>
+            <div class="glance-value red">ShinyHunters</div>
+          </div>
+          <div class="glance-item">
+            <div class="glance-label">Target</div>
+            <div class="glance-value">Instructure / Canvas LMS</div>
+          </div>
+          <div class="glance-item">
+            <div class="glance-label">Attack Type</div>
+            <div class="glance-value">Data exfiltration + extortion</div>
+          </div>
+          <div class="glance-item">
+            <div class="glance-label">Scale</div>
+            <div class="glance-value red">~275M users · 8,800 institutions</div>
+          </div>
+          <div class="glance-item">
+            <div class="glance-label">Data Claimed Stolen</div>
+            <div class="glance-value">Names, emails, student IDs, messages</div>
+          </div>
+          <div class="glance-item">
+            <div class="glance-label">Ransom Deadline</div>
+            <div class="glance-value red">May 12, 2026</div>
+          </div>
+          <div class="glance-item">
+            <div class="glance-label">Platform Status</div>
+            <div class="glance-value green">Restored (May 7)</div>
+          </div>
+          <div class="glance-item">
+            <div class="glance-label">Passwords / SSNs Stolen?</div>
+            <div class="glance-value green">No evidence per Instructure</div>
+          </div>
+        </div>
+
+        <div class="warn-box">
+          <strong>Do Not Pay</strong>
+          Paying a ransom does not guarantee data deletion and marks your institution as willing to pay again. Engage legal counsel and law enforcement instead.
+        </div>
+      </div>
+
+      <!-- Right: 5 Actions -->
+      <div>
+        <div class="section-heading">5 Actions Right Now</div>
+        <ul class="actions-list">
+          <li class="action-item">
+            <div class="action-num">1</div>
+            <div class="action-text">
+              <strong>Change your Canvas password</strong>
+              <span>Use a strong, unique password. If you manage accounts, force a reset for all users.</span>
+            </div>
+          </li>
+          <li class="action-item">
+            <div class="action-num">2</div>
+            <div class="action-text">
+              <strong>Enable MFA on Canvas and your email</strong>
+              <span>This is the single highest-impact action you can take today.</span>
+            </div>
+          </li>
+          <li class="action-item">
+            <div class="action-num">3</div>
+            <div class="action-text">
+              <strong>Watch for phishing</strong>
+              <span>Attackers have your school email. Expect fake Canvas and IT notifications.</span>
+            </div>
+          </li>
+          <li class="action-item">
+            <div class="action-num">4</div>
+            <div class="action-text">
+              <strong>Don't click unsolicited breach notifications</strong>
+              <span>Fraudulent alerts will circulate. Use only official IT communications channels.</span>
+            </div>
+          </li>
+          <li class="action-item">
+            <div class="action-num">5</div>
+            <div class="action-text">
+              <strong>IT Teams: open the IR checklist</strong>
+              <span>Assign owners, document actions, notify legal and compliance. Full checklist at oztp.org/advisories/checklists/canvas-ir.html</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div><!-- end two-col -->
+
+  </div><!-- end page-body -->
+
+  <div class="page-footer">
+    <span>OZTP Brief &nbsp;·&nbsp; Canvas LMS Breach &nbsp;·&nbsp; May 2026</span>
+    <span>For informational use only &nbsp;·&nbsp; Not a substitute for a security audit &nbsp;·&nbsp; Page 1 of 2</span>
+  </div>
+
+</div><!-- end page 1 -->
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     PAGE 2
+════════════════════════════════════════════════════════════════════════════ -->
+<div class="page">
+
+  <div class="page-header">
+    <div class="brand">Open Zero Trust Project &nbsp;·&nbsp; OZTP Brief</div>
+    <div class="doc-label">Canvas LMS Breach &nbsp;·&nbsp; May 2026</div>
+  </div>
+
+  <div class="page-body" style="display: flex; flex-direction: column; gap: 0;">
+
+    <!-- ZT Controls -->
+    <div class="section-heading" style="margin-bottom: 10px;">Zero Trust Controls That Apply</div>
+    <p style="font-size: 8.5pt; color: #555; margin-bottom: 14px; line-height: 1.5;">
+      This incident is a case study in implicit trust extended to a SaaS vendor. Zero Trust architecture would have <strong>contained the blast radius</strong>. These are the controls that matter most — do the reactive ones now, then plan for the preventative ones.
+    </p>
+
+    <table class="zt-controls">
+      <thead>
+        <tr>
+          <th style="width: 110px;">Control</th>
+          <th style="width: 160px;">Reactive — Do Now</th>
+          <th>Preventative — Do Next</th>
+          <th style="width: 120px;">Framework Ref</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Credentials</td>
+          <td>Rotate all Canvas API keys and OAuth tokens. Invalidate active sessions.</td>
+          <td>Replace static API keys with short-lived, scoped credentials — issued per session, expired automatically.</td>
+          <td>NIST SP 800-207 §3.3 · CISA ZTMM Identity</td>
+        </tr>
+        <tr>
+          <td>Identity / MFA</td>
+          <td>Enforce MFA for all Canvas admin and teacher accounts through your IdP (Azure AD, Okta, Google Workspace).</td>
+          <td>Move toward phishing-resistant MFA (FIDO2/passkeys) for admin accounts. Eliminate password-only access.</td>
+          <td>CIS Controls v8 #6 · CISA ZTMM Identity</td>
+        </tr>
+        <tr>
+          <td>SaaS Trust</td>
+          <td>Audit every system integrated with Canvas — what data can it read or write? Remove anything no longer needed.</td>
+          <td>Deploy a CASB or API gateway to inspect Canvas traffic. Monitor bulk data queries and anomalous access patterns.</td>
+          <td>NIST SP 800-207 Tenet 2 · CISA ZTMM Apps &amp; Workloads</td>
+        </tr>
+        <tr>
+          <td>Data Scope</td>
+          <td>Review what sensitive data (counseling notes, financial aid, health records) is currently stored in Canvas.</td>
+          <td>Classify data before it enters Canvas. Move sensitive PII to systems with tighter access controls — don't sync everything into your LMS.</td>
+          <td>CISA ZTMM Data Pillar · CIS Controls v8 #3</td>
+        </tr>
+        <tr>
+          <td>Visibility</td>
+          <td>Enable Canvas API audit logs. Export logs from April 30 forward for forensic review.</td>
+          <td>Treat Canvas API logs like network logs. Set thresholds for unusual access spikes, unexpected geolocations, and bulk record queries.</td>
+          <td>NIST SP 800-207 Tenet 7 · CISA ZTMM Visibility</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 90-Day Path -->
+    <div class="section-heading" style="margin-bottom: 10px;">Recommended 90-Day Path</div>
+    <table class="path-table">
+      <thead>
+        <tr>
+          <th>Timeframe</th>
+          <th>Priority Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Days 1–7</td>
+          <td>Rotate credentials · Enforce MFA on admin accounts · Audit Canvas integrations · Export audit logs</td>
+        </tr>
+        <tr>
+          <td>Days 8–30</td>
+          <td>Classify data in Canvas · Remove unnecessary data · Review SIS ↔ Canvas sync scope · Set up API monitoring</td>
+        </tr>
+        <tr>
+          <td>Days 31–90</td>
+          <td>Migrate from static API keys to short-lived credentials · Deploy CASB or API gateway for SaaS visibility · Conduct a ZT Maturity Assessment</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- CTA -->
+    <div class="cta-box">
+      <div class="cta-text">
+        <h3>Get the Full Advisory</h3>
+        <p>The complete OZTP advisory includes an interactive incident response checklist, full Zero Trust control deep-dives with framework citations, and links to Agent Zeta — our free AI Zero Trust advisor.</p>
+      </div>
+      <a class="cta-url" href="https://oztp.org/advisories/canvas-2026-05/">
+        oztp.org/advisories
+        <small>Free &nbsp;·&nbsp; No account required</small>
+      </a>
+    </div>
+
+  </div><!-- end page-body -->
+
+  <div class="page-footer">
+    <span>© 2026 Some Technologists LLC &nbsp;·&nbsp; Open Zero Trust Project &nbsp;·&nbsp; Apache 2.0</span>
+    <span>Informational use only · Not legal or security consulting advice &nbsp;·&nbsp; Page 2 of 2</span>
+  </div>
+
+</div><!-- end page 2 -->
+
+</body>
+</html>
