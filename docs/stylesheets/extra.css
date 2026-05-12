@@ -414,3 +414,21 @@ a.framework-badge:hover {
   opacity: 0.5 !important;
   margin-top: 0.75rem !important;
 }
+
+.inst-confirm {
+  margin-top: 0.85rem;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.inst-confirm--found {
+  background: rgba(244, 67, 54, 0.08);
+  border: 1px solid rgba(244, 67, 54, 0.3);
+  color: var(--md-default-fg-color);
+}
+
+.inst-confirm--found strong {
+  color: #f44336;
+}
