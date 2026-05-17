@@ -35,6 +35,7 @@ Each advisory covers an active or recent cyber incident affecting real organizat
 
 | Advisory | Date | Status | Affected |
 |----------|------|--------|---------|
+| [YellowKey — BitLocker Bypass via WinRE](yellowkey-2026-05.md) | May 2026 | **UNPATCHED** | All Windows Organizations |
 | [Canvas LMS Breach — ShinyHunters](canvas-2026-05.md) | May 2026 | **ACTIVE** | K-12, Higher Ed worldwide |
 
 ## Lessons Learned

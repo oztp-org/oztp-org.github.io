@@ -99,6 +99,7 @@ nav:
     - Agent Zeta: products/agent-zeta.md
   - ZT Advisories:
     - Overview: advisories/index.md
+    - YellowKey BitLocker Bypass (May 2026): advisories/yellowkey-2026-05.md
     - Canvas Breach (May 2026): advisories/canvas-2026-05.md
     - LastPass Breach (2022): advisories/lastpass-2022.md
   - Blog:
