@@ -2,7 +2,40 @@
 
 **Status:** Active — Windows 11 Pro and Windows 11 Home (additional platforms on the roadmap)
 
-The OZTP Device Agent is a lightweight background process that reports security posture data to the Control Platform. The current release supports Windows 11 Pro and Home; additional operating systems are on the roadmap below.
+The OZTP Device Agent is a lightweight background process that reports security posture data to the Control Platform. It answers a question that EDR, IDS, and SIEM tools typically don't: **are your Zero Trust controls actually in place and configured correctly?**
+
+---
+
+## Where It Fits in Your Security Stack
+
+Most security tools watch for active threats. The Device Agent watches for something different — configuration drift from a Zero Trust baseline. These are complementary, not competing.
+
+| Tool | Primary Question |
+|---|---|
+| EDR (CrowdStrike, Defender for Endpoint) | Is there an active threat on this device? |
+| SIEM (Splunk, Sentinel) | What happened across my environment? |
+| IDS / IPS | Is something probing or breaching my network? |
+| **OZTP Device Agent** | **Are the ZT controls actually in place and configured correctly?** |
+
+A device can pass EDR scans all day while running application control in audit mode with no enforcement policies. EDR won't flag that — the agent will.
+
+**The agent doesn't replace your security stack. It tells you whether your Zero Trust foundation is solid enough for the rest of it to stand on.**
+
+### Fits naturally alongside existing tools
+
+- **With EDR** — EDR detects threats; the agent detects configuration gaps. Run both. They answer different questions.
+- **With SIEM** — The Control Platform exposes structured check-in data via API. Orgs running Splunk or Sentinel can pull device posture as a log source, adding ZT configuration context to existing security workflows.
+- **Without enterprise tooling** — For organizations that haven't deployed EDR or SIEM yet, the agent provides immediate, structured visibility into device-level ZT posture with no vendor dependencies.
+
+---
+
+## Paired With ZT Maturity Assessments
+
+When your organization conducts a Zero Trust Maturity Assessment — whether through [Agent Zeta](/products/agent-zeta/) or the [ZT Maturity Assessment](/products/zt-assessment/) tool — device agent telemetry gives the assessment real answers instead of self-reported ones.
+
+Rather than asking "Do you have application control policies deployed?" and relying on memory, the Control Platform dashboard shows exactly which devices have WDAC active, which are in audit vs. enforcement mode, and how many policies are loaded — for every enrolled device, in real time.
+
+Assessment and device data live in the same platform, accessible from a single authenticated dashboard.
 
 ---
 
@@ -76,7 +109,7 @@ All data in transit is encrypted via HTTPS. OZTP does not have access to your de
 
 ## Requirements
 
-- Windows 11 Pro
+- Windows 11 Pro or Home
 - PowerShell 5.1+ (built-in on Win 11)
 - Python 3.10+ (for running from source) **or** the standalone `.exe` (no Python required)
 - Network access to your Control Platform instance
@@ -87,7 +120,7 @@ All data in transit is encrypted via HTTPS. OZTP does not have access to your de
 
 ### 1. Get an Org Key
 
-Register your organization with your Control Platform instance to get an `X-Org-Key`.
+Register your organization with your Control Platform instance to get an org key.
 
 ### 2. Configure the Agent
 
