@@ -295,6 +295,47 @@ An organization that falls below its tier's criteria during a renewal cycle is p
 
 ---
 
+### The Badges
+
+Each tier carries a distinct badge. Recognized organizations may display their badge on their website, internal security documentation, and communications.
+
+<div style="display:flex; gap:2rem; align-items:flex-end; margin: 1.5rem 0;">
+  <div style="text-align:center;">
+    <img src="../assets/badges/az-foundations.svg" alt="Absolute Zero Foundations badge" width="100"/>
+    <div style="font-size:0.75rem; margin-top:0.5rem; opacity:0.7;">Foundations</div>
+  </div>
+  <div style="text-align:center;">
+    <img src="../assets/badges/az-advanced.svg" alt="Absolute Zero Advanced badge" width="100"/>
+    <div style="font-size:0.75rem; margin-top:0.5rem; opacity:0.7;">Advanced</div>
+  </div>
+  <div style="text-align:center;">
+    <img src="../assets/badges/az-designation.svg" alt="Absolute Zero Designation badge" width="100"/>
+    <div style="font-size:0.75rem; margin-top:0.5rem; opacity:0.7;">Designation</div>
+  </div>
+</div>
+
+Once recognition is granted, OZTP provides the badge file and embed code for your tier. Display example:
+
+```html
+<a href="https://oztp.org/absolute-zero/" title="Absolute Zero Foundations — Open Zero Trust Project">
+  <img src="az-foundations.svg" alt="Absolute Zero Foundations — OZTP" width="100"/>
+</a>
+```
+
+Each badge links back to this page so visitors can verify what the designation means. Organizations should not modify the badge files or display a tier they have not been awarded.
+
+---
+
+### How Issuance Works
+
+1. **Apply** — Submit your evidence package via the contact page. Include your assessment results, policy documentation, and any third-party reports required for your target tier.
+2. **Review** — OZTP reviews the evidence submission. We may follow up with questions. Review is currently manual and typically completes within two weeks.
+3. **Award** — If criteria are met, OZTP issues your badge file, a PDF certificate of recognition, and a unique reference number that can be used to verify the award.
+4. **Display** — Embed your badge using the provided code. Link it back to `oztp.org/absolute-zero/`.
+5. **Renew** — Recognition expires on an annual basis. OZTP will contact you before your renewal date with the reassessment requirements for your tier.
+
+---
+
 ### Apply for Recognition
 
 The Absolute Zero recognition program is currently in development. OZTP is working with early-adopter organizations to validate the criteria and evidence requirements before the formal program launches.

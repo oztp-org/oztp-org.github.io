@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 130" width="120" height="130" role="img" aria-label="Absolute Zero Designation — Open Zero Trust Project">
+  <title>Absolute Zero Designation — Open Zero Trust Project</title>
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="rgba(0,0,0,0.4)"/>
+    </filter>
+  </defs>
+  <!-- Hexagon (flat-top) -->
+  <polygon points="106.8,38 60,11 13.2,38 13.2,92 60,119 106.8,92"
+           fill="#1A237E" filter="url(#shadow)"/>
+  <!-- Inner ring - gold for designation tier -->
+  <polygon points="99,42.5 60,20 21,42.5 21,87.5 60,110 99,87.5"
+           fill="none" stroke="rgba(255,193,7,0.45)" stroke-width="1.5"/>
+  <!-- 0K monogram - gold -->
+  <text x="60" y="63" font-family="Georgia,'Times New Roman',serif" font-size="24"
+        font-weight="bold" fill="#FFC107" text-anchor="middle">0K</text>
+  <!-- Divider - gold -->
+  <line x1="35" y1="71" x2="85" y2="71" stroke="rgba(255,193,7,0.4)" stroke-width="1"/>
+  <!-- ABSOLUTE ZERO -->
+  <text x="60" y="82" font-family="'DejaVu Sans',Verdana,Geneva,sans-serif" font-size="7.5"
+        fill="white" text-anchor="middle" letter-spacing="1.2" font-weight="bold">ABSOLUTE ZERO</text>
+  <!-- Tier -->
+  <text x="60" y="95" font-family="'DejaVu Sans',Verdana,Geneva,sans-serif" font-size="7"
+        fill="#FFC107" text-anchor="middle" letter-spacing="0.8">DESIGNATION</text>
+  <!-- OZTP -->
+  <text x="60" y="108" font-family="'DejaVu Sans',Verdana,Geneva,sans-serif" font-size="6.5"
+        fill="rgba(255,255,255,0.55)" text-anchor="middle">OZTP</text>
+</svg>
