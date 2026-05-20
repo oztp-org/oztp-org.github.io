@@ -156,13 +156,61 @@ At Absolute Zero, ISO 27001 is not a certificate on the wall — it is an embedd
 
 ---
 
+## How the Frameworks Align
+
+The four frameworks are not redundant — they are complementary. Each one approaches security maturity from a different angle. NIST defines the architecture. CISA maps the operational pillars. CIS specifies the controls. ISO governs the management system. Progress in one accelerates progress in the others because they are solving the same underlying problem from different directions.
+
+### Pillar-Level Alignment Map
+
+CISA's five pillars provide the most concrete operational structure, making them the natural anchor for cross-framework alignment.
+
+| CISA ZTMM Pillar | NIST 800-207 Tenets | CIS Controls v8 |
+|------------------|---------------------|-----------------|
+| **Identity** | Tenet 3 — per-session access<br>Tenet 4 — dynamic policy<br>Tenet 6 — dynamic auth/authz | CIS 5 — Account Management<br>CIS 6 — Access Control |
+| **Devices** | Tenet 1 — all sources are resources<br>Tenet 4 — dynamic policy<br>Tenet 5 — continuous monitoring | CIS 1 — Asset Inventory<br>CIS 2 — Software Inventory<br>CIS 4 — Secure Configuration<br>CIS 10 — Malware Defenses |
+| **Networks & Environments** | Tenet 2 — all comms secured<br>Tenet 5 — continuous monitoring | CIS 9 — Email and Web Protections<br>CIS 12 — Network Management<br>CIS 13 — Network Monitoring |
+| **Applications & Workloads** | Tenet 1 — all sources are resources<br>Tenet 6 — dynamic auth/authz | CIS 2 — Software Inventory<br>CIS 7 — Vulnerability Management<br>CIS 16 — Application Security |
+| **Data** | Tenet 2 — all comms secured<br>Tenet 7 — data collection for improvement | CIS 3 — Data Protection<br>CIS 8 — Audit Log Management |
+| **Cross-cutting** | Tenet 5 — continuous monitoring<br>Tenet 7 — data collection | CIS 14 — Security Awareness<br>CIS 15 — Service Provider Management<br>CIS 17 — Incident Response<br>CIS 18 — Penetration Testing |
+
+### ISO 27001 as the Governance Layer
+
+ISO 27001 does not map neatly to individual pillars because it operates at a different level — it is the management system that governs all of them. Where NIST, CISA, and CIS tell you *what* to implement, ISO 27001 tells you *how to manage, document, audit, and continuously improve* that implementation.
+
+This distinction matters practically:
+
+- CISA ZTMM advancement requires documented policies and evidence of effectiveness. ISO 27001's ISMS documentation requirements generate exactly that evidence as a byproduct of compliance.
+- CIS Controls require implementation. ISO 27001's Statement of Applicability (SoA) provides the formal record of which controls are in place and why.
+- NIST 800-207 requires continuous monitoring and data collection. ISO 27001's internal audit and management review cycles provide the governance structure that makes continuous monitoring sustainable.
+
+An organization building toward Absolute Zero can treat ISO 27001 certification as the audit harness that validates and documents everything else.
+
+### Where Progress Compounds
+
+Five relationships where advancing in one framework directly accelerates another:
+
+**1. CIS 1 + 2 unlock CISA Devices advancement.**
+You cannot reach CISA Devices Advanced or Optimal without knowing what devices exist and what software runs on them. CIS Controls 1 (Asset Inventory) and 2 (Software Inventory) are the prerequisite data layer. Do them first and CISA Devices progress follows naturally.
+
+**2. CISA Identity Optimal operationalizes NIST Tenets 3, 4, and 6 simultaneously.**
+Achieving just-in-time privileged access, risk-based dynamic access decisions, and universal phishing-resistant MFA — the Identity Optimal criteria — directly satisfies NIST's requirements for per-session access, dynamic policy, and dynamic authentication/authorization. One body of work, three tenets checked.
+
+**3. CIS 8 (Audit Log Management) feeds both NIST Tenet 7 and ISO surveillance.**
+A centralized SIEM with 12-month log retention and integrity controls satisfies NIST's requirement to collect security telemetry for posture improvement. The same logs are the primary evidence source for ISO 27001 surveillance audits. Building the logging infrastructure once serves both frameworks continuously.
+
+**4. ISO 27001 documentation closes CISA ZTMM evidence gaps.**
+CISA ZTMM maturity assessments require organizations to demonstrate — not just claim — that controls are working. ISO 27001's mandatory documentation (policies, procedures, audit records, nonconformity tracking) produces this evidence systematically. Organizations with an active ISMS typically advance faster through CISA ZTMM evaluations because the evidence already exists.
+
+**5. NIST Tenet 5 is the engine behind every CISA Optimal designation.**
+Every CISA pillar at Optimal requires real-time visibility and automated response. An organization cannot reach Optimal in any pillar without continuous monitoring infrastructure in place. NIST Tenet 5 (all assets are continuously monitored and validated) is the architectural commitment that makes Optimal achievable across all five pillars.
+
+---
+
 ## What Comes Next
 
-OZTP is building the **cross-framework alignment map** — showing how NIST 800-207, CISA ZTMM, CIS Controls IG3, and ISO 27001 reinforce each other, where they overlap, and how progress in one framework accelerates progress in the others.
+OZTP is defining the **Absolute Zero recognition program** — the criteria an organization must demonstrate to earn the designation. This is not a self-assessment checkbox. It is a structured, evidence-based evaluation built on the frameworks above.
 
-We are also defining the **Absolute Zero recognition program** — the criteria an organization must demonstrate to earn the designation. This is not a self-assessment checkbox. It is a structured, evidence-based evaluation.
-
-If your organization is on this journey — or if you want to help build the framework — we want to hear from you.
+If your organization is on this journey — or if you want to help build the recognition program — we want to hear from you.
 
 [Start with the OZTP Top 10 ZT Controls →](top10.md){ .md-button .md-button--primary }
 [Take the ZT Maturity Assessment →](products/zt-assessment.md){ .md-button }
