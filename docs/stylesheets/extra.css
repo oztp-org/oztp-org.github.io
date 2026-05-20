@@ -1,5 +1,19 @@
 /* OZTP brand overrides */
 
+/* Log In nav tab styled as a button */
+.md-tabs__link[href*="run.app"] {
+  border: 1px solid var(--oztp-accent-light);
+  border-radius: 4px;
+  padding: 0.2rem 0.75rem;
+  margin-top: 0.35rem;
+  opacity: 1 !important;
+}
+.md-tabs__link[href*="run.app"]:hover {
+  background: var(--oztp-accent);
+  color: white;
+  border-color: var(--oztp-accent);
+}
+
 :root {
   --oztp-accent: #3f51b5;
   --oztp-accent-light: #7986cb;
