@@ -206,15 +206,104 @@ Every CISA pillar at Optimal requires real-time visibility and automated respons
 
 ---
 
-## What Comes Next
+## The Absolute Zero Recognition Program
 
-OZTP is defining the **Absolute Zero recognition program** — the criteria an organization must demonstrate to earn the designation. This is not a self-assessment checkbox. It is a structured, evidence-based evaluation built on the frameworks above.
+Absolute Zero is a pursuit, not a finish line. The recognition program is designed around that reality. Rather than a single designation that few organizations can ever reach, it defines three tiers — each one a meaningful milestone on the journey toward the ideal.
 
-If your organization is on this journey — or if you want to help build the recognition program — we want to hear from you.
+Recognition is **evidence-based, not self-declared**. Each tier requires documented proof that controls are working, not just policies that say they should be.
 
-[Start with the OZTP Top 10 ZT Controls →](top10.md){ .md-button .md-button--primary }
+---
+
+### Tier 1 — Absolute Zero Foundations
+
+**What it means:** The organization has formally assessed its Zero Trust posture, established a baseline across all five pillars, and committed to a structured improvement roadmap. This is the starting point — the declaration that the pursuit has begun.
+
+**Criteria:**
+
+- Completed a structured ZT Maturity Assessment with documented results across all five CISA ZTMM pillars
+- Gap analysis completed against the [OZTP Top 10 ZT Controls](top10.md)
+- Formal remediation plan documented, with each gap assigned an owner and target date
+- Security policies exist — written and accessible — covering identity, devices, and network access
+
+**Evidence required:**
+
+- Assessment results export or equivalent documentation
+- Remediation roadmap (can be internal; does not need to be published)
+- Policy inventory showing coverage of the three required domains
+
+---
+
+### Tier 2 — Absolute Zero Advanced
+
+**What it means:** The organization has moved beyond baseline. Controls are operational, not just documented. At least two pillars have reached Advanced maturity, and the governance foundation is in place.
+
+**Criteria:**
+
+- All five CISA ZTMM pillars at Initial maturity or above
+- At least two pillars at Advanced maturity
+- CIS Controls IG1 fully implemented across all 18 control families
+- Phishing-resistant MFA deployed for all privileged accounts
+- Incident response plan documented and tested within the last 12 months
+- Device inventory is complete and continuously maintained
+
+**Evidence required:**
+
+- Updated ZT Maturity Assessment results showing pillar-level scores
+- CIS IG1 implementation record or equivalent control inventory
+- MFA deployment confirmation for privileged accounts
+- Incident response plan with date of last tabletop exercise or live test
+- Device inventory report
+
+---
+
+### Tier 3 — Absolute Zero Designation
+
+**What it means:** The highest recognition OZTP awards. The organization has achieved Advanced or Optimal maturity across all five pillars, with at least three at Optimal. A mature governance system is in place, and the posture has been validated by independent third parties.
+
+**Criteria:**
+
+- All five CISA ZTMM pillars at **Advanced** or above
+- At least three pillars at **Optimal**
+- CIS Controls IG2 fully implemented; IG3 in active progress
+- ISO 27001 certified **or** equivalent ISMS with documented annual internal audit and management review on record
+- Third-party penetration test completed within the last 12 months, with all critical and high findings remediated
+- Least-privilege access enforced across all systems; no standing administrative accounts
+- Continuous monitoring operational across identity, devices, and network
+
+**Evidence required:**
+
+- ZT Maturity Assessment results showing pillar-level scores at Advanced/Optimal
+- CIS IG2 implementation record
+- ISO 27001 certificate **or** internal ISMS audit report with management review minutes
+- Penetration test report from a qualified third party, with remediation documentation
+- Privileged access review showing no standing admin accounts
+- Monitoring coverage documentation
+
+---
+
+### Maintaining Recognition
+
+Recognition is not permanent. The security posture of an organization changes — and so does the threat landscape.
+
+| Tier | Renewal Requirement |
+|------|-------------------|
+| Foundations | Annual reassessment; updated remediation roadmap |
+| Advanced | Annual reassessment showing maintained or improved pillar scores |
+| Designation | Annual reassessment + updated pen test (every 12 months) + ISMS audit on record |
+
+An organization that falls below its tier's criteria during a renewal cycle is placed in a remediation period. If criteria are not restored within 90 days, the recognition is suspended until restored.
+
+---
+
+### Apply for Recognition
+
+The Absolute Zero recognition program is currently in development. OZTP is working with early-adopter organizations to validate the criteria and evidence requirements before the formal program launches.
+
+If your organization wants to participate in the early program — or if you want to help shape the criteria — we want to hear from you.
+
+[Contact OZTP →](community.md){ .md-button .md-button--primary }
 [Take the ZT Maturity Assessment →](products/zt-assessment.md){ .md-button }
-[Contact OZTP →](community.md){ .md-button }
+[Ask Agent Zeta →](chat.md){ .md-button }
 
 ---
 
