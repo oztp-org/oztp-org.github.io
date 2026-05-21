@@ -11,7 +11,7 @@ OZTP builds free, open source security tools aligned with Zero Trust frameworks.
   <a href="device-agent/" class="product-card">
     <span class="status-badge status-active">Active</span>
     <h3>Device Agent</h3>
-    <p>Windows 11 Pro and Home agent that reports security posture and application control events. No cloud connectivity required for local-only use.</p>
+    <p>Windows and Linux agents that report security posture and application control events to the Control Platform. No cloud connectivity required for local-only use.</p>
   </a>
   <a href="zt-assessment/" class="product-card">
     <span class="status-badge status-active">Active</span>

@@ -1,6 +1,6 @@
 # Device Agent
 
-**Status:** Active — Windows 11 Pro and Windows 11 Home (additional platforms on the roadmap)
+**Status:** Active — Windows 11 Pro · Windows 11 Home · Linux Server · Linux Desktop
 
 The OZTP Device Agent is a lightweight background process that reports security posture data to the Control Platform. It answers a question that EDR, IDS, and SIEM tools typically don't: **are your Zero Trust controls actually in place and configured correctly?**
 
@@ -33,7 +33,7 @@ A device can pass EDR scans all day while running application control in audit m
 
 When your organization conducts a Zero Trust Maturity Assessment — whether through [Agent Zeta](/products/agent-zeta/) or the [ZT Maturity Assessment](/products/zt-assessment/) tool — device agent telemetry gives the assessment real answers instead of self-reported ones.
 
-Rather than asking "Do you have application control policies deployed?" and relying on memory, the Control Platform dashboard shows exactly which devices have WDAC active, which are in audit vs. enforcement mode, and how many policies are loaded — for every enrolled device, in real time.
+Rather than asking "Do you have application control policies deployed?" and relying on memory, the Control Platform dashboard shows exactly which devices have controls active, which are in audit vs. enforcement mode, and how many policies are loaded — for every enrolled device, in real time.
 
 Assessment and device data live in the same platform, accessible from a single authenticated dashboard.
 
@@ -42,39 +42,76 @@ Assessment and device data live in the same platform, accessible from a single a
 ## What It Does
 
 - Registers the device with the Control Platform and receives a per-device API key
-- Performs periodic check-ins with WDAC posture data
-- Collects and reports Windows Defender Application Control (WDAC) / App Control for Business events
+- Performs periodic check-ins with OS-native security posture data
 - Reports device health status: `healthy`, `warning`, `attention`, or `unknown`
+- Collects application control events and configuration state
 - Runs with no cloud connectivity required in local/monitor-only mode
 
-## Current Focus: WDAC / App Control for Business Monitoring
+---
 
-The initial release focuses on Windows Defender Application Control (WDAC) / App Control for Business visibility:
+## Platform Coverage
+
+The agent leans on OS-native security controls — OZTP enhances them, it does not replace them.
+
+### Windows 11 (Pro and Home)
 
 | Data Collected | Description |
 |---|---|
-| WDAC presence | Whether App Control for Business is active on the device |
-| Policy mode | Audit mode vs. enforcement mode |
-| Policy version | Currently loaded WDAC policy information |
+| WDAC / App Control | Whether application control is active, mode (audit vs. enforce), policy count |
 | Block/audit events | Recent application control events from the CodeIntegrity log |
-| Device identity | Hostname, OS version, agent version |
-| Check-in timestamp | Last successful communication with the control platform |
+| Windows Defender | Real-time protection, antivirus status |
+| BitLocker / Device Encryption | Drive encryption status |
+| Secure Boot | UEFI Secure Boot state |
+| Windows Firewall | Firewall active status |
+| UAC | User Account Control level |
+| TPM | TPM presence and version |
+
+### Linux Server
+
+| Data Collected | Description |
+|---|---|
+| AppArmor / SELinux | MAC framework present, mode (enforce vs. audit), profile count |
+| UFW / iptables | Firewall active and default posture |
+| SSH hardening | Password auth, PermitRootLogin |
+| auditd | Audit daemon active |
+| fail2ban | Brute-force lockout active |
+| LUKS | Full-disk encryption detected |
+| Unattended upgrades | Automatic security updates enabled |
+| Passwordless sudo | Non-root NOPASSWD entries |
+
+### Linux Desktop
+
+All server checks apply, plus desktop-specific posture:
+
+| Data Collected | Description |
+|---|---|
+| Screen lock | GNOME / KDE / XFCE / logind — timeout and lock-on-idle |
+| SSH server | Flags sshd running on a desktop as a configuration concern |
+| Bluetooth | Discoverability and pairable state |
+| Guest account | LightDM / GDM3 guest login enabled |
+| Password hashing | Flags MD5 or DES hashing in /etc/shadow |
+| PAM faillock | Account lockout after failed logins configured |
+| Snap confinement | Flags snaps running in classic or devmode |
+| Browser AppArmor | Firefox / Chromium AppArmor profile active |
+| PowerShell Core | Flags pwsh installed without an AppArmor profile |
+| Legacy protocols | telnet, rsh, rlogin — installed or running |
+| LOTL indicators | Executables in /tmp or /dev/shm, pipe-to-shell patterns in cron, base64 decode in scheduled tasks |
+| SELinux booleans | Risky booleans (user_exec_content, allow_execmem) on RHEL/Fedora |
 
 ---
 
 ## Platform Roadmap
 
-The Device Agent leans on OS-native security controls — OZTP enhances them, it does not replace them. Coverage will expand across operating systems in the order below, driven by user demand.
+| Platform | Status |
+|---|---|
+| Windows 11 Pro | **Active** |
+| Windows 11 Home | **Active** |
+| Linux Server (Ubuntu/Debian, RHEL/Fedora) | **Active** |
+| Linux Desktop (Ubuntu/Debian, RHEL/Fedora) | **Active** |
+| Windows Server | Planned |
+| macOS | Parked |
 
-| Platform | Focus | Status |
-|---|---|---|
-| Windows 11 Pro | WDAC monitoring | **Active** |
-| Windows 11 Home | Defender, Device Encryption, Firewall, Secure Boot, UAC, Windows Hello | **Active** |
-| Windows Server | WDAC + SMB signing, RDP hardening, audit policy, BitLocker | Planned |
-| Linux (desktop + server) | AppArmor / SELinux, UFW, LUKS, SSH hardening, auditd | Planned |
-| macOS | Gatekeeper / SIP, FileVault, pf | Parked |
-
-Working on a deployment that needs one of the planned platforms sooner? [Open an issue](https://github.com/oztp-org/oztp-control-platform/issues) and we'll factor it into prioritization.
+Working on a deployment that needs one of the planned platforms sooner? [Open an issue](https://github.com/oztp-org/agent-linux/issues) and we'll factor it into prioritization.
 
 ---
 
@@ -84,17 +121,17 @@ The agent stores two files locally that contain sensitive credentials:
 
 | File | Contains | Sensitivity |
 |---|---|---|
-| `oztp-agent.json` | `org_api_key` — can register new devices | Higher |
-| `oztp-agent-state.json` | Per-device API key — used for check-ins only | Lower |
+| Config file | `org_api_key` — can register new devices | Higher |
+| State file | Per-device API key — used for check-ins only | Lower |
 
 **After first registration, remove or blank the `org_api_key` from your config file.** The agent only needs it once to register the device. After that, it uses the per-device key stored in the state file. Leaving the org key in the config unnecessarily expands the blast radius if the file is ever read by an unauthorized party.
 
-**Restrict folder permissions** on the agent directory (e.g. `C:\OZTP\`) to administrator-only access. Standard users should not be able to read the config or state files.
+**Restrict permissions** on the agent config directory to administrator/root-only access. Standard users should not be able to read the config or state files.
 
 All data in transit is encrypted via HTTPS. OZTP does not have access to your device's file system — credential protection at rest is the responsibility of the device owner and the organization deploying the agent.
 
 !!! info "Planned: Secure Credential Storage"
-    A future release will support Windows Credential Manager and platform keychain storage so credentials are never stored in plaintext on disk.
+    A future release will support Windows Credential Manager and Linux keyring storage so credentials are never stored in plaintext on disk.
 
 ---
 
@@ -109,9 +146,17 @@ All data in transit is encrypted via HTTPS. OZTP does not have access to your de
 
 ## Requirements
 
+### Windows
 - Windows 11 Pro or Home
 - PowerShell 5.1+ (built-in on Win 11)
 - Python 3.10+ (for running from source) **or** the standalone `.exe` (no Python required)
+- Network access to your Control Platform instance
+
+### Linux
+- Ubuntu 20.04+ / Debian 11+ or RHEL 8+ / Fedora 36+
+- Python 3.10+
+- `httpx` Python package (`pip install httpx`)
+- Root/sudo for systemd timer installation and shadow file checks
 - Network access to your Control Platform instance
 
 ---
@@ -124,31 +169,73 @@ Register your organization with your Control Platform instance to get an org key
 
 ### 2. Configure the Agent
 
-```json title="oztp-agent.json"
-{
-  "server_url": "https://your-control-platform.run.app",
-  "org_api_key": "org_YOUR_ORG_KEY",
-  "device_name": "workstation-01"
-}
-```
+=== "Windows"
+
+    ```json title="oztp-agent.json"
+    {
+      "server_url": "https://your-control-platform.run.app",
+      "org_api_key": "org_YOUR_ORG_KEY",
+      "device_name": "workstation-01"
+    }
+    ```
+
+=== "Linux Server"
+
+    ```json title="/etc/oztp/oztp-agent.json"
+    {
+      "server_url": "https://your-control-platform.run.app",
+      "org_api_key": "org_YOUR_ORG_KEY",
+      "device_name": "my-linux-server"
+    }
+    ```
+
+=== "Linux Desktop"
+
+    ```json title="/etc/oztp/oztp-agent-desktop.json"
+    {
+      "server_url": "https://your-control-platform.run.app",
+      "org_api_key": "org_YOUR_ORG_KEY",
+      "device_name": "my-linux-desktop"
+    }
+    ```
 
 ### 3. Run the Agent
 
-```powershell
-python oztp_agent.py --config oztp-agent.json
-```
+=== "Windows"
 
-Or use the standalone `.exe` (no Python required):
+    ```powershell
+    python oztp_agent.py --config oztp-agent.json
+    ```
 
-```powershell
-.\oztp-agent.exe --config oztp-agent.json
-```
+=== "Linux Server"
 
-!!! note "Coming Soon"
-    Standalone Windows executable packaging is in progress.
+    ```bash
+    # One-time run
+    sudo python3 oztp_agent_linux.py --config /etc/oztp/oztp-agent.json
+
+    # Install as systemd service (runs every 15 minutes)
+    sudo cp oztp_agent_linux.py /opt/oztp/
+    sudo cp oztp-agent.service oztp-agent.timer /etc/systemd/system/
+    sudo systemctl daemon-reload
+    sudo systemctl enable --now oztp-agent.timer
+    ```
+
+=== "Linux Desktop"
+
+    ```bash
+    # One-time run
+    sudo python3 oztp_agent_linux_desktop.py --config /etc/oztp/oztp-agent-desktop.json
+
+    # Install as systemd service (runs every 15 minutes)
+    sudo cp oztp_agent_linux_desktop.py /opt/oztp/
+    sudo cp oztp-agent-desktop.service oztp-agent-desktop.timer /etc/systemd/system/
+    sudo systemctl daemon-reload
+    sudo systemctl enable --now oztp-agent-desktop.timer
+    ```
 
 ---
 
 ## Source
 
-[github.com/oztp-org/oztp-control-platform/tree/main/agent](https://github.com/oztp-org/oztp-control-platform/tree/main/agent)
+- Windows agent: [github.com/oztp-org/oztp-control-platform/tree/main/agent](https://github.com/oztp-org/oztp-control-platform/tree/main/agent)
+- Linux agents: [github.com/oztp-org/agent-linux](https://github.com/oztp-org/agent-linux)
