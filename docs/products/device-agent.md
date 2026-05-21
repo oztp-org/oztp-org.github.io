@@ -43,13 +43,13 @@ Assessment and device data live in the same platform, accessible from a single a
 
 - Registers the device with the Control Platform and receives a per-device API key
 - Performs periodic check-ins with WDAC posture data
-- Collects and reports Windows Defender Application Control (WDAC) events
+- Collects and reports Windows Defender Application Control (WDAC) / App Control for Business events
 - Reports device health status: `healthy`, `warning`, `attention`, or `unknown`
 - Runs with no cloud connectivity required in local/monitor-only mode
 
-## Current Focus: WDAC Monitoring
+## Current Focus: WDAC / App Control for Business Monitoring
 
-The initial release focuses on Windows Defender Application Control visibility:
+The initial release focuses on Windows Defender Application Control (WDAC) / App Control for Business visibility:
 
 | Data Collected | Description |
 |---|---|

@@ -36,7 +36,7 @@ No email address, billing information, or personal account is required to use OZ
 | Device name (set by your admin) | Identify the device in your dashboard |
 | Hostname | Display device identity |
 | OS name and version | Platform context for posture assessment |
-| Security posture results | WDAC status, Defender, Firewall, Secure Boot, TPM, UAC — pass/warn/fail |
+| Security posture results | WDAC (App Control for Business) status, Defender, Firewall, Secure Boot, TPM, UAC — pass/warn/fail |
 | Security event summaries | WDAC event type, level, and sanitized message |
 | Check-in timestamp | Track device activity |
 

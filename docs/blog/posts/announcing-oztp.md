@@ -20,7 +20,7 @@ That's the problem OZTP is built to address.
 
 OZTP is building free, open source Zero Trust tools for organizations of every size. Not frameworks and whitepapers — actual software that can be downloaded, installed, and run.
 
-The first release focuses on what we're calling **monitoring first**: give organizations visibility into their current security posture before recommending any changes. Specifically, we're starting with Windows Defender Application Control (WDAC) on Windows 11 Pro — one of the most powerful and underutilized security controls available to Windows environments today.
+The first release focuses on what we're calling **monitoring first**: give organizations visibility into their current security posture before recommending any changes. Specifically, we're starting with Windows Defender Application Control (WDAC) / App Control for Business on Windows 11 Pro — one of the most powerful and underutilized security controls available to Windows environments today.
 
 The initial product set:
 

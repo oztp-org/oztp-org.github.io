@@ -57,7 +57,7 @@ Every access request must prove who is asking — not just once at login, but fo
 Zero Trust's "never trust, always verify" applies to software too. An unknown executable is an unverified entity.
 
 !!! tip "Where to start"
-    [Windows Defender Application Control (WDAC)](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/){ target=_blank } is built into Windows 10/11 Pro and Enterprise — no purchase required. Start in **audit mode** to understand your software baseline before switching to enforcement.
+    [Windows Defender Application Control (WDAC) / App Control for Business](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/){ target=_blank } is built into Windows 10/11 Pro and Enterprise — no purchase required. Start in **audit mode** to understand your software baseline before switching to enforcement.
 
 **OZTP:** The [Control Platform](products/control-platform.md) monitors WDAC posture across your fleet — policy count, enforcement mode, and events — in real time. This is OZTP's flagship capability today.
 

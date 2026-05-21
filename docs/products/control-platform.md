@@ -10,7 +10,7 @@ The OZTP Control Platform is a lightweight cloud API that serves as the central 
 
 - Accepts device registrations and issues per-device API keys
 - Receives periodic check-ins from enrolled devices
-- Stores WDAC posture data and application control events
+- Stores WDAC (App Control for Business) posture data and application control events
 - Displays device health status on a web dashboard
 - Supports multi-tenant deployments (each org sees only its own devices)
 

@@ -59,7 +59,7 @@ hide:
   <a href="products/control-platform/" class="product-card">
     <span class="status-badge status-active">Active</span>
     <h3>Control Platform</h3>
-    <p>Cloud-hosted control plane for device check-ins, WDAC telemetry, and health reporting across your organization.</p>
+    <p>Cloud-hosted control plane for device check-ins, WDAC (App Control for Business) telemetry, and health reporting across your organization.</p>
   </a>
   <a href="products/device-agent/" class="product-card">
     <span class="status-badge status-active">Active</span>
