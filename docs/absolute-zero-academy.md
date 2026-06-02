@@ -56,9 +56,9 @@ The Academy offers three individual certification tiers, each building on the la
 ---
 
 ### AZ Architect
-** For: ** Senior security practitioners, security architects, and those building or leading ZT programs — including future Absolute Zero recognition assessors.
+**For:** Senior security practitioners, security architects, and those building or leading ZT programs — including future Absolute Zero recognition assessors.
 
-** Covers: **
+**Covers:**
 - CISA ZTMM Optimal across all five pillars in practice
 - CIS Controls IG3 implementation
 - ISO 27001 ISMS design and continuous operation
@@ -68,7 +68,7 @@ The Academy offers three individual certification tiers, each building on the la
 - Zero Trust architecture for complex, multi-environment organizations
 - Third-party risk and supply chain Zero Trust
 
-** Earns: ** AZ Architect Certificate + eligibility to serve as an Absolute Zero recognition assessor
+**Earns:** AZ Architect Certificate + eligibility to serve as an Absolute Zero recognition assessor
 
 ---
 
