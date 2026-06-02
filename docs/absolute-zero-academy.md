@@ -1,6 +1,6 @@
 ---
 title: Absolute Zero Academy — Zero Trust Education and Certification
-description: The Absolute Zero Academy is OZTP's free, open source education and certification program for Zero Trust practitioners.
+description: The Absolute Zero Academy is OZTP's open-source education and certification program for Zero Trust practitioners.
 ---
 
 # Absolute Zero Academy
@@ -56,21 +56,19 @@ The Academy offers three individual certification tiers, each building on the la
 ---
 
 ### AZ Architect
+** For: ** Senior security practitioners, security architects, and those building or leading ZT programs — including future Absolute Zero recognition assessors.
 
-**For:** Senior security practitioners, security architects, and those building or leading ZT programs — including future Absolute Zero recognition assessors.
-
-**Covers:**
-
+** Covers: **
 - CISA ZTMM Optimal across all five pillars in practice
 - CIS Controls IG3 implementation
 - ISO 27001 ISMS design and continuous operation
 - Cross-framework gap analysis and multi-year roadmap design
+- **Threat Intelligence Integration & Automated Guardrails**
+- **Governance, Risk, and Compliance (GRC) Alignment**
 - Zero Trust architecture for complex, multi-environment organizations
 - Third-party risk and supply chain Zero Trust
-- Presenting ZT maturity and program progress to leadership and boards
-- Assessor training: conducting evidence-based reviews for [Absolute Zero org recognition](absolute-zero.md#the-absolute-zero-recognition-program)
 
-**Earns:** AZ Architect Certificate + eligibility to serve as an Absolute Zero recognition assessor
+** Earns: ** AZ Architect Certificate + eligibility to serve as an Absolute Zero recognition assessor
 
 ---
 
@@ -85,10 +83,13 @@ The Academy and the [Absolute Zero recognition program](absolute-zero.md#the-abs
 | AZ Architect | Absolute Zero Designation + assessor eligibility |
 
 ---
+## Open Access and Sustainability 
 
-## Open and Free
+The Absolute Zero Academy is built on the principle that essential cybersecurity knowledge should be accessible. To ensure the long-term sustainability, continuous updates, and validation integrity of the Academy, we distinguish between open-access learning and formal credentials:
 
-The Absolute Zero Academy is being built as an open, free resource — consistent with OZTP's mission to make Zero Trust security accessible to organizations of every size. Course materials will be openly licensed. The certification exams will have no cost barrier.
+* **Open Curriculum:** Educational frameworks, study documentation, and foundational objectives are openly licensed and accessible to individuals and organizations for self-study.
+* **Services & Validation:** Official certification exam proctoring, formal credential issuance, and future instructor-led academy classes may include fees to cover platform scaling, administrative overhead, and rigorous identity verification.
+
 
 ---
 
