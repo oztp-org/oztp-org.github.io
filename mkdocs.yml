@@ -125,6 +125,8 @@ extra:
       name: OZTP on GitHub
   generator: false
   analytics:
+    provider: google
+    property: G-GZMBTFY0EP
     feedback:
       title: Was this helpful?
       ratings:
