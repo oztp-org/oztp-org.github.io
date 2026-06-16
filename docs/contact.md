@@ -7,7 +7,7 @@ description: Get in touch with the Open Zero Trust Project team.
 
 Have a question, suggestion, or want to contribute? We'd love to hear from you.
 
-<form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+<form class="contact-form" action="https://formspree.io/f/mpqenneq" method="POST">
 
   <div class="contact-field">
     <label for="name">Name</label>
