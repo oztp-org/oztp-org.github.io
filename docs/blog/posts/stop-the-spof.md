@@ -1,8 +1,18 @@
+---
+date: 2026-05-09
+authors:
+  - oztp
+categories:
+  - Zero Trust Concepts
+---
+
 # Stop the SPOF
 
 A Single Point of Failure (SPOF) is any person, credential, system, or pathway where a single compromise leads to total loss. Zero Trust exists, in large part, to eliminate them.
 
 The incidents below are not edge cases or nation-state exceptions. They are the normal consequence of implicit trust — an assumed-safe account, a trusted update, a vendor with standing access. In every case, one thing failed and everything followed.
+
+<!-- more -->
 
 ---
 
@@ -69,7 +79,7 @@ NSA contractor Edward Snowden used his standing system administrator access to c
 Attackers compromised a LastPass developer's personal laptop via a vulnerability in Plex Media Server, then used stolen credentials to access cloud backup infrastructure — including encrypted vault backups for millions of users. Offline brute-force attacks against weak master passwords led to over $150 million in cryptocurrency losses by late 2023. One developer's personal device held standing privileged access with no device health verification. It was the SPOF for the entire customer base.
 
 [:fontawesome-brands-wikipedia-w: Wikipedia — LastPass](https://en.wikipedia.org/wiki/LastPass){ .md-button }
-[OZTP Advisory →](advisories/lastpass-2022/){ .md-button }
+[OZTP Advisory →](/advisories/lastpass-2022/){ .md-button }
 
 ---
 
@@ -94,8 +104,6 @@ Every incident above fits one or more of these patterns. If any of these exist i
 
 ## Framework Alignment
 
-Zero Trust frameworks explicitly address SPOF elimination. These are not new ideas — they are documented requirements.
-
 | SPOF Category | NIST SP 800-207 | CISA ZTMM v2 | CIS Controls v8 |
 |---|---|---|---|
 | No MFA | §2.1 — Authenticate all access requests | Identity pillar | Control 6: Access Control Management |
@@ -109,8 +117,6 @@ Zero Trust frameworks explicitly address SPOF elimination. These are not new ide
 ---
 
 ## Checklist: Does Your Org Have a SPOF?
-
-Work through this list. Any unchecked item is a potential SPOF.
 
 **Identity**
 
@@ -148,15 +154,11 @@ Work through this list. Any unchecked item is a potential SPOF.
 
 ---
 
-## SPOF Assessment
+!!! info "ZT Maturity Assessment"
+    A structured SPOF assessment mapped to NIST SP 800-207 and CISA ZTMM v2 is planned for a future release. In the meantime, the ZT Maturity Assessment covers the full CISA ZTMM v2 control set.
 
-!!! info "Coming soon"
-    A structured SPOF assessment — mapped to NIST SP 800-207 and CISA ZTMM v2, scored by pillar — is planned for a future release.
-
-    In the meantime, the [ZT Maturity Assessment](products/zt-assessment.md) covers the full CISA ZTMM v2 control set, including the identity, device, and visibility controls most relevant to SPOF elimination.
-
-    [Launch ZT Assessment →](products/zt-assessment.md){ .md-button .md-button--primary }
+    [Launch ZT Assessment →](/products/zt-assessment/){ .md-button .md-button--primary }
 
 ---
 
-*New incidents are added as significant SPOF-driven breaches occur. [Suggest an addition →](community.md)*
+*New incidents are added as significant SPOF-driven breaches occur. [Suggest an addition →](/community/)*

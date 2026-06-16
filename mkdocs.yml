@@ -86,18 +86,16 @@ plugins:
 
 nav:
   - Home: index.md
-  - About: about.md
-  - Frameworks: frameworks.md
-  - Top 10 ZT Controls: top10.md
-  - Absolute Zero: absolute-zero.md
-  - Absolute Zero Academy: absolute-zero-academy.md
-  - Stop the SPOF: stop-the-spof.md
-  - Products:
+  - Top 10 Controls: top10.md
+  - Resources:
     - Overview: products/index.md
+    - Frameworks: frameworks.md
     - Control Platform: products/control-platform.md
     - Device Agent: products/device-agent.md
     - ZT Maturity Assessment: products/zt-assessment.md
     - Agent Zeta: products/agent-zeta.md
+    - AZ Academy: absolute-zero-academy.md
+  - AZ Academy: absolute-zero-academy.md
   - ZT Advisories:
     - Overview: advisories/index.md
     - CISA ZT for OT — Volt Typhoon (June 2026): advisories/cisa-zt-ot-2026.md
@@ -106,10 +104,14 @@ nav:
     - LastPass Breach (2022): advisories/lastpass-2022.md
   - Blog:
     - blog/index.md
-  - Community: community.md
-  - Privacy: privacy.md
-  - Terms of Use: terms.md
-  - Log In: https://oztp-control-platform-651946913194.us-east1.run.app
+  - About:
+    - About: about.md
+    - Absolute Zero: absolute-zero.md
+    - Contact: contact.md
+    - Community: community.md
+    - Privacy: privacy.md
+    - Terms of Use: terms.md
+  - Log In: login.md
 
 copyright: >
   &copy; 2026 Some Technologists LLC &mdash;

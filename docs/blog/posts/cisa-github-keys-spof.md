@@ -24,4 +24,4 @@ None of those controls require malicious intent to matter. They matter most prec
 
 This is the anti-SPOF argument at its clearest. Not "don't hire bad people" — but "don't build a system where one bad day becomes everyone's worst week."
 
-[See our SPOF incident archive and Zero Trust checklist →](../../stop-the-spof.md){ .md-button }
+[See our SPOF incident archive and Zero Trust checklist →](/blog/2026/05/09/stop-the-spof/){ .md-button }

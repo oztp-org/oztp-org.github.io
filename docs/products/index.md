@@ -1,4 +1,4 @@
-# Products
+# Resources
 
 OZTP builds free, open source security tools aligned with Zero Trust frameworks. All software is free to download and use.
 

@@ -447,6 +447,127 @@ a.framework-badge:hover {
   color: #f44336;
 }
 
+/* ── Login hub ────────────────────────────────────────────────────────────── */
+.login-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+@media (max-width: 600px) {
+  .login-grid { grid-template-columns: 1fr; }
+}
+
+.login-card {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  border: 1.5px solid var(--md-default-fg-color--lightest);
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.login-card:hover {
+  border-color: var(--md-primary-fg-color);
+  box-shadow: 0 2px 12px rgba(63,81,181,0.12);
+}
+
+.login-card--soon {
+  opacity: 0.6;
+  cursor: default;
+  pointer-events: none;
+}
+
+.login-card-icon { font-size: 2rem; flex-shrink: 0; line-height: 1; }
+
+.login-card-body h2 {
+  font-size: 1.1rem;
+  margin: 0 0 0.4rem;
+}
+
+.login-card-body p {
+  font-size: 0.875rem;
+  margin: 0 0 0.75rem;
+  opacity: 0.75;
+}
+
+.login-card-cta {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--md-primary-fg-color);
+}
+
+.login-card-cta--soon { color: var(--md-default-fg-color--light); }
+
+.login-note {
+  font-size: 0.8rem;
+  opacity: 0.65;
+  margin-top: 1rem;
+}
+
+/* ── Contact form ─────────────────────────────────────────────────────────── */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  max-width: 560px;
+  margin: 1.5rem 0 2rem;
+}
+
+.contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.contact-field label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+}
+
+.contact-field input,
+.contact-field select,
+.contact-field textarea {
+  padding: 0.6rem 0.75rem;
+  border: 1.5px solid var(--md-default-fg-color--lightest);
+  border-radius: 5px;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: border-color 0.15s;
+}
+
+.contact-field input:focus,
+.contact-field select:focus,
+.contact-field textarea:focus {
+  outline: none;
+  border-color: var(--md-primary-fg-color);
+}
+
+.contact-field textarea { resize: vertical; }
+
+.contact-submit {
+  align-self: flex-start;
+  padding: 0.65rem 1.5rem;
+  background: var(--md-primary-fg-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.contact-submit:hover { opacity: 0.88; }
+
 /* ── Human + AI badge ─────────────────────────────────────────────────────── */
 .hai-badge {
   display: inline-flex;
