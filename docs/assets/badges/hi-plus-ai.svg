@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 72" width="56" height="72" role="img" aria-label="Made with Human and Artificial Intelligence">
+  <title>Made with Human + Artificial Intelligence — OZTP</title>
+  <!-- White base -->
+  <rect x="1.5" y="1.5" width="53" height="69" rx="8" fill="white"/>
+  <!-- Top half: solid indigo — Human Intelligence -->
+  <path d="M 9.5,1.5 L 46.5,1.5 Q 54.5,1.5 54.5,9.5 V 36 H 1.5 V 9.5 Q 1.5,1.5 9.5,1.5 Z" fill="#3f51b5"/>
+  <!-- Border -->
+  <rect x="1.5" y="1.5" width="53" height="69" rx="8" fill="none" stroke="#3f51b5" stroke-width="3"/>
+  <!-- HI — white on indigo -->
+  <text x="28" y="26" text-anchor="middle"
+        font-family="'DejaVu Sans',Verdana,Geneva,sans-serif"
+        font-weight="800" font-size="21" fill="white" letter-spacing="1.5">HI</text>
+  <!-- + divider — indigo -->
+  <text x="28" y="43" text-anchor="middle"
+        font-family="'DejaVu Sans',Verdana,Geneva,sans-serif"
+        font-weight="700" font-size="17" fill="#3f51b5">+</text>
+  <!-- AI — indigo on white -->
+  <text x="28" y="62" text-anchor="middle"
+        font-family="'DejaVu Sans',Verdana,Geneva,sans-serif"
+        font-weight="800" font-size="21" fill="#3f51b5" letter-spacing="1.5">AI</text>
+</svg>

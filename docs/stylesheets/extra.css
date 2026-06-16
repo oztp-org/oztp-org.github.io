@@ -446,3 +446,26 @@ a.framework-badge:hover {
 .inst-confirm--found strong {
   color: #f44336;
 }
+
+/* ── Human + AI badge ─────────────────────────────────────────────────────── */
+.hai-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+  vertical-align: middle;
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.15s;
+}
+
+.hai-badge:hover {
+  opacity: 1;
+}
+
+.hai-icon {
+  height: 22px;
+  width: auto;
+  vertical-align: middle;
+  flex-shrink: 0;
+}

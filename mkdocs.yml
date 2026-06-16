@@ -115,6 +115,8 @@ copyright: >
   &copy; 2026 Some Technologists LLC &mdash;
   Site content licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
   Software under <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a>.
+  &nbsp;&middot;&nbsp;
+  <span class="hai-badge" title="This content is created through collaboration between human expertise and AI research tools."><img src="/assets/badges/hi-plus-ai.svg" alt="Made with Human + AI" class="hai-icon"> Made with Human + AI</span>
 
 extra:
   social:
