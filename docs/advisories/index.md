@@ -38,6 +38,14 @@ Each advisory covers an active or recent cyber incident affecting real organizat
 | [YellowKey — BitLocker Bypass via WinRE](yellowkey-2026-05.md) | May 2026 | **UNPATCHED** | All Windows Organizations |
 | [Canvas LMS Breach — ShinyHunters](canvas-2026-05.md) | May 2026 | **ACTIVE** | K-12, Higher Ed worldwide |
 
+## Guidance Advisories
+
+Federal guidance and threat intelligence translated into ZT action steps.
+
+| Advisory | Date | Status | Affected |
+|----------|------|--------|---------|
+| [CISA ZT for OT — Volt Typhoon & the IT/OT Trust Gap](cisa-zt-ot-2026.md) | June 2026 | **ONGOING THREAT** | Critical Infrastructure, OT/ICS Operators |
+
 ## Lessons Learned
 
 | Advisory | Date | Status | Affected |

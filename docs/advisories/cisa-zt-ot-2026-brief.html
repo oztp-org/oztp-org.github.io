@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OZTP Brief — CISA ZT for OT: Volt Typhoon — June 2026</title>
+  <style>
+    /* ── Reset & Base ─────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 10.5pt;
+      color: #212121;
+      background: #f5f5f5;
+      line-height: 1.5;
+    }
+
+    /* ── Page wrapper ─────────────────────────────────────────────────────── */
+    .page {
+      width: 8.5in;
+      min-height: 11in;
+      margin: 0.4in auto;
+      background: #fff;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+      page-break-after: always;
+      overflow: hidden;
+    }
+
+    /* ── Header bar ───────────────────────────────────────────────────────── */
+    .page-header {
+      background: #3f51b5;
+      color: #fff;
+      padding: 18px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .page-header .brand {
+      font-size: 11pt;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      opacity: 0.92;
+    }
+
+    .page-header .doc-label {
+      font-size: 8pt;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
+
+    /* ── Page body ────────────────────────────────────────────────────────── */
+    .page-body {
+      flex: 1;
+      padding: 32px 40px 28px;
+    }
+
+    /* ── Title block ──────────────────────────────────────────────────────── */
+    .title-block {
+      border-bottom: 3px solid #3f51b5;
+      padding-bottom: 18px;
+      margin-bottom: 22px;
+    }
+
+    .badges {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    .badge-red {
+      background: rgba(211, 47, 47, 0.1);
+      color: #c62828;
+      border: 1px solid rgba(211, 47, 47, 0.35);
+    }
+
+    .badge-indigo {
+      background: rgba(63, 81, 181, 0.1);
+      color: #3f51b5;
+      border: 1px solid rgba(63, 81, 181, 0.3);
+    }
+
+    .doc-title {
+      font-size: 24pt;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #1a1a2e;
+      line-height: 1.15;
+      margin-bottom: 6px;
+    }
+
+    .doc-subtitle {
+      font-size: 11pt;
+      color: #555;
+      line-height: 1.4;
+    }
+
+    /* ── Two-column layout ────────────────────────────────────────────────── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-bottom: 22px;
+    }
+
+    /* ── Section headings ─────────────────────────────────────────────────── */
+    .section-heading {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #3f51b5;
+      margin-bottom: 10px;
+      padding-bottom: 4px;
+      border-bottom: 1.5px solid #e8eaf6;
+    }
+
+    /* ── At a Glance grid ─────────────────────────────────────────────────── */
+    .glance-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    .glance-item {
+      padding: 7px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .glance-item:nth-last-child(-n+2) {
+      border-bottom: none;
+    }
+
+    .glance-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #777;
+      margin-bottom: 2px;
+    }
+
+    .glance-value {
+      font-size: 9.5pt;
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+
+    .glance-value.red { color: #c62828; }
+    .glance-value.green { color: #2e7d32; }
+    .glance-value.orange { color: #e65100; }
+
+    /* ── Actions list ─────────────────────────────────────────────────────── */
+    .actions-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .action-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 8px 12px;
+      background: #f8f9ff;
+      border-left: 3px solid #3f51b5;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .action-num {
+      font-size: 12pt;
+      font-weight: 800;
+      color: #3f51b5;
+      line-height: 1;
+      min-width: 18px;
+      margin-top: 1px;
+    }
+
+    .action-text strong {
+      display: block;
+      font-size: 9pt;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 1px;
+    }
+
+    .action-text span {
+      font-size: 8.5pt;
+      color: #555;
+      line-height: 1.4;
+    }
+
+    /* ── Warning box ──────────────────────────────────────────────────────── */
+    .warn-box {
+      background: rgba(211, 47, 47, 0.06);
+      border: 1px solid rgba(211, 47, 47, 0.25);
+      border-left: 4px solid #c62828;
+      border-radius: 0 4px 4px 0;
+      padding: 10px 14px;
+      margin-top: 14px;
+      font-size: 8.5pt;
+      color: #b71c1c;
+      line-height: 1.5;
+    }
+
+    .warn-box strong { display: block; margin-bottom: 3px; font-size: 8pt; text-transform: uppercase; letter-spacing: 0.06em; }
+
+    /* ── Context box (replaces FBI box) ──────────────────────────────────── */
+    .context-box {
+      background: rgba(63, 81, 181, 0.05);
+      border: 1px solid rgba(63, 81, 181, 0.25);
+      border-left: 4px solid #3f51b5;
+      border-radius: 0 4px 4px 0;
+      padding: 9px 14px;
+      margin-bottom: 16px;
+      font-size: 8.5pt;
+      line-height: 1.5;
+    }
+
+    .context-box .context-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #3f51b5;
+      margin-bottom: 6px;
+    }
+
+    .context-box ul {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px 24px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .context-box ul li {
+      color: #333;
+      padding-left: 12px;
+      position: relative;
+    }
+
+    .context-box ul li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: #3f51b5;
+      font-size: 8pt;
+    }
+
+    /* ── ZT controls table ────────────────────────────────────────────────── */
+    .zt-controls {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      font-size: 8pt;
+    }
+
+    .zt-controls thead tr {
+      background: #3f51b5;
+      color: #fff;
+    }
+
+    .zt-controls thead th {
+      padding: 7px 10px;
+      text-align: left;
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .zt-controls tbody tr:nth-child(even) { background: #f8f9ff; }
+
+    .zt-controls tbody td {
+      padding: 7px 10px;
+      border-bottom: 1px solid #e8eaf6;
+      vertical-align: top;
+      line-height: 1.4;
+    }
+
+    .zt-controls tbody td:first-child {
+      font-weight: 700;
+      color: #3f51b5;
+      white-space: nowrap;
+      font-size: 8pt;
+    }
+
+    .top10-ref {
+      font-size: 7pt;
+      color: #7986cb;
+      margin-top: 2px;
+      font-style: italic;
+    }
+
+    /* ── 90-day path ──────────────────────────────────────────────────────── */
+    .path-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8pt;
+      margin-bottom: 18px;
+    }
+
+    .path-table thead tr {
+      background: #e8eaf6;
+    }
+
+    .path-table thead th {
+      padding: 7px 12px;
+      text-align: left;
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #3f51b5;
+    }
+
+    .path-table tbody td {
+      padding: 7px 12px;
+      border-bottom: 1px solid #eeeeee;
+      vertical-align: top;
+      line-height: 1.4;
+    }
+
+    .path-table tbody td:first-child {
+      font-weight: 700;
+      white-space: nowrap;
+      color: #444;
+      width: 90px;
+    }
+
+    /* ── CTA box ──────────────────────────────────────────────────────────── */
+    .cta-box {
+      background: #3f51b5;
+      color: #fff;
+      border-radius: 8px;
+      padding: 24px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      margin-top: auto;
+    }
+
+    .cta-box .cta-text h3 {
+      font-size: 14pt;
+      font-weight: 800;
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+
+    .cta-box .cta-text p {
+      font-size: 9pt;
+      opacity: 0.85;
+      line-height: 1.5;
+      max-width: 420px;
+    }
+
+    .cta-box .cta-url {
+      background: #fff;
+      color: #3f51b5;
+      border-radius: 6px;
+      padding: 12px 22px;
+      font-size: 10pt;
+      font-weight: 800;
+      text-decoration: none;
+      white-space: nowrap;
+      letter-spacing: 0.01em;
+      flex-shrink: 0;
+      text-align: center;
+    }
+
+    .cta-box .cta-url small {
+      display: block;
+      font-size: 7.5pt;
+      font-weight: 500;
+      color: #7986cb;
+      margin-top: 2px;
+    }
+
+    /* ── Page footer ──────────────────────────────────────────────────────── */
+    .page-footer {
+      background: #f5f5f5;
+      border-top: 1px solid #e0e0e0;
+      padding: 10px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 7.5pt;
+      color: #888;
+    }
+
+    /* ── Print styles ─────────────────────────────────────────────────────── */
+    @media print {
+      body { background: #fff; font-size: 10pt; }
+      .page { width: 100%; margin: 0; box-shadow: none; min-height: 0; }
+      .cta-box .cta-url { border: 2px solid #3f51b5; }
+    }
+
+    @page {
+      size: letter portrait;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     PAGE 1
+════════════════════════════════════════════════════════════════════════════ -->
+<div class="page">
+
+  <div class="page-header">
+    <div class="brand">Open Zero Trust Project &nbsp;·&nbsp; OZTP Brief</div>
+    <div class="doc-label">June 2026 &nbsp;·&nbsp; oztp.org</div>
+  </div>
+
+  <div class="page-body">
+
+    <!-- Title -->
+    <div class="title-block">
+      <div class="badges">
+        <span class="badge badge-red">Nation-State Threat</span>
+        <span class="badge badge-indigo">Critical Infrastructure</span>
+        <span class="badge badge-indigo">CISA Guidance · April 29, 2026</span>
+      </div>
+      <div class="doc-title">Zero Trust for OT</div>
+      <div class="doc-subtitle">Volt Typhoon is prepositioning inside U.S. critical infrastructure OT networks — using stolen IT credentials and legitimate tools. CISA, DoD, FBI, DOE, and DOS issued joint guidance. Here's what to do.</div>
+    </div>
+
+    <!-- Two column: At a Glance + Actions -->
+    <div class="two-col">
+
+      <!-- Left: At a Glance -->
+      <div>
+        <div class="section-heading">At a Glance</div>
+        <div class="glance-grid">
+          <div class="glance-item">
+            <div class="glance-label">Threat Actor</div>
+            <div class="glance-value red">Volt Typhoon (PRC)</div>
+          </div>
+          <div class="glance-item">
+            <div class="glance-label">Issuing Agencies</div>
+            <div class="glance-value">CISA · DoD · FBI · DOE · DOS</div>
+          </div>
+          <div class="glance-item">
+            <div class="glance-label">Attack Type</div>
+            <div class="glance-value">IT credential theft → OT lateral movement</div>
+          </div>
+          <div class="glance-item">
+            <div class="glance-label">Technique</div>
+            <div class="glance-value red">Living off the Land (LOTL)</div>
+          </div>
+          <div class="glance-item">
+            <div class="glance-label">Sectors at Risk</div>
+            <div class="glance-value">Energy, water, manufacturing, transport, comms</div>
+          </div>
+          <div class="glance-item">
+            <div class="glance-label">Goal</div>
+            <div class="glance-value red">Physical damage capability — not ransomware</div>
+          </div>
+          <div class="glance-item">
+            <div class="glance-label">Core ZT Failure</div>
+            <div class="glance-value">Shared AD between IT and OT</div>
+          </div>
+          <div class="glance-item">
+            <div class="glance-label">OT Constraint</div>
+            <div class="glance-value orange">Legacy devices: can't patch, scan, or run agents</div>
+          </div>
+        </div>
+
+        <div class="warn-box">
+          <strong>This Is Not Hypothetical</strong>
+          CISA has confirmed Volt Typhoon has been inside U.S. critical infrastructure networks. They are not disrupting systems today — they are waiting. The access already exists. The guidance exists to close the door before it is used.
+        </div>
+      </div>
+
+      <!-- Right: 5 Actions -->
+      <div>
+        <div class="section-heading">5 Actions Right Now</div>
+        <ul class="actions-list">
+          <li class="action-item">
+            <div class="action-num">1</div>
+            <div class="action-text">
+              <strong>Deploy TAPs at every IT/OT boundary</strong>
+              <span>Passive network visibility first — active scanning can crash legacy OT devices. You cannot protect what you cannot see.</span>
+            </div>
+          </li>
+          <li class="action-item">
+            <div class="action-num">2</div>
+            <div class="action-text">
+              <strong>Enforce MFA on all OT remote access</strong>
+              <span>Every jump host, every session, every user including vendors. A single stolen password should not reach OT.</span>
+            </div>
+          </li>
+          <li class="action-item">
+            <div class="action-num">3</div>
+            <div class="action-text">
+              <strong>Separate OT accounts from enterprise AD</strong>
+              <span>Shared Active Directory is the Volt Typhoon lateral movement path. OT systems must not be reachable with corporate credentials.</span>
+            </div>
+          </li>
+          <li class="action-item">
+            <div class="action-num">4</div>
+            <div class="action-text">
+              <strong>Audit and scope-limit all vendor remote access</strong>
+              <span>Compile every third-party account with OT access. Limit scope, require session logging, time-limit all access.</span>
+            </div>
+          </li>
+          <li class="action-item">
+            <div class="action-num">5</div>
+            <div class="action-text">
+              <strong>Table-top your OT incident response plan</strong>
+              <span>Pre-authorize soft segmentation procedures before you need them. Do not design OT containment during an active incident.</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div><!-- end two-col -->
+
+  </div><!-- end page-body -->
+
+  <div class="page-footer">
+    <span>OZTP Brief &nbsp;·&nbsp; CISA Zero Trust for OT &nbsp;·&nbsp; June 2026</span>
+    <span>For informational use only &nbsp;·&nbsp; Not a substitute for a security audit &nbsp;·&nbsp; Page 1 of 2</span>
+  </div>
+
+</div><!-- end page 1 -->
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     PAGE 2
+════════════════════════════════════════════════════════════════════════════ -->
+<div class="page">
+
+  <div class="page-header">
+    <div class="brand">Open Zero Trust Project &nbsp;·&nbsp; OZTP Brief</div>
+    <div class="doc-label">CISA ZT for OT &nbsp;·&nbsp; June 2026</div>
+  </div>
+
+  <div class="page-body" style="display: flex; flex-direction: column; gap: 0;">
+
+    <!-- Volt Typhoon Context -->
+    <div class="context-box">
+      <div class="context-label">Volt Typhoon — The Attack Chain</div>
+      <ul>
+        <li><strong>Step 1:</strong> Compromise the corporate IT environment (phishing, exposed VPN, public-facing apps)</li>
+        <li><strong>Step 2:</strong> Steal Active Directory credentials — the key to adjacent OT systems</li>
+        <li><strong>Step 3:</strong> Move laterally into OT using <strong>legitimate tools already installed</strong> — no malware, no signatures</li>
+        <li><strong>Step 4:</strong> Establish persistent access, map operational systems, and <strong>wait</strong></li>
+      </ul>
+    </div>
+
+    <!-- ZT Controls -->
+    <div class="section-heading" style="margin-bottom: 10px;">Zero Trust Controls by Pillar</div>
+
+    <table class="zt-controls">
+      <thead>
+        <tr>
+          <th style="width: 105px;">ZT Pillar</th>
+          <th style="width: 165px;">Immediate Action</th>
+          <th>Strategic Fix</th>
+          <th style="width: 130px;">Framework / Top 10</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            Identity
+            <div class="top10-ref">Top 10 #1, #4, #9, #10</div>
+          </td>
+          <td>Separate OT Active Directory from enterprise AD. Enforce MFA on all jump hosts. Audit break-glass account scope and expiry.</td>
+          <td>Deploy Zero Standing Privilege for OT: per-session, scoped access only. No standing administrative credentials. Time-limited break-glass accounts with automatic alerts on use.</td>
+          <td>NIST SP 800-207 §3.3 · CISA ZTMM Identity</td>
+        </tr>
+        <tr>
+          <td>
+            Devices
+            <div class="top10-ref">Top 10 #2</div>
+          </td>
+          <td>Deploy network TAPs at IT/OT boundaries for passive asset discovery. <strong>Do not use active scanning</strong> — it can crash legacy PLCs and RTUs.</td>
+          <td>Build incremental OT asset inventory from passive traffic data. Add ZT requirements (logging, SBOM, ICAM) to all new OT procurement specifications.</td>
+          <td>NIST SP 800-207 Tenet 6 · CISA ZTMM Devices</td>
+        </tr>
+        <tr>
+          <td>
+            Networks
+            <div class="top10-ref">Top 10 #5, #7</div>
+          </td>
+          <td>Treat the IT/OT boundary as a hard enforcement point. Log all cross-boundary traffic. Restrict enterprise accounts from OT systems immediately.</td>
+          <td>Deploy data diodes for unidirectional OT-to-IT data flows. Harden jump hosts as single authorized remote access entry — MFA, session recording, minimum-scope access. Pre-plan soft segmentation procedures for incident containment.</td>
+          <td>NIST SP 800-207 Tenet 2 · CISA ZTMM Networks</td>
+        </tr>
+        <tr>
+          <td>
+            Apps &amp; Workloads
+            <div class="top10-ref">Top 10 #3, #6</div>
+          </td>
+          <td>Audit OT engineering workstations for unnecessary software. Enable application allowlisting on HMIs where feasible (WDAC for Windows-based systems).</td>
+          <td>Wrap legacy OT protocols (Modbus, DNP3, EtherNet/IP) in TLS-enabled gateways at zone boundaries. Apply SSVC framework to prioritize OT patches by actual exploitation risk vs. downtime cost.</td>
+          <td>NIST SP 800-207 Tenet 1 · CIS Controls v8 #2, #4</td>
+        </tr>
+        <tr>
+          <td>
+            Data
+            <div class="top10-ref">Top 10 #8</div>
+          </td>
+          <td>Concentrate logging at IT/OT junction points and jump hosts — where visibility is feasible and value is highest. Deploy CISA's open-source Malcolm SIEM for industrial protocol parsing.</td>
+          <td>Build OT-specific backups: engineering logic, ladder diagrams, I/O lists, configuration, startup values. Validate via checksum before needed. Know your OT recovery time objective from a known-good state.</td>
+          <td>NIST SP 800-207 Tenet 7 · CISA ZTMM Visibility</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 90-Day Path -->
+    <div class="section-heading" style="margin-bottom: 8px;">Recommended 90-Day Path</div>
+    <table class="path-table">
+      <thead>
+        <tr>
+          <th>Timeframe</th>
+          <th>Priority Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Days 1–7</td>
+          <td>Deploy TAPs at IT/OT boundaries · Enforce MFA on jump hosts · Audit vendor remote access · Export 90 days of IT/OT boundary logs</td>
+        </tr>
+        <tr>
+          <td>Days 8–30</td>
+          <td>Passive asset discovery · Separate or restrict OT AD accounts · Table-top OT IR plan with soft segmentation · Enable full vendor session logging</td>
+        </tr>
+        <tr>
+          <td>Days 31–90</td>
+          <td>Deploy Malcolm SIEM for industrial protocol visibility · Implement SSVC-based OT patch prioritization · Add ZT and SBOM requirements to OT procurement specs · Validate OT-specific backups</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- CTA -->
+    <div class="cta-box">
+      <div class="cta-text">
+        <h3>Get the Full Advisory</h3>
+        <p>The complete OZTP advisory includes all five ZT pillars with NIST and CISA framework citations, the full OZTP Top 10 mapping for OT environments, and access to Agent Zeta — our free AI Zero Trust advisor.</p>
+      </div>
+      <a class="cta-url" href="https://oztp.org/advisories/cisa-zt-ot-2026/">
+        oztp.org/advisories
+        <small>Free &nbsp;·&nbsp; No account required</small>
+      </a>
+    </div>
+
+  </div><!-- end page-body -->
+
+  <div class="page-footer">
+    <span>© 2026 Some Technologists LLC &nbsp;·&nbsp; Open Zero Trust Project &nbsp;·&nbsp; Apache 2.0</span>
+    <span>Informational use only · Not legal or security consulting advice &nbsp;·&nbsp; Page 2 of 2</span>
+  </div>
+
+</div><!-- end page 2 -->
+
+</body>
+</html>
