@@ -10,10 +10,10 @@
   <text x="28" y="26" text-anchor="middle"
         font-family="'DejaVu Sans',Verdana,Geneva,sans-serif"
         font-weight="800" font-size="21" fill="white" letter-spacing="1.5">HI</text>
-  <!-- + divider — indigo -->
+  <!-- + divider — orange, visible on both indigo and white -->
   <text x="28" y="43" text-anchor="middle"
         font-family="'DejaVu Sans',Verdana,Geneva,sans-serif"
-        font-weight="700" font-size="17" fill="#3f51b5">+</text>
+        font-weight="700" font-size="17" fill="#FF6D00">+</text>
   <!-- AI — indigo on white -->
   <text x="28" y="62" text-anchor="middle"
         font-family="'DejaVu Sans',Verdana,Geneva,sans-serif"
