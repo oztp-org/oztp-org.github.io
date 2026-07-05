@@ -55,7 +55,7 @@ These are the working learning objectives for the **AZ Foundations** certificati
 ---
 
 ## Domain 2: Controls, Layered Defense, and the Modern Threat Landscape
-*Domain Total: 23 Objectives | PBQ Candidates: 5*
+*Domain Total: 24 Objectives | PBQ Candidates: 5*
 
 ### Section 2.1 — Control Types and Their Roles
 | # | Objective | Bloom's | Exam Type |
@@ -96,7 +96,7 @@ These are the working learning objectives for the **AZ Foundations** certificati
 ---
 
 ## Domain 3: ZT Frameworks and the Five Pillars
-*Domain Total: 37 Objectives | PBQ Candidates: 4*
+*Domain Total: 37 Objectives | PBQ Candidates: 3*
 
 ### Section 3.1 — Why Frameworks Matter
 | # | Objective | Bloom's | Exam Type |
@@ -162,7 +162,7 @@ These are the working learning objectives for the **AZ Foundations** certificati
 ---
 
 ## Domain 4: Reading and Assessing Environments
-*Domain Total: 22 Objectives | PBQ Candidates: 7*
+*Domain Total: 21 Objectives | PBQ Candidates: 6*
 
 ### Section 4.1 — What a ZT Assessment Is
 | # | Objective | Bloom's | Exam Type |
@@ -212,7 +212,7 @@ These are the working learning objectives for the **AZ Foundations** certificati
 | Domain | Objectives | PBQ Candidates |
 | :--- | :---: | :---: |
 | **D1: What is Zero Trust?** | 21 | 4 |
-| **D2: Controls, Layered Defense, Modern Threats** | 23 | 5 |
-| **D3: Frameworks and Five Pillars** | 37 | 4 |
-| **D4: Reading and Assessing Environments** | 22 | 7 |
-| **Total** | **103** | **20** |
+| **D2: Controls, Layered Defense, Modern Threats** | 24 | 5 |
+| **D3: Frameworks and Five Pillars** | 37 | 3 |
+| **D4: Reading and Assessing Environments** | 21 | 6 |
+| **Total** | **103** | **18** |
