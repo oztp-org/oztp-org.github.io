@@ -95,7 +95,9 @@ nav:
     - ZT Maturity Assessment: products/zt-assessment.md
     - Agent Zeta: products/agent-zeta.md
     - AZ Academy: absolute-zero-academy.md
-  - AZ Academy: absolute-zero-academy.md
+  - AZ Academy:
+    - Overview: absolute-zero-academy.md
+    - Foundations Learning Objectives: objectives.md
   - ZT Advisories:
     - Overview: advisories/index.md
     - FortiBleed — Fortinet Credential Exposure (June 2026): advisories/fortinet-fortibleed-2026-06.md

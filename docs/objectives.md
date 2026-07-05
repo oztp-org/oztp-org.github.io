@@ -1,9 +1,18 @@
+---
+title: AZ Foundations — Learning Objectives
+description: The published draft learning objectives for the AZ Foundations certification, part of the Absolute Zero Academy.
+---
+
 # Absolute Zero (AZ) Foundations — Learning Objectives
 
-**Status:** Working Draft — Internal Review  
+**Status:** Published Draft — Open for Public Feedback  
 **Scaffolding:** Bloom’s Taxonomy  
 **Format:** Bloom’s Level + Exam Type per objective  
 **Audience:** Security professionals and students with baseline security knowledge  
+
+These are the working learning objectives for the **AZ Foundations** certification, the entry tier of the [Absolute Zero Academy](absolute-zero-academy.md). They are published here as a draft, not a final curriculum — we want practitioner feedback before locking them in.
+
+**Have feedback?** Tell us what's missing, what's out of scope for a Foundations-level exam, or where the wording could be sharper. [Contact OZTP →](contact.md)
 
 ---
 
@@ -199,4 +208,8 @@
 | **D2: Controls, Layered Defense, Modern Threats** | 20 | 4 |
 | **D3: Frameworks and Five Pillars** | 33 | 3 |
 | **D4: Reading and Assessing Environments** | 22 | 7 |
-| **Total** | **97** | **18** |
+| **Total** | **96** | **18** |
+
+---
+
+*Known gaps we're already tracking for a future revision: a dedicated supply-chain-attack section (Domain 2) and OS-native application control coverage — WDAC, AppArmor/SELinux, Gatekeeper (Domain 3). Targeting a review pass in Q4 2026, informed by feedback gathered here.*
