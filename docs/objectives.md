@@ -14,6 +14,8 @@ These are the working learning objectives for the **AZ Foundations** certificati
 
 **Have feedback?** Tell us what's missing, what's out of scope for a Foundations-level exam, or where the wording could be sharper. [Contact OZTP →](contact.md)
 
+**Studying for this?** Download the [printable study guide](az-foundations-study-guide.html){ target=_blank } — a formatted version of everything below plus the exam blueprint (domain weighting), designed to print or save as a PDF.
+
 ---
 
 ## Domain 1: What is Zero Trust?

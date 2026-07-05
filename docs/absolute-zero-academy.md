@@ -36,6 +36,7 @@ The Academy offers three individual certification tiers, each building on the la
 **Earns:** AZ Foundations Certificate
 
 [View the AZ Foundations Learning Objectives →](objectives.md) — published as a draft; we're actively looking for practitioner feedback before finalizing.
+[Download the printable study guide →](az-foundations-study-guide.html){ target=_blank } — includes the exam blueprint (domain weighting) and prints or saves as a PDF.
 
 ---
 
@@ -91,7 +92,7 @@ The Academy and the [Absolute Zero recognition program](absolute-zero.md#the-abs
 
 The Absolute Zero Academy is built on the principle that essential cybersecurity knowledge should be accessible. To ensure the long-term sustainability, continuous updates, and validation integrity of the Academy, we distinguish between open-access learning and formal credentials:
 
-* **Open Curriculum:** Educational frameworks, study documentation, and foundational objectives are openly licensed and accessible to individuals and organizations for self-study. See the [AZ Foundations Learning Objectives](objectives.md) — published as a draft, open for feedback.
+* **Open Curriculum:** Educational frameworks, study documentation, and foundational objectives are openly licensed and accessible to individuals and organizations for self-study. See the [AZ Foundations Learning Objectives](objectives.md) — published as a draft, open for feedback — or [download the printable study guide](az-foundations-study-guide.html){ target=_blank }.
 * **Services & Validation:** Official certification exam proctoring, formal credential issuance, and future instructor-led academy classes may include fees to cover platform scaling, administrative overhead, and rigorous identity verification.
 
 
