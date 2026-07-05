@@ -28,6 +28,8 @@ The Academy offers three individual certification tiers, each building on the la
 - The five pillars of the CISA Zero Trust Maturity Model
 - Introduction to all four major ZT frameworks: NIST, CISA ZTMM, CIS Controls, and ISO 27001
 - The OZTP Top 10 Zero Trust Controls
+- Recognizing supply chain attacks and defeating them with Default Deny / application control
+- OS-native application control — WDAC, AppArmor/SELinux, Gatekeeper — as free, underused Devices pillar controls
 - How to read and act on a ZT maturity assessment
 - Building a practical remediation roadmap
 

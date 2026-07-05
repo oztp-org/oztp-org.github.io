@@ -55,7 +55,7 @@ These are the working learning objectives for the **AZ Foundations** certificati
 ---
 
 ## Domain 2: Controls, Layered Defense, and the Modern Threat Landscape
-*Domain Total: 20 Objectives | PBQ Candidates: 4*
+*Domain Total: 23 Objectives | PBQ Candidates: 5*
 
 ### Section 2.1 — Control Types and Their Roles
 | # | Objective | Bloom's | Exam Type |
@@ -89,11 +89,14 @@ These are the working learning objectives for the **AZ Foundations** certificati
 | 2.3.5 | Explain the role of threat hunting as a detective control and describe why it is necessary in an assume-breach environment | L2 | Knowledge (awareness only) |
 | 2.3.6 | Contrast reactive security (respond after detection) with proactive security (assume breach, hunt continuously) | L4 | Compare/contrast |
 | 2.3.7 | Describe edge infrastructure exploitation methodologies (e.g., VPNFilter or Volt Typhoon router manipulation) and identify the specific logging and account lockout controls required to expose ongoing stealth attacks | L2/L3 | Scenario — PBQ candidate |
+| 2.3.8 | Define a supply chain attack and explain how it differs from a direct attack against an organization's own infrastructure | L1/L2 | Knowledge |
+| 2.3.9 | Explain why supply chain attacks evade perimeter and signature-based detection by arriving through a trusted update mechanism or dependency | L2 | Knowledge |
+| 2.3.10 | Explain how application control (Default Deny / allowlisting) defeats supply chain payloads regardless of their delivery mechanism, using the SolarWinds Orion and XZ Utils incidents as anchoring examples | L2/L3 | Scenario — PBQ candidate |
 
 ---
 
 ## Domain 3: ZT Frameworks and the Five Pillars
-*Domain Total: 33 Objectives | PBQ Candidates: 3*
+*Domain Total: 37 Objectives | PBQ Candidates: 4*
 
 ### Section 3.1 — Why Frameworks Matter
 | # | Objective | Bloom's | Exam Type |
@@ -123,6 +126,10 @@ These are the working learning objectives for the **AZ Foundations** certificati
 | 3.3.7 | Describe the Data pillar and identify how data classification and encryption support ZT data protection | L2 | Knowledge |
 | 3.3.8 | Map a described security control to its primary CISA ZTMM pillar | L3 | Scenario — PBQ candidate |
 | 3.3.9 | Explain why a single security event often crosses multiple pillars and provide an example | L2 | Knowledge |
+| 3.3.10 | Identify OS-native application control mechanisms — Windows Defender Application Control (WDAC), Linux AppArmor/SELinux, and macOS Gatekeeper/System Integrity Protection (SIP) — as free, built-in Devices pillar controls present on most modern operating systems | L1/L2 | Knowledge |
+| 3.3.11 | Classify each OS-native mechanism (WDAC, AppArmor/SELinux, Gatekeeper/SIP) as primarily an allowlisting control or a containment control | L2/L3 | Scenario |
+| 3.3.12 | Explain the difference between audit mode and enforcement mode for OS-native application control and explain why audit mode alone does not represent Zero Trust posture | L2 | Knowledge |
+| 3.3.13 | Explain why OS-native application control is a widely available but underused ZT control and describe how it defeats supply chain and Living off the Land payloads without requiring threat signatures | L2/L3 | Scenario — PBQ candidate |
 
 ### Section 3.4 — CIS Controls v8
 | # | Objective | Bloom's | Exam Type |
@@ -205,11 +212,7 @@ These are the working learning objectives for the **AZ Foundations** certificati
 | Domain | Objectives | PBQ Candidates |
 | :--- | :---: | :---: |
 | **D1: What is Zero Trust?** | 21 | 4 |
-| **D2: Controls, Layered Defense, Modern Threats** | 20 | 4 |
-| **D3: Frameworks and Five Pillars** | 33 | 3 |
+| **D2: Controls, Layered Defense, Modern Threats** | 23 | 5 |
+| **D3: Frameworks and Five Pillars** | 37 | 4 |
 | **D4: Reading and Assessing Environments** | 22 | 7 |
-| **Total** | **96** | **18** |
-
----
-
-*Known gaps we're already tracking for a future revision: a dedicated supply-chain-attack section (Domain 2) and OS-native application control coverage — WDAC, AppArmor/SELinux, Gatekeeper (Domain 3). Targeting a review pass in Q4 2026, informed by feedback gathered here.*
+| **Total** | **103** | **20** |
