@@ -86,7 +86,7 @@ plugins:
 
 nav:
   - Home: index.md
-  - Absolute Zero: absolute-zero/
+  - Absolute Zero: absolute-zero.md
   - Top 10 Controls: top10.md
   - Resources:
     - Overview: products/index.md
