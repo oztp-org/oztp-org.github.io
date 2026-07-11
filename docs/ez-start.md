@@ -17,7 +17,11 @@ For each control, rate your current posture using the temperature scale:
 ---
 
 ## Phase 1: Foundational Hygiene
-1.  **#1 — Multi-Factor Authentication:** How is MFA enforced? (🔴 / 🟠 / 🟡 / 🔵)
+1. #1 — Multi-Factor Authentication: How is MFA enforced?
+<button onclick="updateScore(this, 0)">🔴</button>
+<button onclick="updateScore(this, 1)">🟠</button>
+<button onclick="updateScore(this, 2)">🟡</button>
+<button onclick="updateScore(this, 3)">🔵</button>
 2.  **#2 — Device Inventory:** Do you know every device on your network? (🔴 / 🟠 / 🟡 / 🔵)
 3.  **#3 — Admin Separation:** Are admin accounts segregated from daily work? (🔴 / 🟠 / 🟡 / 🔵)
 4.  **#4 — Encryption:** Is data encrypted at rest and in transit? (🔴 / 🟠 / 🟡 / 🔵)
