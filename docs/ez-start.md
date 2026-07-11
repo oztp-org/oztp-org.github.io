@@ -23,7 +23,7 @@ For each control, rate your current posture:
 
 ## Phase 1: Foundational Hygiene
 <!-- Replace each question's button area with this structure -->
-1. **#1 — Multi-Factor Authentication:** How is MFA enforced? 
+1. **#1 — Multi-Factor Authentication:** How is MFA enforced?
    <div class="question-row">
      <button class="ez-btn" onclick="updateScore(this, 0, 'q1')">🔴</button>
      <button class="ez-btn" onclick="updateScore(this, 1, 'q1')">🟠</button>
@@ -32,10 +32,14 @@ For each control, rate your current posture:
    </div>
 
 2. **#2 — Device Inventory:** Do you know every device on your network?
-   <button class="ez-btn" onclick="updateScore(this, 0, 'q2')">🔴</button>
-   <button class="ez-btn" onclick="updateScore(this, 1, 'q2')">🟠</button>
-   <button class="ez-btn" onclick="updateScore(this, 2, 'q2')">🟡</button>
-   <button class="ez-btn" onclick="updateScore(this, 3, 'q2')">🔵</button>
+   <div class="question-row">
+     <button class="ez-btn" onclick="updateScore(this, 0, 'q2')">🔴</button>
+     <button class="ez-btn" onclick="updateScore(this, 1, 'q2')">🟠</button>
+     <button class="ez-btn" onclick="updateScore(this, 2, 'q2')">🟡</button>
+     <button class="ez-btn" onclick="updateScore(this, 3, 'q2')">🔵</button>
+   </div>
+
+
 
 3. **#3 — Admin Separation:** Are admin accounts segregated?
    <button class="ez-btn" onclick="updateScore(this, 0, 'q3')">🔴</button>
