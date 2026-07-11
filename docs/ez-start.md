@@ -22,14 +22,14 @@ For each control, rate your current posture:
 <div class="assessment-container">
 
 ## Phase 1: Foundational Hygiene
-<!-- Replace each question's button area with this structure -->
+<!-- Replace each question's button area with this structure --><br>
 1. **#1 — Multi-Factor Authentication:** How is MFA enforced?
    <div class="question-row">
      <button class="ez-btn" onclick="updateScore(this, 0, 'q1')">🔴</button>
      <button class="ez-btn" onclick="updateScore(this, 1, 'q1')">🟠</button>
      <button class="ez-btn" onclick="updateScore(this, 2, 'q1')">🟡</button>
      <button class="ez-btn" onclick="updateScore(this, 3, 'q1')">🔵</button>
-   </div>
+   </div> <br>
 
 2. **#2 — Device Inventory:** Do you know every device on your network?
    <div class="question-row">
@@ -37,7 +37,7 @@ For each control, rate your current posture:
      <button class="ez-btn" onclick="updateScore(this, 1, 'q2')">🟠</button>
      <button class="ez-btn" onclick="updateScore(this, 2, 'q2')">🟡</button>
      <button class="ez-btn" onclick="updateScore(this, 3, 'q2')">🔵</button>
-   </div>
+   </div> <br>
 
 
 
