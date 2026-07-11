@@ -1,5 +1,7 @@
-| title | OZTP Top 10 Zero Trust Controls |
-| description | Ten high-impact, achievable Zero Trust controls — ranked by phase, with honest guidance on where to start. |
+---
+title: OZTP Top 10 Zero Trust Controls
+description: Ten high-impact, achievable Zero Trust controls — ranked by phase, with honest guidance on where to start.
+---
 
 # OZTP Top 10 Zero Trust Controls
 
