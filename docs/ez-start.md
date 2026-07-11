@@ -100,9 +100,15 @@ For each control, rate your current posture:
     document.getElementById('combined-score').innerText = total;
     document.getElementById('progress-bar').style.width = (total / 30) * 100 + "%";
     
-    // Highlight selected button
-    btn.parentElement.querySelectorAll('button').forEach(b => b.style.backgroundColor = "#fff");
-    btn.style.backgroundColor = "#e0e0e0";
+    // Reset background of all buttons in this specific question row
+    btn.parentElement.querySelectorAll('button').forEach(b => {
+      b.style.backgroundColor = "#fff";
+      b.style.borderColor = "#ccc";
+    });
+    
+    // Set the clicked button to green
+    btn.style.backgroundColor = "#c8e6c9"; 
+    btn.style.borderColor = "#2e7d32";
   }
 </script>
 
