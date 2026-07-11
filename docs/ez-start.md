@@ -21,7 +21,7 @@ For each control, rate your current posture:
 
 <div class="assessment-container">
 
-## Phase 1: Foundational Hygiene
+<b>## Phase 1: Foundational Hygiene</b>
 <!-- Replace each question's button area with this structure --><br>
 1. **#1 — Multi-Factor Authentication:** How is MFA enforced?
    <div class="question-row">
