@@ -103,13 +103,14 @@ For each control, rate your current posture:
     document.getElementById('combined-score').innerText = total;
     document.getElementById('progress-bar').style.width = (total / 30) * 100 + "%";
     
-    // Only reset buttons that share the same parent container (the specific row)
-    btn.parentElement.querySelectorAll('button').forEach(b => {
+    // Find the closest row container and only clear buttons within it
+    const row = btn.closest('.question-row');
+    row.querySelectorAll('button').forEach(b => {
       b.style.backgroundColor = "#fff";
       b.style.borderColor = "#ccc";
     });
     
-    // Set the clicked button to green
+    // Set clicked button to green
     btn.style.backgroundColor = "#c8e6c9"; 
     btn.style.borderColor = "#2e7d32";
   }
