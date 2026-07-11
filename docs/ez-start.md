@@ -10,7 +10,7 @@ Welcome to the **EZ Start Assessment**. Instead of the 98+ controls found in our
 ## How it works
 For each control, rate your current posture using the temperature scale:
 *   **🔴 Not Cool:** No control in place. High risk of basic attack.
-*   **🟠 Warming Up:** Planning or partial implementation.
+*   **🟠 Started Cooling:** Planning or partial implementation.
 *   **🟡 Cooling Down:** Implemented across most of the environment.
 *   **🔵 Cool Blue:** Fully implemented, monitored, and automated.
 
