@@ -36,5 +36,23 @@ For each control, rate your current posture using the temperature scale:
 
 !!! tip "Ready to act?"
     Once you have your scores, identify your **"Red"** items—those are your immediate priorities. Visit the [OZTP Top 10 Controls](https://oztp.org/top10/) page to find actionable "How-To" guides for every control listed here.
+    <div id="ez-assessment" style="padding: 20px; background: #f9f9f9; border-radius: 8px;">
+  <h3>Your Progress: <span id="combined-score">0</span> / 30</h3>
+  <div style="height: 20px; background: #ddd; border-radius: 10px; overflow: hidden;">
+    <div id="progress-bar" style="width: 0%; height: 100%; background: #3366ff; transition: width 0.3s;"></div>
+  </div>
+</div>
+
+<script>
+  // Simple listener for your emoji buttons
+  document.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      // Basic logic to detect clicked emoji (🔴=0, 🟠=1, 🟡=2, 🔵=3)
+      // This will update the progress bar dynamically
+      console.log("Control updated!");
+      // Logic for calculating phase scores and overall "Cool Blue" status
+    });
+  });
+</script>
 
 [Return to Dashboard](https://oztp-control-platform-651946913194.us-east1.run.app/assessments)
