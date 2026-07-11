@@ -2,6 +2,14 @@
 title: EZ Start Zero Trust Assessment
 description: A phase-based, temperature-scored assessment to help you start your Zero Trust journey.
 ---
+<style>
+  .assessment-container { font-size: 14px; }
+  button { cursor: pointer; border: none; background: none; font-size: 18px; }
+</style>
+
+<div class="assessment-container">
+  <!-- Paste your questions here -->
+</div>
 
 # EZ Start Zero Trust Assessment
 
