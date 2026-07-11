@@ -1,187 +1,95 @@
----
-title: OZTP Top 10 Zero Trust Controls
-description: Ten high-impact, achievable Zero Trust controls — ranked by impact and achievability, with honest guidance on where to start.
----
+| title | OZTP Top 10 Zero Trust Controls |
+| description | Ten high-impact, achievable Zero Trust controls — ranked by phase, with honest guidance on where to start. |
 
 # OZTP Top 10 Zero Trust Controls
 
-**The problem with Zero Trust isn't the concept — it's the starting point.**
+*The problem with Zero Trust isn't the concept — it's the starting point.*
 
-[NIST](https://csrc.nist.gov/pubs/sp/800/207/final){ target=_blank }, [CISA](https://www.cisa.gov/zero-trust-maturity-model){ target=_blank }, and the [NSA](https://media.defense.gov/2021/Feb/25/2002588479/-1/-1/0/CSI_EMBRACING_ZTA.PDF){ target=_blank } all agree: Zero Trust is the right model. But their frameworks are comprehensive by design, built for large agencies with mature security teams. For most organizations, reading them produces paralysis, not progress.
+[NIST](https://csrc.nist.gov/pubs/sp/800/207/final), [CISA](https://www.cisa.gov/zero-trust-maturity-model), and the [NSA](https://media.defense.gov/2021/Feb/25/2002588479/-1/-1/0/CSI_EMBRACING_ZTA.PDF) all agree: Zero Trust is the right model. But their frameworks are comprehensive by design, built for large agencies with mature security teams. For most organizations, reading them produces paralysis, not progress.
 
-This list cuts through that. Ten controls, ranked by **impact × achievability**, with honest guidance on what each one stops and where to begin. Some you can implement this week. Some take months. All of them matter.
+This list cuts through that. Ten controls, reorganized into a maturity-based progression: **Foundational Hygiene, System Hardening, and Zero Trust Architecture.**
 
 !!! note "How OZTP helps"
-    Each entry notes our role honestly: where the [Control Platform](products/control-platform.md) or [Agent Zeta](products/agent-zeta.md) help directly, where we advise, and where we point the way to other solutions. Zero Trust is bigger than any single tool — including ours.
+    Each entry notes our role honestly: where the [Control Platform](https://oztp.org/products/control-platform/) or [Agent Zeta](https://oztp.org/products/agent-zeta/) help directly, where we advise, and where we point the way to other solutions.
+
+## Phase 1: Foundational Hygiene
+
+### #1 — Require Multi-Factor Authentication on Everything
+*Identity · Immediate · Free to start*
+*What it stops:* Credential theft, phishing, and password spray attacks.
+*Where to start:* Enable MFA on your email and identity provider today. Use any authenticator app—[Microsoft Authenticator](https://www.microsoft.com/en-us/security/mobile-authenticator-app), [Google Authenticator](https://support.google.com/accounts/answer/1066447), or [Authy](https://authy.com/). For higher assurance, use [FIDO2/passkeys](https://fidoalliance.org/passkeys/).
+
+### #2 — Know Every Device on Your Network
+*Devices · High impact · Low cost*
+*What it stops:* Unmanaged or unauthorized devices accessing your systems.
+*Where to start:* Build a device inventory—spreadsheet first, tooling later. Devices not in inventory should be denied access by default.
+
+### #3 — Protect Admin Accounts Like the Crown Jewels
+*Identity · High impact · Practice and policy*
+*What it stops:* Admin account compromise leading to complete network takeover.
+*Where to start:* Separate admin accounts from daily-use accounts. Never use a privileged account for email, web browsing, or routine work.
+
+### #4 — Encrypt What Matters, Everywhere It Lives
+*Data · High impact · Many free options*
+*What it stops:* Data exfiltration even when attackers gain access to storage or intercept network traffic.
+*Where to start:* Enable [BitLocker](https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/) on Windows endpoints and ensure all web-facing services use HTTPS.
 
 ---
 
-## #1 — Require Multi-Factor Authentication on Everything
+## Phase 2: System Hardening
 
-**Identity · Immediate · Free to start**
+### #5 — Control What Software Can Run
+*Devices + Applications · High impact · Built into Windows*
+*What it stops:* Malware, ransomware, and unauthorized tools.
+*Where to start:* [Windows Defender Application Control (WDAC) / App Control for Business](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/) is built into Windows 10/11 Pro and Enterprise. Start in audit mode.
 
-**What it stops:** Credential theft, phishing, and password spray attacks. MFA blocks 99.9% of automated account compromise. Nothing else comes close at this price point.
+### #6 — Give Everyone the Minimum Access They Need
+*Identity + Applications · High impact · Policy and process*
+*What it stops:* Lateral movement.
+*Where to start:* Audit user accounts and remove unnecessary admin privileges. Access should be granted for a specific resource, for a specific reason, for the minimum time required.
 
-Every access request must prove who is asking — not just once at login, but for sensitive actions. A stolen password alone should never be enough.
-
-!!! tip "Where to start"
-    Enable MFA on your email and identity provider today. Use any authenticator app — [Microsoft Authenticator](https://www.microsoft.com/en-us/security/mobile-authenticator-app){ target=_blank }, [Google Authenticator](https://support.google.com/accounts/answer/1066447){ target=_blank }, or [Authy](https://authy.com){ target=_blank }. This takes one afternoon and requires no budget.
-
-    For higher assurance: [FIDO2/passkeys](https://fidoalliance.org/passkeys/){ target=_blank } are phishing-resistant and the NSA's preferred path.
-
-**OZTP:** [Agent Zeta](chat.md) assesses your MFA coverage across the [CISA ZTMM](https://www.cisa.gov/zero-trust-maturity-model){ target=_blank } Identity pillar and identifies gaps.
-
----
-
-## #2 — Know Every Device on Your Network
-
-**Devices · High impact · Low cost**
-
-**What it stops:** Unmanaged devices — personal laptops, IoT devices, contractor machines — accessing your systems without visibility. You cannot apply Zero Trust to assets you don't know exist.
-
-[CIS Controls v8](https://www.cisecurity.org/controls/v8){ target=_blank } puts device inventory first for a reason: every ZT access decision should incorporate device health. An unknown device is an unverifiable one.
-
-!!! tip "Where to start"
-    Build a device inventory — spreadsheet first, tooling later. Know: what devices exist, who owns them, and whether they have management software installed. Devices not in inventory should be denied access by default.
-
-**OZTP:** The [Control Platform](products/control-platform.md) and Device Agent do this for Windows endpoints today — automated check-ins, health reporting, and centralized visibility. Free and open source.
+### #7 — Log Everything. You Will Need It Later.
+*Visibility & Analytics · High impact · Low cost to start*
+*What it stops:* Long dwell time; makes detection and investigation possible.
+*Where to start:* Centralize your logs. Free and open source SIEM options include [Wazuh](https://wazuh.com/) and [OpenSearch](https://opensearch.org/).
 
 ---
 
-## #3 — Control What Software Can Run
+## Phase 3: Zero Trust Architecture
 
-**Devices + Applications · High impact · Built into Windows**
+### #8 — Divide Your Network
+*Networks · High impact · Moderate complexity*
+*What it stops:* Lateral movement. Segmentation turns a breach foothold into a dead end.
+*Where to start:* Identify your most sensitive systems and isolate them on separate network segments. Even basic VLAN separation significantly reduces blast radius.
 
-**What it stops:** Malware, ransomware, and unauthorized tools — even novel zero-day malware cannot execute if the binary isn't on the approved list. Application allowlisting is one of the most effective defenses against ransomware available today.
+### #9 — Replace "Connected = Trusted" with Identity-Based Access
+*Networks + Identity · High impact · Multi-phase journey*
+*What it stops:* The implicit trust that VPNs create.
+*Where to start:* Inventory what your VPN is actually used for, application by application. Migrate to identity-based access (ZTNA) one application at a time.
 
-Zero Trust's "never trust, always verify" applies to software too. An unknown executable is an unverified entity.
-
-!!! tip "Where to start"
-    [Windows Defender Application Control (WDAC) / App Control for Business](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/){ target=_blank } is built into Windows 10/11 Pro and Enterprise — no purchase required. Start in **audit mode** to understand your software baseline before switching to enforcement.
-
-**OZTP:** The [Control Platform](products/control-platform.md) monitors WDAC posture across your fleet — policy count, enforcement mode, and events — in real time. This is OZTP's flagship capability today.
-
----
-
-## #4 — Give Everyone the Minimum Access They Need
-
-**Identity + Applications · High impact · Policy and process**
-
-**What it stops:** Lateral movement. When an attacker compromises one account, least privilege determines how far they can go. A tightly scoped account is a dead end; an over-privileged account is a master key.
-
-!!! tip "Where to start"
-    Audit your user accounts. Who has admin rights that don't need them? Removing unnecessary admin privileges from standard user accounts is one action that dramatically limits blast radius with zero cost.
-
-    Access should be granted for a specific resource, for a specific reason, for the minimum time required — then revoked.
-
-**OZTP:** [Agent Zeta](chat.md) assesses your least privilege posture and maps gaps to [CISA ZTMM](https://www.cisa.gov/zero-trust-maturity-model){ target=_blank } recommendations.
-
----
-
-## #5 — Protect Admin Accounts Like the Crown Jewels
-
-**Identity · High impact · Practice and policy**
-
-**What it stops:** Admin account compromise leading to complete network takeover. Attackers prioritize privileged accounts because they unlock everything. A compromised admin account is the most common path to catastrophic breaches.
-
-!!! tip "Where to start"
-    Separate admin accounts from daily-use accounts. Never use a privileged account for email, web browsing, or routine work. Use a dedicated admin account only when performing administrative tasks — then log out.
-
-    For organizations ready for tooling: Privileged Access Management (PAM) solutions provide just-in-time access, session recording, and automated credential rotation.
-
-**OZTP:** [Agent Zeta](chat.md) advises on privileged access posture. The right PAM solution depends on your environment and scale — we help you identify what fits.
-
----
-
-## #6 — Encrypt What Matters, Everywhere It Lives
-
-**Data · High impact · Many free options**
-
-**What it stops:** Data exfiltration even when attackers gain access to storage or intercept network traffic. Encrypted data at rest is unreadable without the key — stolen drives, compromised backups, and cloud storage breaches yield nothing.
-
-!!! tip "Where to start"
-    Enable [BitLocker](https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/){ target=_blank } on Windows endpoints (free, built-in on Pro and Enterprise) and confirm all web-facing services use HTTPS. These two steps cover the most common exposure points for most organizations.
-
-**OZTP:** OZTP infrastructure uses AES-256 encryption at rest and TLS in transit by default. [Agent Zeta](chat.md) assesses your data protection posture against [CISA ZTMM](https://www.cisa.gov/zero-trust-maturity-model){ target=_blank } and [ISO/IEC 27001](https://www.iso.org/standard/27001){ target=_blank } controls.
-
----
-
-## #7 — Divide Your Network — Assume the Attacker Is Already Inside
-
-**Networks · High impact · Moderate complexity**
-
-**What it stops:** Lateral movement. The 2017 NotPetya attack spread across entire flat networks in minutes. Segmentation turns a breach foothold into a dead end rather than a highway to your most critical systems.
-
-!!! tip "Where to start"
-    Identify your most sensitive systems — domain controllers, financial data, HR records, backups — and isolate them on separate network segments. Even basic VLAN separation significantly reduces blast radius without requiring new hardware.
-
-    See [NSA's micro-segmentation guidance](https://media.defense.gov/2021/Feb/25/2002588479/-1/-1/0/CSI_EMBRACING_ZTA.PDF){ target=_blank } and [CISA's network ZT controls](https://www.cisa.gov/zero-trust-maturity-model){ target=_blank } for implementation specifics.
-
-**OZTP:** [Agent Zeta](chat.md) maps your network architecture against CISA ZTMM Network pillar controls and identifies segmentation gaps.
-
----
-
-## #8 — Log Everything. You Will Need It Later.
-
-**Visibility & Analytics · High impact · Low cost to start**
-
-**What it stops:** Long dwell time. The average attacker spends months inside a network before detection. Comprehensive logging is what makes detection possible — and what makes investigation useful after the fact.
-
-Zero Trust's "assume breach" principle means designing for detection, not just prevention. You cannot detect what you cannot see.
-
-!!! tip "Where to start"
-    Centralize your logs. Know what normal looks like — login times, access patterns, data volumes — so anomalies stand out. Free and open source SIEM options include [Wazuh](https://wazuh.com){ target=_blank } and [OpenSearch](https://opensearch.org){ target=_blank }. Even centralized log files are better than siloed ones.
-
-**OZTP:** The [Control Platform](products/control-platform.md) logs device health and WDAC events continuously. [Agent Zeta](chat.md) advises on visibility posture across all five CISA pillars.
-
----
-
-## #9 — Replace "Connected = Trusted" with Identity-Based Access
-
-**Networks + Identity · High impact · Multi-phase journey**
-
-**What it stops:** The implicit trust that VPNs create. Once connected, users often have access to far more than their job requires. Zero Trust Network Access (ZTNA) grants access to specific applications based on verified identity and device health — not network membership.
-
-!!! tip "Where to start"
-    Inventory what your VPN is actually used for, application by application. Many organizations find that 80% of use cases can migrate to identity-based access without a major infrastructure overhaul. Start with one internal application and learn from it.
-
-    See [NIST SP 800-207](https://csrc.nist.gov/pubs/sp/800/207/final){ target=_blank } for the authoritative architecture reference on ZTNA deployment models.
-
-**OZTP:** [Agent Zeta](chat.md) assesses your network access posture and identifies VPN dependencies mapped to CISA ZTMM. This is a journey measured in phases — we help you map it honestly.
-
----
-
-## #10 — Machines Have Identities Too. Secure Them.
-
-**Identity + Applications · Growing urgency · Often overlooked**
-
-**What it stops:** Supply chain attacks, compromised automation, and API key theft. Service accounts and machine credentials are often the most over-privileged, least-monitored identities in any environment. The SolarWinds and CircleCI breaches both exploited machine identity weaknesses.
-
-!!! tip "Where to start"
-    Audit your service accounts and API keys. Are any shared across teams? Hardcoded in scripts or repositories? When were they last rotated? Finding and removing hardcoded credentials alone eliminates a major, commonly exploited attack surface.
-
-    Tools like [GitHub's secret scanning](https://docs.github.com/en/code-security/secret-scanning){ target=_blank } can identify exposed credentials in your repositories automatically.
-
-**OZTP:** OZTP hashes all API keys at rest, supports key rotation via API, and stores secrets in a dedicated secret manager — we build to the standard we recommend. We share this pattern openly as a reference implementation for secure service authentication.
+### #10 — Machines Have Identities Too. Secure Them.
+*Identity + Applications · Growing urgency · Often overlooked*
+*What it stops:* Supply chain attacks, compromised automation, and API key theft.
+*Where to start:* Audit service accounts and API keys. Use tools like [GitHub's secret scanning](https://docs.github.com/en/code-security/secret-scanning) to find exposed credentials.
 
 ---
 
 ## Framework Mapping
 
-Every control maps to recognized external standards — we don't invent our own maturity models.
+| # | Control | Phase | CISA ZTMM Pillar | CIS Controls v8 |
+| :--- | :--- | :--- | :--- | :--- |
+| 1 | Multi-Factor Authentication | 1 | Identity | 6 |
+| 2 | Device Inventory & Health | 1 | Devices | 1 |
+| 3 | Admin Account Separation | 1 | Identity | 5 |
+| 4 | Encryption at Rest & in Transit | 1 | Data | 3 |
+| 5 | Application Control | 2 | Devices + Applications | 2 |
+| 6 | Least Privilege Access | 2 | Identity + Applications | 5, 6 |
+| 7 | Logging & Continuous Monitoring | 2 | Visibility & Analytics | 8, 13 |
+| 8 | Network Micro-segmentation | 3 | Networks | 12 |
+| 9 | Identity-Based Network Access | 3 | Networks + Identity | 12, 13 |
+| 10 | Non-Human Identity Security | 3 | Identity + Applications | 5 |
 
-| # | Control | CISA ZTMM Pillar | CIS Controls v8 |
-|---|---------|-----------------|-----------------|
-| 1 | Multi-Factor Authentication | Identity | 6 |
-| 2 | Device Inventory & Health | Devices | 1 |
-| 3 | Application Control | Devices + Applications | 2 |
-| 4 | Least Privilege Access | Identity + Applications | 5, 6 |
-| 5 | Privileged Access Management | Identity | 5 |
-| 6 | Encryption at Rest & in Transit | Data | 3 |
-| 7 | Network Micro-segmentation | Networks | 12 |
-| 8 | Logging & Continuous Monitoring | Visibility & Analytics | 8, 13 |
-| 9 | Identity-Based Network Access | Networks + Identity | 12, 13 |
-| 10 | Non-Human Identity Security | Identity + Applications | 5 |
+*Primary references: [NIST SP 800-207](https://csrc.nist.gov/pubs/sp/800/207/final), [CISA ZTMM](https://www.cisa.gov/zero-trust-maturity-model), [CIS Controls v8](https://www.cisecurity.org/controls/v8), [NSA Zero Trust Guidance](https://media.defense.gov/2021/Feb/25/2002588479/-1/-1/0/CSI_EMBRACING_ZTA.PDF), [ISO/IEC 27001](https://www.iso.org/standard/27001).*
 
 **Primary references:** [NIST SP 800-207](https://csrc.nist.gov/pubs/sp/800/207/final){ target=_blank } · [CISA ZTMM v2](https://www.cisa.gov/zero-trust-maturity-model){ target=_blank } · [CIS Controls v8](https://www.cisecurity.org/controls/v8){ target=_blank } · [NSA Zero Trust Guidance](https://media.defense.gov/2021/Feb/25/2002588479/-1/-1/0/CSI_EMBRACING_ZTA.PDF){ target=_blank } · [ISO/IEC 27001](https://www.iso.org/standard/27001){ target=_blank }
 
