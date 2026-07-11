@@ -100,7 +100,7 @@ For each control, rate your current posture:
     document.getElementById('combined-score').innerText = total;
     document.getElementById('progress-bar').style.width = (total / 30) * 100 + "%";
     
-    // Reset background of all buttons in this specific question row
+    // Only reset buttons that share the same parent container (the specific row)
     btn.parentElement.querySelectorAll('button').forEach(b => {
       b.style.backgroundColor = "#fff";
       b.style.borderColor = "#ccc";
