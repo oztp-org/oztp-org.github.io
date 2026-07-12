@@ -42,12 +42,14 @@ For each control, rate your current posture:
 
 
 3. **#3 — Admin Separation:** Are admin accounts segregated?
+    <div class="question-row">
    <button class="ez-btn" onclick="updateScore(this, 0, 'q3')">🔴</button>
    <button class="ez-btn" onclick="updateScore(this, 1, 'q3')">🟠</button>
    <button class="ez-btn" onclick="updateScore(this, 2, 'q3')">🟡</button>
    <button class="ez-btn" onclick="updateScore(this, 3, 'q3')">🔵</button>
+   </div> <br>
 
-4. **#4 — Encryption:** Is data encrypted at rest and in transit?
+5. **#4 — Encryption:** Is data encrypted at rest and in transit?
    <button class="ez-btn" onclick="updateScore(this, 0, 'q4')">🔴</button>
    <button class="ez-btn" onclick="updateScore(this, 1, 'q4')">🟠</button>
    <button class="ez-btn" onclick="updateScore(this, 2, 'q4')">🟡</button>
