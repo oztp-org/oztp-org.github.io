@@ -56,7 +56,7 @@ For each control, rate your current posture:
    <button class="ez-btn" onclick="updateScore(this, 2, 'q4')">🟡</button>
    <button class="ez-btn" onclick="updateScore(this, 3, 'q4')">🔵</button>
     </div> <br>
-## Phase 2: System Hardening<br>
+<b>## Phase 2: System Hardening<br></b>
 
 5. **#5 — Application Control:** Restricting what software can run?
    <div class="question-row">
@@ -79,7 +79,7 @@ For each control, rate your current posture:
    <button class="ez-btn" onclick="updateScore(this, 2, 'q7')">🟡</button>
    <button class="ez-btn" onclick="updateScore(this, 3, 'q7')">🔵</button>
    </div> <br>
-## Phase 3: Zero Trust Architecture<br>
+<b>## Phase 3: Zero Trust Architecture<br></b>
 
 8. **#8 — Network Segmentation:** Are systems isolated?
    <div class="question-row">
@@ -101,7 +101,7 @@ For each control, rate your current posture:
     <button class="ez-btn" onclick="updateScore(this, 1, 'q10')">🟠</button>
     <button class="ez-btn" onclick="updateScore(this, 2, 'q10')">🟡</button>
     <button class="ez-btn" onclick="updateScore(this, 3, 'q10')">🔵</button>
-    </div>
+    </div><br>
 
 ---
 
