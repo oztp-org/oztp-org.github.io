@@ -128,7 +128,8 @@ For each control, rate your current posture:
     // Set clicked button to green
     btn.style.backgroundColor = "#c8e6c9"; 
     btn.style.borderColor = "#2e7d32";
-  }
-</script>
+  }<br>
+
 
 [Return to Dashboard](https://oztp-control-platform-651946913194.us-east1.run.app/assessments)
+</script>
