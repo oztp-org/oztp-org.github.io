@@ -109,7 +109,14 @@ For each control, rate your current posture:
 <div style="height: 20px; background: #ddd; border-radius: 10px; overflow: hidden; margin-bottom: 20px;">
   <div id="progress-bar" style="width: 0%; height: 100%; background: #3366ff; transition: width 0.3s;"></div>
 </div>
-
+<br><br>
+  <div style="text-align: center;">
+    <a href="https://oztp-control-platform-651946913194.us-east1.run.app/assessments" 
+       style="padding: 10px 20px; background: #3366ff; color: white; text-decoration: none; border-radius: 5px;">
+       Return to Dashboard
+    </a>
+  </div>
+</div>
 <script>
   let scores = {};
   function updateScore(btn, value, id) {
@@ -128,8 +135,5 @@ For each control, rate your current posture:
     // Set clicked button to green
     btn.style.backgroundColor = "#c8e6c9"; 
     btn.style.borderColor = "#2e7d32";
-  }<br>
-
-
-[Return to Dashboard](https://oztp-control-platform-651946913194.us-east1.run.app/assessments)
+  }
 </script>
