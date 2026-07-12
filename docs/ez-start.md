@@ -49,50 +49,59 @@ For each control, rate your current posture:
    <button class="ez-btn" onclick="updateScore(this, 3, 'q3')">🔵</button>
    </div> <br>
 
-5. **#4 — Encryption:** Is data encrypted at rest and in transit?
+4. **#4 — Encryption:** Is data encrypted at rest and in transit?
+   <div class="question-row">
    <button class="ez-btn" onclick="updateScore(this, 0, 'q4')">🔴</button>
    <button class="ez-btn" onclick="updateScore(this, 1, 'q4')">🟠</button>
    <button class="ez-btn" onclick="updateScore(this, 2, 'q4')">🟡</button>
    <button class="ez-btn" onclick="updateScore(this, 3, 'q4')">🔵</button>
+    </div> <br>
+## Phase 2: System Hardening<br>
 
-## Phase 2: System Hardening
 5. **#5 — Application Control:** Restricting what software can run?
+   <div class="question-row">
    <button class="ez-btn" onclick="updateScore(this, 0, 'q5')">🔴</button>
    <button class="ez-btn" onclick="updateScore(this, 1, 'q5')">🟠</button>
    <button class="ez-btn" onclick="updateScore(this, 2, 'q5')">🟡</button>
    <button class="ez-btn" onclick="updateScore(this, 3, 'q5')">🔵</button>
-
+   </div> <br>
 6. **#6 — Least Privilege:** Is access limited to the necessary?
+   <div class="question-row">
    <button class="ez-btn" onclick="updateScore(this, 0, 'q6')">🔴</button>
    <button class="ez-btn" onclick="updateScore(this, 1, 'q6')">🟠</button>
    <button class="ez-btn" onclick="updateScore(this, 2, 'q6')">🟡</button>
    <button class="ez-btn" onclick="updateScore(this, 3, 'q6')">🔵</button>
-
+   </div> <br>
 7. **#7 — Logging:** Do you centralize and monitor logs?
+    <div class="question-row">
    <button class="ez-btn" onclick="updateScore(this, 0, 'q7')">🔴</button>
    <button class="ez-btn" onclick="updateScore(this, 1, 'q7')">🟠</button>
    <button class="ez-btn" onclick="updateScore(this, 2, 'q7')">🟡</button>
    <button class="ez-btn" onclick="updateScore(this, 3, 'q7')">🔵</button>
+   </div> <br>
+## Phase 3: Zero Trust Architecture<br>
 
-## Phase 3: Zero Trust Architecture
 8. **#8 — Network Segmentation:** Are systems isolated?
+   <div class="question-row">
    <button class="ez-btn" onclick="updateScore(this, 0, 'q8')">🔴</button>
    <button class="ez-btn" onclick="updateScore(this, 1, 'q8')">🟠</button>
    <button class="ez-btn" onclick="updateScore(this, 2, 'q8')">🟡</button>
    <button class="ez-btn" onclick="updateScore(this, 3, 'q8')">🔵</button>
-
+   </div> <br>
 9. **#9 — Identity-Based Access:** Replaced broad VPN access?
+    <div class="question-row">
    <button class="ez-btn" onclick="updateScore(this, 0, 'q9')">🔴</button>
    <button class="ez-btn" onclick="updateScore(this, 1, 'q9')">🟠</button>
    <button class="ez-btn" onclick="updateScore(this, 2, 'q9')">🟡</button>
    <button class="ez-btn" onclick="updateScore(this, 3, 'q9')">🔵</button>
-
+   </div> <br>
 10. **#10 — Machine Identities:** Are APIs/services secured?
+    <div class="question-row">
     <button class="ez-btn" onclick="updateScore(this, 0, 'q10')">🔴</button>
     <button class="ez-btn" onclick="updateScore(this, 1, 'q10')">🟠</button>
     <button class="ez-btn" onclick="updateScore(this, 2, 'q10')">🟡</button>
     <button class="ez-btn" onclick="updateScore(this, 3, 'q10')">🔵</button>
-</div>
+    </div>
 
 ---
 
