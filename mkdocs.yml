@@ -101,6 +101,7 @@ nav:
     - Foundations Learning Objectives: objectives.md
   - ZT Advisories:
     - Overview: advisories/index.md
+    - PHP - 2026 Vulnerabilities and Supply Chain Exposure: advisories/php-vulnerabilities.md
     - FortiBleed — Fortinet Credential Exposure (June 2026): advisories/fortinet-fortibleed-2026-06.md
     - CISA ZT for OT — Volt Typhoon (June 2026): advisories/cisa-zt-ot-2026.md
     - YellowKey BitLocker Bypass (May 2026): advisories/yellowkey-2026-05.md
