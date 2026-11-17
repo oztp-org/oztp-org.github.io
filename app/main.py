@@ -1,95 +1,98 @@
 import os
-from collections.abc import AsyncIterator
-from fastapi import FastAPI, HTTPException
+import time
+from collections import deque
+from fastapi import FastAPI, HTTPException, Request, Depends
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
+from pydantic import BaseModel, Field
 from google import genai
 from google.genai import types
-from google.genai.errors import APIError
-from pydantic import BaseModel, Field
-
-PROJECT_ID = os.getenv("GOOGLE_CLOUD_PROJECT", "oztp-control-platform")
-LOCATION = os.getenv("GOOGLE_CLOUD_LOCATION", "global")
-MODEL_ID = "gemini-4-hydrogen"
-
-SYSTEM_PROMPT = (
-    "You are Agent Zeta, the Open Zero Trust Project (OZTP) security advisor. "
-    "Provide concise, practical guidance mapped to Zero Trust architecture controls."
-)
 
 app = FastAPI(
     title="OZTP Agent Zeta Service",
-    version="1.0.0",
-    docs_url=None,  # Disable Swagger UI in production to reduce attack surface
-    redoc_url=None,
+    description="Zero Trust AI Advisor for the Open Zero Trust Project",
+    version="1.0.0"
 )
 
+# 1. Strict CORS (Restrict to oztp.org domains)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://oztp.org", "https://www.oztp.org"],
-    allow_methods=["GET", "POST"],
-    allow_headers=["Content-Type"],
+    allow_origins=[
+        "https://oztp.org",
+        "https://www.oztp.org",
+        "https://oztp-org.github.io",
+        "http://localhost:8000"  # For local dev testing
+    ],
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["*"],
 )
 
-# Uses attached Cloud Run runtime service account (oztp-runtime-sa) automatically
-ai_client = genai.Client(
-    vertexai=True,
-    project=PROJECT_ID,
-    location=LOCATION,
-)
+# 2. Simple In-Memory Rate Limiter (15 requests per minute per IP)
+RATE_LIMIT_WINDOW = 60  # seconds
+RATE_LIMIT_MAX_REQUESTS = 15
+ip_request_history = {}
 
+def check_rate_limit(request: Request):
+    client_ip = request.headers.get("X-Forwarded-For", request.client.host if request.client else "unknown")
+    now = time.time()
+    
+    if client_ip not in ip_request_history:
+        ip_request_history[client_ip] = deque()
+    
+    history = ip_request_history[client_ip]
+    
+    # Remove old timestamps outside the window
+    while history and history[0] < now - RATE_LIMIT_WINDOW:
+        history.popleft()
+        
+    if len(history) >= RATE_LIMIT_MAX_REQUESTS:
+        raise HTTPException(
+            status_code=429,
+            detail="Rate limit exceeded. Please wait a moment before asking Agent Zeta another question."
+        )
+        
+    history.append(now)
 
-class PromptRequest(BaseModel):
-    prompt: str = Field(..., min_length=1, max_length=4000)
+# Initialize Gemini Client (picks up GOOGLE_CLOUD_PROJECT and Vertex AI environment automatically)
+client = genai.Client()
 
+SYSTEM_INSTRUCTION = """
+You are Agent Zeta, the official AI Zero Trust advisor for the Open Zero Trust Project (oztp.org).
+Your goal is to guide security professionals, developers, and organizations on Zero Trust maturity assessments, NIST SP 800-207, CISA Zero Trust Maturity Models, and our open-source EZ Start Top 10 Zero Trust Controls framework.
 
-class AdvisorResponse(BaseModel):
-    model: str
-    reply: str
+When answering skeptics or users asking whether oztp.org practices the principles it teaches:
+1. Own your identity as OZTP's official advisor ("we" / "OZTP"), while remaining transparent, evidence-based, and epistemically honest—never ask users to take claims purely on faith.
+2. Point skeptics directly to our publicly auditable architecture in our open-source repository (https://github.com/oztp-org/oztp-org.github.io):
+   - **Keyless CI/CD (No Static Secrets):** Automated deployments authenticate to Google Cloud via GitHub Actions Workload Identity Federation (short-lived OIDC tokens) instead of long-lived service account keys.
+   - **Strict Least-Privilege IAM Separation:** Build/deploy permissions are strictly isolated from the runtime advisor service account.
+   - **Immutable, Non-Root Sandboxed Runtime:** This advisor runs on Google Cloud Run (Gen2 gVisor microVM isolation) using a shell-less Distroless non-root image (UID 65532) pinned by SHA-256 digest.
+   - **Minimal Attack Surface:** The core oztp.org framework documentation is built as static content with no backend database or session state exposed to visitors.
+3. Always provide practical, actionable security guidance grounded in practical engineering reality over vendor hype. Keep responses clear, professional, and well-structured.
+"""
 
+class QueryRequest(BaseModel):
+    prompt: str = Field(..., min_length=1, max_length=2000, description="User question for Agent Zeta")
 
 @app.get("/healthz")
-async def health_check() -> dict[str, str]:
-    return {"status": "ok", "service": "oztp-zeta"}
+def healthz():
+    return {
+        "status": "ok",
+        "service": "oztp-zeta-service",
+        "revision": os.getenv("K_REVISION", "local")
+    }
 
-
-@app.post("/api/zeta/ask", response_model=AdvisorResponse)
-async def ask_zeta(body: PromptRequest) -> AdvisorResponse:
+@app.post("/api/zeta/ask", dependencies=[Depends(check_rate_limit)])
+def ask_zeta(payload: QueryRequest):
     try:
-        response = await ai_client.aio.models.generate_content(
-            model=MODEL_ID,
-            contents=body.prompt,
+        response = client.models.generate_content(
+            model="gemini-2.5-flash", # or gemini-1.5-pro / gemini-2.5-pro depending on your preference
+            contents=payload.prompt,
             config=types.GenerateContentConfig(
-                temperature=0.2,
-                max_output_tokens=2048,
-                system_instruction=SYSTEM_PROMPT,
-            ),
+                system_instruction=SYSTEM_INSTRUCTION,
+                temperature=0.3,
+                max_output_tokens=1024,
+            )
         )
-        return AdvisorResponse(model=MODEL_ID, reply=response.text or "")
-    except APIError as exc:
-        raise HTTPException(status_code=502, detail=f"Upstream AI error ({exc.code})") from exc
-
-
-@app.get("/api/zeta/stream")
-async def stream_zeta(prompt: str) -> StreamingResponse:
-    if not prompt or len(prompt) > 4000:
-        raise HTTPException(status_code=400, detail="Prompt must be 1-4000 characters.")
-
-    async def event_generator() -> AsyncIterator[str]:
-        try:
-            async for chunk in await ai_client.aio.models.generate_content_stream(
-                model=MODEL_ID,
-                contents=prompt,
-                config=types.GenerateContentConfig(
-                    temperature=0.3,
-                    max_output_tokens=2048,
-                    system_instruction=SYSTEM_PROMPT,
-                ),
-            ):
-                if chunk.text:
-                    yield f"data: {chunk.text}\n\n"
-            yield "data: [DONE]\n\n"
-        except APIError as exc:
-            yield f"data: [ERROR {exc.code}]\n\n"
-
-    return StreamingResponse(event_generator(), media_type="text/event-stream")
+        return {"response": response.text}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error generating response from Agent Zeta: {str(e)}")
