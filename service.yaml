@@ -30,7 +30,7 @@ spec:
             - name: GOOGLE_CLOUD_PROJECT
               value: "oztp-control-platform"
             - name: GOOGLE_CLOUD_LOCATION
-              value: "global"
+              value: "us-central1"
           resources:
             limits:
               cpu: "1000m"
