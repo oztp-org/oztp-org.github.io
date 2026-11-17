@@ -8,7 +8,7 @@ on:
       - "app/**"
       - "Dockerfile"
       - "service.yaml"
-      - ".github/workflows/deploy.yml"
+      - ".github/workflows/deploy-cloud-run.yml"
   workflow_dispatch:
 
 permissions:
@@ -28,23 +28,22 @@ jobs:
   build-and-deploy:
     name: Build, Sign & Deploy Hardened Workload
     runs-on: ubuntu-latest
-    environment: production
 
     steps:
-      - name: Checkout repository (immutable SHA)
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
 
       - name: Authenticate to Google Cloud via WIF (Keyless OIDC)
-        uses: google-github-actions/auth@6fc4af4b145ae7821d527454aa9bd537d1f2dc5f
+        uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: ${{ env.WIF_PROVIDER }}
           service_account: ${{ env.DEPLOYER_SA }}
           token_format: access_token
 
       - name: Set up Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@e30db14372690e688318749c4844bc9c59c15c13
+        uses: google-github-actions/setup-gcloud@v2
 
       - name: Configure Docker for Artifact Registry
         run: |
