@@ -58,13 +58,20 @@ _client = None
 def get_genai_client() -> genai.Client:
     global _client
     if _client is None:
-        _client = genai.Client(
-            vertexai=True,
-            project=os.getenv("GOOGLE_CLOUD_PROJECT", "oztp-control-platform"),
-            location=os.getenv("GOOGLE_CLOUD_LOCATION", "global"),
-        )
+        api_key = os.getenv("GEMINI_API_KEY")
+        if not api_key:
+            raise RuntimeError("GEMINI_API_KEY environment variable is not set.")
+        _client = genai.Client(api_key=api_key)
     return _client
-
+response = client.models.generate_content(
+            model=os.getenv("GEMINI_MODEL", "gemini-3.8-flash"),
+            contents=payload.prompt,
+            config=types.GenerateContentConfig(
+                system_instruction=SYSTEM_INSTRUCTION,
+                temperature=0.3,
+                max_output_tokens=1024,
+            ),
+        )
 SYSTEM_INSTRUCTION = """
 You are Agent Zeta, the official AI Zero Trust advisor for the Open Zero Trust Project (oztp.org).
 Your goal is to guide security professionals, developers, and organizations on Zero Trust maturity assessments, NIST SP 800-207, CISA Zero Trust Maturity Models, and our open-source EZ Start Top 10 Zero Trust Controls framework.
