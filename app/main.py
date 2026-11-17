@@ -20,7 +20,7 @@ app.add_middleware(
         "https://oztp.org",
         "https://www.oztp.org",
         "https://oztp-org.github.io",
-        "http://localhost:8000"  # For local dev testing
+        "http://localhost:8000"
     ],
     allow_credentials=True,
     allow_methods=["GET", "POST", "OPTIONS"],
@@ -28,33 +28,42 @@ app.add_middleware(
 )
 
 # 2. Simple In-Memory Rate Limiter (15 requests per minute per IP)
-RATE_LIMIT_WINDOW = 60  # seconds
+RATE_LIMIT_WINDOW = 60
 RATE_LIMIT_MAX_REQUESTS = 15
 ip_request_history = {}
 
 def check_rate_limit(request: Request):
     client_ip = request.headers.get("X-Forwarded-For", request.client.host if request.client else "unknown")
     now = time.time()
-    
+
     if client_ip not in ip_request_history:
         ip_request_history[client_ip] = deque()
-    
+
     history = ip_request_history[client_ip]
-    
-    # Remove old timestamps outside the window
+
     while history and history[0] < now - RATE_LIMIT_WINDOW:
         history.popleft()
-        
+
     if len(history) >= RATE_LIMIT_MAX_REQUESTS:
         raise HTTPException(
             status_code=429,
             detail="Rate limit exceeded. Please wait a moment before asking Agent Zeta another question."
         )
-        
+
     history.append(now)
 
-# Initialize Gemini Client (picks up GOOGLE_CLOUD_PROJECT and Vertex AI environment automatically)
-client = genai.Client()
+# Lazy-initialized Vertex AI Gemini client so startup never blocks port 8080
+_client = None
+
+def get_genai_client() -> genai.Client:
+    global _client
+    if _client is None:
+        _client = genai.Client(
+            vertexai=True,
+            project=os.getenv("GOOGLE_CLOUD_PROJECT", "oztp-control-platform"),
+            location=os.getenv("GOOGLE_CLOUD_LOCATION", "global"),
+        )
+    return _client
 
 SYSTEM_INSTRUCTION = """
 You are Agent Zeta, the official AI Zero Trust advisor for the Open Zero Trust Project (oztp.org).
@@ -84,8 +93,9 @@ def healthz():
 @app.post("/api/zeta/ask", dependencies=[Depends(check_rate_limit)])
 def ask_zeta(payload: QueryRequest):
     try:
+        client = get_genai_client()
         response = client.models.generate_content(
-            model="gemini-2.5-flash", # or gemini-1.5-pro / gemini-2.5-pro depending on your preference
+            model="gemini-2.5-flash",
             contents=payload.prompt,
             config=types.GenerateContentConfig(
                 system_instruction=SYSTEM_INSTRUCTION,
