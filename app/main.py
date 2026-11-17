@@ -94,15 +94,15 @@ def healthz():
 def ask_zeta(payload: QueryRequest):
     try:
         client = get_genai_client()
-        response = client.models.generate_content(
-            model="gemini-2.0-flash",
-            contents=payload.prompt,
-            config=types.GenerateContentConfig(
-                system_instruction=SYSTEM_INSTRUCTION,
-                temperature=0.3,
-                max_output_tokens=1024,
-            )
-        )
+       response = client.models.generate_content(
+    model=os.getenv("GEMINI_MODEL", "gemini-2.5-flash"),
+    contents=payload.prompt,
+    config=types.GenerateContentConfig(
+        system_instruction=SYSTEM_INSTRUCTION,
+        temperature=0.3,
+        max_output_tokens=1024,
+    ),
+)
         return {"response": response.text}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error generating response from Agent Zeta: {str(e)}")
