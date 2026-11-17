@@ -6,27 +6,22 @@ metadata:
     cloud.googleapis.com/location: us-east1
     managed-by: github-actions-wif
   annotations:
-    # Enforce public or internal-and-cloud-load-balancing ingress as needed
     run.googleapis.com/ingress: all
     run.googleapis.com/launch-stage: GA
 spec:
   template:
     metadata:
       annotations:
-        # Enforce user-space system call interception via gVisor (Gen2)
         run.googleapis.com/execution-environment: gen2
-        # Prevent cold-start CPU throttling abuse and enforce strict concurrency
         run.googleapis.com/cpu-throttling: "true"
         autoscaling.knative.dev/minScale: "0"
         autoscaling.knative.dev/maxScale: "5"
     spec:
-      # Isolated Runtime Service Account with zero deploy/admin permissions
       serviceAccountName: oztp-runtime-sa@oztp-control-platform.iam.gserviceaccount.com
       containerConcurrency: 40
       timeoutSeconds: 60
       containers:
         - name: oztp-zeta-container
-          # Replaced dynamically by immutable digest during CI/CD deployment
           image: us-east1-docker.pkg.dev/oztp-control-platform/oztp-containers/oztp-zeta:PLACEHOLDER
           ports:
             - name: http1
@@ -41,13 +36,4 @@ spec:
               cpu: "1000m"
               memory: "512Mi"
           securityContext:
-            # Mandatory non-root execution (UID 65532 / nonroot)
-            runAsNonRoot: true
             runAsUser: 65532
-            runAsGroup: 65532
-            # Block setuid/setgid binaries and kernel privilege elevation
-            allowPrivilegeEscalation: false
-            readOnlyRootFilesystem: true
-            capabilities:
-              drop:
-                - ALL
