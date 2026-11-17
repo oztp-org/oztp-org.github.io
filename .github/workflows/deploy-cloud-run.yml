@@ -1,0 +1,74 @@
+name: Zero Trust Build & Deploy to Cloud Run
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "app/**"
+      - "Dockerfile"
+      - "service.yaml"
+      - ".github/workflows/deploy.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  PROJECT_ID: oztp-control-platform
+  REGION: us-east1
+  SERVICE_NAME: oztp-zeta-service
+  GAR_REPO: oztp-containers
+  IMAGE_NAME: oztp-zeta
+  WIF_PROVIDER: projects/651946913194/locations/global/workloadIdentityPools/github-oztp-pool/providers/github-oidc-provider
+  DEPLOYER_SA: oztp-deployer-sa@oztp-control-platform.iam.gserviceaccount.com
+
+jobs:
+  build-and-deploy:
+    name: Build, Sign & Deploy Hardened Workload
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Checkout repository (immutable SHA)
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+
+      - name: Authenticate to Google Cloud via WIF (Keyless OIDC)
+        uses: google-github-actions/auth@6fc4af4b145ae7821d527454aa9bd537d1f2dc5f
+        with:
+          workload_identity_provider: ${{ env.WIF_PROVIDER }}
+          service_account: ${{ env.DEPLOYER_SA }}
+          token_format: access_token
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@e30db14372690e688318749c4844bc9c59c15c13
+
+      - name: Configure Docker for Artifact Registry
+        run: |
+          gcloud auth configure-docker "${{ env.REGION }}-docker.pkg.dev" --quiet
+
+      - name: Build and Push Immutable Container Image
+        id: build
+        run: |
+          IMAGE_URI="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.GAR_REPO }}/${{ env.IMAGE_NAME }}"
+          docker build \
+            --provenance=false \
+            --tag "${IMAGE_URI}:${{ github.sha }}" \
+            .
+          docker push "${IMAGE_URI}:${{ github.sha }}"
+          DIGEST=$(gcloud artifacts docker images describe "${IMAGE_URI}:${{ github.sha }}" --format="value(image_summary.digest)")
+          echo "digest_uri=${IMAGE_URI}@${DIGEST}" >> "$GITHUB_OUTPUT"
+
+      - name: Render Hardened Cloud Run Manifest with Immutable Digest
+        run: |
+          sed -i "s|image: .*|image: ${{ steps.build.outputs.digest_uri }}|g" service.yaml
+          grep "image: " service.yaml
+
+      - name: Deploy Hardened service.yaml to Cloud Run
+        run: |
+          gcloud run services replace service.yaml \
+            --region="${{ env.REGION }}" \
+            --project="${{ env.PROJECT_ID }}"
