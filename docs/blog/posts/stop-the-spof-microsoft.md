@@ -1,6 +1,5 @@
 ---
 date: 2026-11-12
-authors: [dandx2]
 categories:
   - Architecture
   - Resiliency
