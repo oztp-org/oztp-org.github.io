@@ -102,7 +102,7 @@ def ask_zeta(payload: QueryRequest):
     try:
         client = get_genai_client()
        response = client.models.generate_content(
-    model=os.getenv("GEMINI_MODEL", "gemini-2.5-flash"),
+    model=os.getenv("GEMINI_MODEL", "gemini-3.8-flash"),
     contents=payload.prompt,
     config=types.GenerateContentConfig(
         system_instruction=SYSTEM_INSTRUCTION,
