@@ -21,6 +21,7 @@ hide:
   <div class="cta-row">
     <a href="products/" class="md-button md-button--primary">Explore Products</a>
     <a href="https://github.com/oztp-org" class="md-button">View on GitHub</a>
+    <a href="#cyber-news-journal" class="md-button">Cyber News Journal &darr;</a>
   </div>
 </div>
 
@@ -105,7 +106,7 @@ Start with visibility. Add controls when you're ready. Let the frameworks guide 
 
 ---
 
-<p class="section-label">Cyber Incident Journal</p>
+<p class="section-label" id="cyber-news-journal">Cyber Incident Journal</p>
 
 ## Emerging Incidents & Zero Trust Lessons Learned
 
