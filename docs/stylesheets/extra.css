@@ -48,6 +48,28 @@
   margin-top: 2rem;
 }
 
+.hero .cta-row .btn-orange {
+  background-color: #ea580c;
+  color: #ffffff !important;
+  border-color: #c2410c;
+}
+
+.hero .cta-row .btn-orange:hover {
+  background-color: #c2410c;
+  border-color: #9a3412;
+}
+
+.hero .cta-row .btn-wintergreen {
+  background-color: #0d9488;
+  color: #ffffff !important;
+  border-color: #0f766e;
+}
+
+.hero .cta-row .btn-wintergreen:hover {
+  background-color: #0f766e;
+  border-color: #115e59;
+}
+
 /* Principle cards */
 .principle-grid {
   display: grid;

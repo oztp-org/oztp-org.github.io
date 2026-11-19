@@ -20,8 +20,8 @@ hide:
 
   <div class="cta-row">
     <a href="products/" class="md-button md-button--primary">Explore Products</a>
-    <a href="https://github.com/oztp-org" class="md-button">View on GitHub</a>
-    <a href="#cyber-news-journal" class="md-button">Cyber News Journal &darr;</a>
+    <a href="https://github.com/oztp-org" class="md-button btn-orange">View on GitHub</a>
+    <a href="#cyber-news-journal" class="md-button btn-wintergreen">Cyber News Journal &darr;</a>
   </div>
 </div>
 
