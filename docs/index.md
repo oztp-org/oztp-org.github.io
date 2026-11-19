@@ -103,7 +103,6 @@ Start with visibility. Add controls when you're ready. Let the frameworks guide 
 
 [Get started with the Device Agent →](products/device-agent/){ .md-button }
 
-
 ---
 
 <p class="section-label">Cyber Incident Journal</p>
@@ -113,7 +112,7 @@ Start with visibility. Add controls when you're ready. Let the frameworks guide 
 Defensive, anti-hype incident briefs synthesized from authoritative advisories by **Agent Zeta** and vetted with practitioner commentary (**HI + AI**).
 
 <!--
-  OZTP Cyber News Journal — Front Page Embed Widget (Clean Light/Adaptive Theme)
+  OZTP Cyber News Journal — Front Page Embed Widget (Clean Light Theme, Strict XSS Hardened)
   Embed this snippet into oztp.org (MkDocs, GitHub Pages, or any HTML template)
   to display the latest published Zero Trust incident briefs.
 -->
@@ -139,30 +138,11 @@ Defensive, anti-hype incident briefs synthesized from authoritative advisories b
   .journal-card:hover {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   }
-  .journal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 16px;
-    margin-bottom: 12px;
-  }
-  .journal-headline {
-    margin: 0;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #0f172a;
-    line-height: 1.35;
-  }
-  .journal-date {
-    font-size: 0.82rem;
-    color: #64748b;
-    white-space: nowrap;
-  }
   .journal-badge-row {
     display: flex;
     gap: 8px;
     align-items: center;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     flex-wrap: wrap;
   }
   .badge-pill {
@@ -183,6 +163,25 @@ Defensive, anti-hype incident briefs synthesized from authoritative advisories b
     color: #6b21a8;
     border: 1px solid #e9d5ff;
   }
+  .journal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+  .journal-headline {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.35;
+  }
+  .journal-date {
+    font-size: 0.82rem;
+    color: #64748b;
+    white-space: nowrap;
+  }
   .journal-summary {
     font-size: 0.95rem;
     line-height: 1.6;
@@ -193,29 +192,6 @@ Defensive, anti-hype incident briefs synthesized from authoritative advisories b
     padding: 12px 16px;
     margin: 14px 0;
   }
-  .journal-zeta-box {
-    background: #eff6ff;
-    border: 1px solid #bfdbfe;
-    border-radius: 8px;
-    padding: 14px 16px;
-    margin: 14px 0;
-  }
-  .journal-box-title {
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    font-weight: 700;
-    margin-bottom: 6px;
-  }
-  .journal-zeta-title {
-    color: #1d4ed8;
-  }
-  .journal-zeta-text {
-    font-size: 0.92rem;
-    line-height: 1.55;
-    color: #1e3a8a;
-    margin: 0;
-  }
   .journal-dan-box {
     background: #f0fdf4;
     border: 1px solid #bbf7d0;
@@ -224,7 +200,12 @@ Defensive, anti-hype incident briefs synthesized from authoritative advisories b
     margin: 14px 0;
   }
   .journal-dan-title {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
     color: #15803d;
+    margin-bottom: 6px;
   }
   .journal-dan-text {
     font-size: 0.92rem;
@@ -239,11 +220,18 @@ Defensive, anti-hype incident briefs synthesized from authoritative advisories b
     border-top: 1px solid #f1f5f9;
     font-size: 0.82rem;
     color: #64748b;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+  .journal-citations strong {
+    color: #475569;
   }
   .journal-citations a {
     color: #0284c7;
     text-decoration: underline;
-    margin-right: 12px;
+    margin-right: 8px;
   }
 
   /* Adaptive dark mode support for MkDocs Material slate theme */
@@ -260,16 +248,6 @@ Defensive, anti-hype incident briefs synthesized from authoritative advisories b
     color: #cbd5e1;
     border-left-color: #38bdf8;
   }
-  [data-md-color-scheme="slate"] .journal-zeta-box {
-    background: rgba(30, 41, 59, 0.85);
-    border-color: rgba(99, 102, 241, 0.35);
-  }
-  [data-md-color-scheme="slate"] .journal-zeta-title {
-    color: #818cf8;
-  }
-  [data-md-color-scheme="slate"] .journal-zeta-text {
-    color: #e0e7ff;
-  }
   [data-md-color-scheme="slate"] .journal-dan-box {
     background: rgba(20, 83, 45, 0.2);
     border-color: rgba(34, 197, 94, 0.3);
@@ -283,6 +261,9 @@ Defensive, anti-hype incident briefs synthesized from authoritative advisories b
   [data-md-color-scheme="slate"] .journal-citations {
     border-top-color: #334155;
     color: #94a3b8;
+  }
+  [data-md-color-scheme="slate"] .journal-citations strong {
+    color: #cbd5e1;
   }
   [data-md-color-scheme="slate"] .journal-citations a {
     color: #38bdf8;
@@ -305,88 +286,151 @@ Defensive, anti-hype incident briefs synthesized from authoritative advisories b
         const entries = await resp.json();
         renderJournalEntries(entries, container);
       } catch (err) {
-        container.innerHTML = '<p style="color:#64748b; font-style:italic;">Live journal feed temporarily unavailable. Please check back shortly.</p>';
+        container.textContent = "";
+        const errMsg = document.createElement("p");
+        errMsg.style.cssText = "color:#64748b; font-style:italic;";
+        errMsg.textContent = "Live journal feed temporarily unavailable. Please check back shortly.";
+        container.appendChild(errMsg);
       }
     }
 
-    function escapeStr(s) {
-      if (!s) return "";
-      return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    function createSafeLink(rawUrl, text) {
+      if (!rawUrl || typeof rawUrl !== "string") return null;
+      try {
+        const parsed = new URL(rawUrl);
+        if (parsed.protocol === "https:" || parsed.protocol === "http:") {
+          const a = document.createElement("a");
+          a.href = parsed.href;
+          a.target = "_blank";
+          a.rel = "noopener noreferrer";
+          a.textContent = text;
+          return a;
+        }
+      } catch (_) {}
+      return null;
     }
 
     function renderJournalEntries(entries, container) {
-      if (!entries || entries.length === 0) {
-        container.innerHTML = '<p style="color:#64748b; font-style:italic;">No published incidents at this time. Harvesters scan every hour.</p>';
+      container.textContent = "";
+
+      if (!entries || !Array.isArray(entries) || entries.length === 0) {
+        const emptyMsg = document.createElement("p");
+        emptyMsg.style.cssText = "color:#64748b; font-style:italic;";
+        emptyMsg.textContent = "No published incidents at this time. Harvesters scan periodically.";
+        container.appendChild(emptyMsg);
         return;
       }
 
-      const html = entries.map(entry => {
-        const combBadge = entry.is_comb
-          ? '<span class="badge-pill badge-pill-comb">⚡ Multi-Source Comb</span>'
-          : '';
-        const attrBadge = `<span class="badge-pill badge-pill-hi-ai">${escapeStr(entry.attribution || "HI + AI")}</span>`;
+      for (const entry of entries) {
+        if (!entry || typeof entry !== "object") continue;
 
-        let pubDateStr = "";
+        const card = document.createElement("article");
+        card.className = "journal-card";
+
+        // 1. Badge Row
+        const badgeRow = document.createElement("div");
+        badgeRow.className = "journal-badge-row";
+
+        const attrBadge = document.createElement("span");
+        attrBadge.className = "badge-pill badge-pill-hi-ai";
+        attrBadge.textContent = entry.attribution || "HI + AI";
+        badgeRow.appendChild(attrBadge);
+
+        if (entry.is_comb) {
+          const combBadge = document.createElement("span");
+          combBadge.className = "badge-pill badge-pill-comb";
+          combBadge.textContent = "⚡ Multi-Source Comb";
+          badgeRow.appendChild(combBadge);
+        }
+        card.appendChild(badgeRow);
+
+        // 2. Header: Headline & Date
+        const header = document.createElement("div");
+        header.className = "journal-header";
+
+        const headline = document.createElement("h3");
+        headline.className = "journal-headline";
+        headline.textContent = entry.headline || "Untitled Brief";
+        header.appendChild(headline);
+
         if (entry.published_at) {
-          pubDateStr = new Date(entry.published_at).toLocaleDateString(undefined, {
-            year: "numeric", month: "short", day: "numeric"
-          });
-        }
-
-        let citationsHtml = "";
-        if (entry.citations && entry.citations.length > 0) {
-          const links = entry.citations.map(c => {
-            const src = escapeStr(c.source || "Advisory");
-            const title = escapeStr(c.title || "Source");
-            const url = escapeStr(c.url || "#");
-            return `<a href="${url}" target="_blank" rel="noopener noreferrer">${src}: ${title} ↗</a>`;
-          }).join("");
-          citationsHtml = `<div class="journal-citations"><strong>Sources:</strong> ${links}</div>`;
-        }
-
-        let zetaBox = "";
-        if (entry.zeta_lessons_learned) {
-          let advLink = "";
-          if (entry.zt_advisory_url) {
-            advLink = ` &bull; <a href="${escapeStr(entry.zt_advisory_url)}" target="_blank" rel="noopener noreferrer" style="text-decoration:underline;">Advisory Reference &rarr;</a>`;
+          const dateSpan = document.createElement("span");
+          dateSpan.className = "journal-date";
+          try {
+            dateSpan.textContent = new Date(entry.published_at).toLocaleDateString(undefined, {
+              year: "numeric", month: "short", day: "numeric"
+            });
+          } catch (_) {
+            dateSpan.textContent = String(entry.published_at).slice(0, 10);
           }
-          zetaBox = `
-            <div class="journal-zeta-box">
-              <div class="journal-box-title journal-zeta-title">Agent Zeta &mdash; Zero Trust Lessons Learned</div>
-              <p class="journal-zeta-text">${escapeStr(entry.zeta_lessons_learned)}${advLink}</p>
-            </div>
-          `;
+          header.appendChild(dateSpan);
+        }
+        card.appendChild(header);
+
+        // 3. Executive Summary (Concise Brief)
+        if (entry.executive_summary) {
+          const summary = document.createElement("div");
+          summary.className = "journal-summary";
+          summary.textContent = entry.executive_summary;
+          card.appendChild(summary);
         }
 
-        let danBox = "";
-        if (entry.human_note) {
-          danBox = `
-            <div class="journal-dan-box">
-              <div class="journal-box-title journal-dan-title">Dan's Take &mdash; Practitioner Note</div>
-              <p class="journal-dan-text">&ldquo;${escapeStr(entry.human_note)}&rdquo;</p>
-            </div>
-          `;
+        // 4. Dan's Take (Practitioner Note)
+        const dansTake = entry.human_note || entry.dans_take;
+        if (dansTake) {
+          const danBox = document.createElement("div");
+          danBox.className = "journal-dan-box";
+
+          const danTitle = document.createElement("div");
+          danTitle.className = "journal-dan-title";
+          danTitle.textContent = "Dan's Take — Practitioner Note";
+          danBox.appendChild(danTitle);
+
+          const danText = document.createElement("p");
+          danText.className = "journal-dan-text";
+          danText.textContent = `“${dansTake}”`;
+          danBox.appendChild(danText);
+
+          card.appendChild(danBox);
         }
 
-        return `
-          <article class="journal-card">
-            <div class="journal-badge-row">
-              ${attrBadge}
-              ${combBadge}
-            </div>
-            <div class="journal-header">
-              <h3 class="journal-headline">${escapeStr(entry.headline)}</h3>
-              <span class="journal-date">${pubDateStr}</span>
-            </div>
-            <div class="journal-summary">${escapeStr(entry.executive_summary)}</div>
-            ${zetaBox}
-            ${danBox}
-            ${citationsHtml}
-          </article>
-        `;
-      }).join("");
+        // 5. Corroborating Source Link(s) & Advisory Link
+        const citationsBox = document.createElement("div");
+        citationsBox.className = "journal-citations";
 
-      container.innerHTML = html;
+        const label = document.createElement("strong");
+        label.textContent = "Sources:";
+        citationsBox.appendChild(label);
+
+        let hasLinks = false;
+        if (Array.isArray(entry.citations)) {
+          for (const c of entry.citations) {
+            if (c && c.url) {
+              const srcName = c.source || "Advisory";
+              const titleText = c.title ? `${srcName}: ${c.title} ↗` : `${srcName} ↗`;
+              const a = createSafeLink(c.url, titleText);
+              if (a) {
+                citationsBox.appendChild(a);
+                hasLinks = true;
+              }
+            }
+          }
+        }
+
+        if (entry.zt_advisory_url) {
+          const advLink = createSafeLink(entry.zt_advisory_url, "OZTP Advisory Reference →");
+          if (advLink) {
+            citationsBox.appendChild(advLink);
+            hasLinks = true;
+          }
+        }
+
+        if (hasLinks) {
+          card.appendChild(citationsBox);
+        }
+
+        container.appendChild(card);
+      }
     }
 
     if (document.readyState === "loading") {
